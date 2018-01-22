@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 class WheelController extends Controller
 {
     //
-    function forward(Request $request){
+    public function forward(Request $request){
 
-      exec('/cgi-bin/forward.cgi');
+      exec('cgi-bin/forward.cgi');
 
       return 1;
 
     }
 
-    function stop(Request $request){
+    public function stop(Request $request){
 
-      exec('/cgi-bin/stop.cgi');
+      exec('cgi-bin/stop.cgi');
 
       return 1;
 

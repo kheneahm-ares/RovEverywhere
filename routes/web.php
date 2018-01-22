@@ -17,5 +17,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/forward', 'WheelController@forward')->name('forward');
-Route::post('/stop', 'WheelController@stop')->name('stop');
+Route::get('/forward', 'WheelController@forward')->name('forward');
+Route::get('/stop', 'WheelController@stop')->name('stop');

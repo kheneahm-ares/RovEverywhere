@@ -59,26 +59,26 @@
 
 
   <script>
-  $( document ).ready(function(){
+  $(document).ready(function(){
       $("#reverse").on("mousedown", function() {
        $.get('/reverse');
        }).on('mouseup', function() {
        $.get('/stop');
       });
       $("#forward").on("mousedown", function() {
-       $.post('/forward');
+       $.get('/forward');
        }).on('mouseup', function() {
-       $.post('/stop');
+       $.get('/stop');
       });
       $("#left").on("mousedown", function() {
-       $.post('/left');
+       $.get('/left');
        }).on('mouseup', function() {
-       $.post('/stop');
+       $.get('/stop');
       });
       $("#right").on("mousedown", function() {
-       $.post('/right');
+       $.get('/right');
        }).on('mouseup', function() {
-       $.post('/stop');
+       $.get('/stop');
       });
   });
   </script>
