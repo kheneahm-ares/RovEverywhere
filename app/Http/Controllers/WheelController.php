@@ -7,17 +7,45 @@ use Illuminate\Http\Request;
 class WheelController extends Controller
 {
     //
-    public function forward(Request $request){
+    public function forward(){
+      $pwm = $_GET['pwm'];
 
-      exec('cgi-bin/forward.cgi');
+      exec('cgi-bin/forward.cgi "'. ($pwm) . '" &> /dev/null &');
 
-      return 1;
+      return $pwm;
 
     }
 
-    public function stop(Request $request){
+    public function reverse(){
+      $pwm = $_GET['pwm'];
 
-      exec('cgi-bin/stop.cgi');
+      exec('cgi-bin/reverse.cgi "'. ($pwm) . '" &> /dev/null &');
+
+      return $pwm;
+
+    }
+
+    public function left(){
+      $pwm = $_GET['pwm'];
+
+      exec('cgi-bin/left.cgi "'. ($pwm) . '" &> /dev/null &');
+
+      return $pwm;
+
+    }
+
+    public function right(){
+      $pwm = $_GET['pwm'];
+
+      exec('cgi-bin/right.cgi "'. ($pwm) . '" &> /dev/null &');
+
+      return $pwm;
+
+    }
+
+    public function stop(){
+
+      exec('cgi-bin/stop.cgi &> /dev/null &');
 
       return 1;
 
