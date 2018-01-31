@@ -17,5 +17,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/forward', 'WheelController@forward')->name('forward');
+Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');
+Route::get('/reverse/{pwm}', 'WheelController@reverse')->name('reverse');
+Route::get('/left/{pwm}', 'WheelController@left')->name('left');
+Route::get('/right/{pwm}', 'WheelController@right')->name('right');
+
 Route::get('/stop', 'WheelController@stop')->name('stop');
