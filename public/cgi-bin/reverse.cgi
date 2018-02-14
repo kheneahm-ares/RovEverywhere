@@ -26,8 +26,8 @@ pwm=int(sys.argv[1])
 
 pi=pigpio.pi()
 
-pi.set_mode(leftB, pigpio.OUTPUT)
-pi.set_PWM_dutycycle(leftB, pwm)
+pi.set_mode(leftA, pigpio.OUTPUT)
+pi.set_PWM_dutycycle(leftA, pwm)
 
-pi.set_mode(rightA, pigpio.OUTPUT)
-pi.set_PWM_dutycycle(rightA, pwm)
+pi.set_mode(rightB, pigpio.OUTPUT)
+pi.set_PWM_dutycycle(rightB, pwm)
