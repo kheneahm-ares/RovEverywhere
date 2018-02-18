@@ -35,3 +35,5 @@ Route::get('/tiltNeutral', 'CameraController@tiltNeutral')->name('tiltNeutral');
 Route::get('/tiltLeft', 'CameraController@tiltLeft')->name('rigtiltLeftht');
 
 Route::get('/tiltStop', 'CameraController@tiltStop')->name('tiltStop');
+
+Route::get('/panTiltStop', 'CameraController@panTiltStop')->name('panTiltStop');
