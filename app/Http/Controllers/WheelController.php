@@ -46,7 +46,7 @@ class WheelController extends Controller
     public function stop(){
 
       exec('cgi-bin/stop.cgi &> /dev/null &');
-
+      
       return 1;
 
     }

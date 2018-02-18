@@ -163,7 +163,7 @@
         $.get('/panStop');
       });
       $("#panRight").on("mousedown", function() {
-        $ajax({
+        $.ajax({
           url: 'panRight',
                         type: 'GET',
                         success: function(response)
@@ -177,7 +177,7 @@
       });
 
       $("#panNeutral").on("mousedown", function() {
-        $ajax({
+        $.ajax({
           url: 'panNeutral',
                         type: 'GET',
                         success: function(response)
@@ -191,7 +191,7 @@
       });
 
       $("#panLeft").on("mousedown", function() {
-        $ajax({
+        $.ajax({
           url: 'panLeft',
                         type: 'GET',
                         success: function(response)
@@ -210,7 +210,7 @@
         $.get('/tiltStop');
       });
       $("#tiltLeft").on("mousedown", function() {
-        $ajax({
+        $.ajax({
           url: 'tiltLeft',
                         type: 'GET',
                         success: function(response)
@@ -224,7 +224,7 @@
       });
 
       $("#tiltNeutral").on("mousedown", function() {
-        $ajax({
+        $.ajax({
           url: 'tiltNeutral',
                         type: 'GET',
                         success: function(response)
@@ -238,7 +238,7 @@
       });
 
       $("#tiltRight").on("mousedown", function() {
-        $ajax({
+        $.ajax({
           url: 'tiltRight',
                         type: 'GET',
                         success: function(response)

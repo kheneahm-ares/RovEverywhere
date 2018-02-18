@@ -23,3 +23,15 @@ Route::get('/left/{pwm}', 'WheelController@left')->name('left');
 Route::get('/right/{pwm}', 'WheelController@right')->name('right');
 
 Route::get('/stop', 'WheelController@stop')->name('stop');
+
+Route::get('/panRight', 'CameraController@panRight')->name('panRight');
+Route::get('/panNeutral', 'CameraController@panNeutral')->name('panNeutral');
+Route::get('/panLeft', 'CameraController@panLeft')->name('panLeft');
+
+Route::get('/panStop', 'CameraController@panStop')->name('panStop');
+
+Route::get('/tiltRight', 'CameraController@tiltRight')->name('tiltRight');
+Route::get('/tiltNeutral', 'CameraController@tiltNeutral')->name('tiltNeutral');
+Route::get('/tiltLeft', 'CameraController@tiltLeft')->name('rigtiltLeftht');
+
+Route::get('/tiltStop', 'CameraController@tiltStop')->name('tiltStop');
