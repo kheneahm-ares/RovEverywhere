@@ -1,5 +1,12 @@
-#!/bin/bash
+#!/usr/bin/python
+import sys
+import pigpio
+import RPi.GPIO as GPIO
+import time
+GPIO.setwarnings(False)
+GPIO.cleanup()
+GPIO.setmode(GPIO.BCM)
 
-echo 0=40% > /dev/servoblaster
+servo = 5
 
-
+pi = pigpio.pi()

@@ -52,8 +52,8 @@ class CameraController extends Controller
 
       }
 
-      public function panTiltStop(){
-        exec('cgi-bin/panTiltStop.cgi');
+      public function panTiltNeutral(){
+        exec('cgi-bin/panTiltNeutral.cgi');
         echo("Stop Horiz");
 
       }

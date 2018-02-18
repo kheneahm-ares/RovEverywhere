@@ -48,7 +48,7 @@
       left: 325px;
       top: 40px;
     }
-    #panTiltStop {
+    #panTiltNeutral {
       border-style: solid;
       position:absolute;
       left: 285px;
@@ -94,7 +94,7 @@
     <div class="col-md-5">
       <div class="row col-md-offset-4">
         <a href="#" id="panLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/left.png"></a>
-        <a href="#" id="panTiltStop" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/neutral.png"></a>
+        <a href="#" id="panTiltNeutral" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/neutral.png"></a>
         <a href="#" id="panRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/right.png"></a>
         <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
         <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
