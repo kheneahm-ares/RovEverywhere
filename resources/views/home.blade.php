@@ -71,7 +71,7 @@
 <div class="container">
 
     <div class="col-md-7">
-      <iframe src="http://ENTER_YOUR_IP_HERE:9000/javascript_simple.html" frameborder="0" align="middle" width="640" height="480" align="middle" scrolling="no"></iframe>
+      <iframe src="http://localhost/stream" frameborder="0" align="middle" width="640" height="480" align="middle" scrolling="no"></iframe>
     </div>
 
     <div class="col-md-5">

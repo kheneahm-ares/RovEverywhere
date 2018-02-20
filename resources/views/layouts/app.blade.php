@@ -19,6 +19,11 @@
     integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4="
     crossorigin="anonymous">
     </script>
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}"></script>
+
+
 </head>
 <body>
     <div id="">
@@ -81,8 +86,6 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 
 
 </body>

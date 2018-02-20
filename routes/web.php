@@ -17,6 +17,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/map', 'MapController@index')->name('map')->middleware('auth');
+Route::get('/map/create', 'MapController@create')->name('map.create')->middleware('auth');
+Route::post('/map/store', 'MapController@store')->name('map.store')->middleware('auth');
+
+
 Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');
 Route::get('/reverse/{pwm}', 'WheelController@reverse')->name('reverse');
 Route::get('/left/{pwm}', 'WheelController@left')->name('left');
