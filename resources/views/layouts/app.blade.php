@@ -22,6 +22,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+        @yield('scripts')
 
 
 </head>
@@ -58,7 +59,9 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
+                          <li><a href="/map/create">Map</a></li>
+
+                            <li class="">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -82,6 +85,7 @@
                 </div>
             </div>
         </nav>
+        @include('partials._messages')
 
         @yield('content')
     </div>

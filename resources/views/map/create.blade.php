@@ -1,49 +1,44 @@
 @extends('layouts.app')
+@section('scripts')
+  <link rel="stylesheet" href="{{ asset('css/parsley.css') }}">
 
+@endsection
 @section('content')
-<style>
-  #map-canvas{
-      width: 600px;
-      height: 500px;
-  }
-</style>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvuPRT9TEk3uWyoC4-nIw7tOI-0wuhbvA&libraries=places"></script>
-
+  @include('partials._googlemaps')
   <div class="row">
     <div class="col-md-4 col-md-offset-1">
       <div id="map-canvas"></div>
     </div>
-    <div class="col-md-4 col-md-offset-3">
+    <div class="col-md-4 col-md-offset-2">
       <h1>Add Location to picture</h1>
-        {!! Form::open(array('route' => 'map.store')) !!}
+        {!! Form::open(array('route' => 'map.store', 'data-parsley-validate' => '')) !!}
 
         Select Image to Upload
         <div class="input-group">
               <label class="input-group-btn">
                   <span class="btn btn-default btn-file">
-                      Browse <input type="file" name="avatar" style="display: none;">
+                      Browse <input type="file" name="avatar" style="display: none;" required>
                   </span>
               </label>
               <input type="text" class="form-control create-workout" style="margin-top: 0px; width: 157px;" readonly>
           </div>
 
           {{ Form::label('title', 'Title')}}
-          {{ Form::text('title', null, array('class' => 'form-control'))}}
+          {{ Form::text('title', null, array('class' => 'form-control', 'required' => ''))}}
 
 
           <div class="form-group">
-            <label for="title">Map</label>
-            <input type="text" class="form-control"id="searchmap" name="searchmap" />
+            <label for="title">Search Map</label>
+            <input type="text" class="form-control"id="searchmap" name="searchmap" required/>
           </div>
 
           <div class="form-group">
             <label for="lat">Latitude</label>
-            <input type="text" class="form-control" name="lat" id="lat" />
+            <input type="text" class="form-control" name="lat" id="lat" required/>
           </div>
           <div class="form-group">
             <label for="lng">Longitude</label>
-            <input type="text" class="form-control" name="lng" id="lng" />
+            <input type="text" class="form-control" name="lng" id="lng" required/>
           </div>
 
           <button class="col-md-offset-10 btn btn-md btn-primary">Save</button>
@@ -58,8 +53,9 @@
             lat: 41.88,
             lng: -87.63
           },
-          zoom: 15
+          zoom: 10
     });
+
 
     var marker = new google.maps.Marker({
       position: {
@@ -95,6 +91,20 @@
 
         $('#lat').val(lat);
         $('#lng').val(lng);
+
+        //get city
+        var googleApiUrl = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true";
+
+        $.ajax({
+            url: googleApiUrl,
+            type: "GET",
+            success: function(msg){
+              console.log(msg.results[0]["formatted_address"]);
+              var address = msg.results[0]["formatted_address"];
+              $('#searchmap').val(address);
+            }
+
+        });
     });
 
   </script>
