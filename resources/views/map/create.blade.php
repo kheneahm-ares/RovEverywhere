@@ -10,26 +10,29 @@
       <div id="map-canvas"></div>
     </div>
     <div class="col-md-4 col-md-offset-2">
-      <h1>Add Location to picture</h1>
-        {!! Form::open(array('route' => 'map.store', 'data-parsley-validate' => '')) !!}
+      <h1>Add Location to Picture</h1>
+        {!! Form::open(array('route' => 'map.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST')) !!}
 
         Select Image to Upload
         <div class="input-group">
               <label class="input-group-btn">
                   <span class="btn btn-default btn-file">
-                      Browse <input type="file" name="avatar" style="display: none;" required>
+                      Browse
+                      {!! Form::file('path', array('class' => 'form-control', 'id' => 'path', 'style' => 'display: none')) !!}
                   </span>
               </label>
-              <input type="text" class="form-control create-workout" style="margin-top: 0px; width: 157px;" readonly>
+              <br />
           </div>
+          <img src="" id="imagePreview" alt="Preview Image" width="300px" height="200px" />
+          <br />
 
-          {{ Form::label('title', 'Title')}}
-          {{ Form::text('title', null, array('class' => 'form-control', 'required' => ''))}}
+          {{ Form::label('name', 'Title')}}
+          {{ Form::text('name', null, array('class' => 'form-control', 'required' => ''))}}
 
 
           <div class="form-group">
             <label for="title">Search Map</label>
-            <input type="text" class="form-control"id="searchmap" name="searchmap" required/>
+            <input type="text" class="form-control" id="address" name="address" required/>
           </div>
 
           <div class="form-group">
@@ -56,7 +59,6 @@
           zoom: 10
     });
 
-
     var marker = new google.maps.Marker({
       position: {
         lat: 41.88,
@@ -66,7 +68,7 @@
       draggable: true
     });
 
-    var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('address'));
 
 
     //listener that changes marker to new position depending on new search
@@ -101,11 +103,23 @@
             success: function(msg){
               console.log(msg.results[0]["formatted_address"]);
               var address = msg.results[0]["formatted_address"];
-              $('#searchmap').val(address);
+              $('#address').val(address);
             }
 
         });
     });
 
+    $('#path').change(function(){
+    			readImgUrlAndPreview(this);
+    			function readImgUrlAndPreview(input){
+    				 if (input.files && input.files[0]) {
+    			            var reader = new FileReader();
+    			            reader.onload = function (e) {
+    			                $('#imagePreview').attr('src', e.target.result);
+    							}
+    			          };
+    			          reader.readAsDataURL(input.files[0]);
+    			     }
+    		});
   </script>
 @endsection

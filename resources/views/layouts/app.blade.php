@@ -10,7 +10,7 @@
     <meta name="_token" content="{{ csrf_token() }}"/>
 
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>RovEverywhere</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -42,7 +42,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                         RovEverywhere
                     </a>
                 </div>
 
