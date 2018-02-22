@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Picture;
 use Session;
 use Auth;
+use Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 
 class MapController extends Controller
@@ -42,20 +45,24 @@ class MapController extends Controller
       //create new picture
       $picture = new Picture;
       $picture->name = $request->name;
-      $picture->address = $request->name;
-      $picture->lat = $request->name;
+      $picture->address = $request->address;
+      $picture->lat = $request->lat;
       $picture->lng = $request->lng;
-      $picture->path = $request->path;
 
+      //get user
+      $user = Auth::user();
+      $picture->user_id = $user->id;
+
+      $imageName = time().'.'.request()->path->getClientOriginalExtension();
+
+      request()->path->move(public_path('uploads/pictures'), $imageName);
+      $picture->path = $imageName;
       $picture->save();
 
-      Session::flash('success', 'The picture has been saved!');
+      Session::flash('success', 'The picture has been stored!');
 
-      $user = Auth::user();
 
       return redirect()->route('map.index', $user->id); //url only not actual "html" page
-
-
 
     }
 }
