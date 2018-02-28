@@ -11,5 +11,5 @@ servo = 3
 
 pi = pigpio.pi()
 pi.set_mode(servo, pigpio.OUTPUT)
-print("Moving to the right using 2500...")
-pi.set_servo_pulsewidth(servo, 2500)
+print("Moving to the right using 600...")
+pi.set_servo_pulsewidth(servo, 600)

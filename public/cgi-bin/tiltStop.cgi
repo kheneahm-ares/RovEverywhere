@@ -8,17 +8,11 @@ GPIO.setwarnings(False)
 GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
-servo = 5
+servo = 2
 
-GPIO.setup(leftA,GPIO.OUT)
+GPIO.setup(servo,GPIO.OUT)
 Pservo = GPIO.PWM(servo, 100)
 try:
 	Pservo.ChangeDutyCycle(0)
 finally:
 	GPIO.cleanup()
-	os.system("killall panLeft.cgi")
-	os.system("killall panNeutral.cgi")
-	os.system("killall tiltLeft.cgi")
-	os.system("killall tiltRight.cgi")
-    os.system("killall tiltNeutral.cgi")
-	os.system("killall panNeutral.cgi")
