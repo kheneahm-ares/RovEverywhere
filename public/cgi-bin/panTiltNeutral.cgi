@@ -8,7 +8,7 @@ GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
 servoPan = 3
-servoTilt = 5
+servoTilt = 2
 
 pi = pigpio.pi()
 pi.set_mode(servoPan, pigpio.OUTPUT)

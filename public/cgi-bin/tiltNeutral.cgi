@@ -7,7 +7,7 @@ GPIO.setwarnings(False)
 GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
-servo = 5
+servo = 2
 
 pi = pigpio.pi()
 pi.set_mode(servo, pigpio.OUTPUT)
