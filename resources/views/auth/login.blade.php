@@ -63,6 +63,8 @@
                     </form>
                 </div>
             </div>
+            <body style=" background-image: url('images/Rover.gif'); background-size: cover; background-repeat: no-repeat;">
+            </body>
         </div>
     </div>
 </div>
