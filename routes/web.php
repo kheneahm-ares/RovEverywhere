@@ -18,8 +18,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/map', 'MapController@index')->name('map.index')->middleware('auth');
+Route::get('/map/details/{id}', 'MapController@details')->name('map.details')->middleware('auth');
 Route::get('/map/create', 'MapController@create')->name('map.create')->middleware('auth');
 Route::post('/map/store', 'MapController@store')->name('map.store')->middleware('auth');
+
 
 
 Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');

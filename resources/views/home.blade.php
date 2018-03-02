@@ -3,104 +3,135 @@
 @section('content')
 
   <style>
+    .liveStream{
+      background:url('images/loader.gif') center center no-repeat;
+    }
 
     #forward{
-      border-style: solid;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      border-top: solid;
+      border-left: solid;
+      border-right: solid;
       position:absolute;
-      left: 230px;
+      left: 215px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+
     }
     #left{
-      border-style: solid;
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+      border-top: solid;
+      border-left: solid;
+      border-bottom: solid;
       position:absolute;
-      top: 200px;
+      top: 100px;
       left: 100px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 25px;
     }
     #pwm{
-      border-style: solid;
+      border-radius: 10px;
       position:absolute;
-      top: 200px;
+      top: 125px;
       left: 215px;
       font-size: 35px;
     }
     #right{
-      border-style: solid;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+      border-top: solid;
+      border-right: solid;
+      border-bottom: solid;
       position:absolute;
-      top: 200px;
-      left: 380px;
+      top: 100px;
+      left: 330px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 25px;
     }
     #reverse{
-      border-style: solid;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      border-bottom: solid;
+      border-left: solid;
+      border-right: solid;
       position:absolute;
-      top: 325px;
-      left: 230px;
+      top: 215px;
+      left: 215px;
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+
 
     }
     #panLeft {
-      border-style: solid;
       position:absolute;
-      left: 245px;
+      left: -130px;
       top: 40px;
+      opacity: 0.2;
     }
 
     #panRight {
-      border-style: solid;
       position:absolute;
-      left: 325px;
+      left: -50px;
       top: 40px;
+      opacity: 0.2;
+
     }
     #panTiltNeutral {
-      border-style: solid;
       position:absolute;
-      left: 285px;
+      left: -90px;
       top: 40px;
     }
     #tiltLeft {
-      border-style: solid;
       position: absolute;
-      left: 285px;
+      left: -90px;
+      opacity: 0.2;
+
     }
     #tiltRight {
-      border-style: solid;
       position: absolute;
-      left: 285px;
+      left: -90px;
       top: 80px;
+      opacity: 0.2;
+
+    }
+
+    #takepic{
+      position: relative;
+      top: -480px;
+      opacity: 0.2;
     }
 
   </style>
 
-<div class="container">
+<div class="container" >
 
     <div class="col-md-7">
-      <iframe src="http://192.168.12.1:9090/stream" frameborder="0" align="middle" width="640" height="480" align="middle" scrolling="no"></iframe>
+      <iframe class="liveStream" src="http://192.168.12.1:9090/stream" frameborder="0" align="middle" width="640" height="480" align="middle" scrolling="no"></iframe>
+      <button id="takepic" class="fas fa-camera" style="font-size: 50px; width: 100px;" onclick="takePic()"></button>
     </div>
 
     <div class="col-md-5">
-      <div class="row col-md-offset-4">
-        <button style="height: 50px; width: 100px" onclick="lighton()"><img style="height: 40px"src="/images/lighton.png"></button>
-        <button style="height: 50px; width: 100px" onclick="lightoff()"><img style="height: 35px"src="/images/lightoff.png"></button>
-      </div>
-
-      <br />
-        <a href="#" id="forward" ><img style="height: 65px"src="/images/forward.png"></a>
-        <a href="#" id="left" ><img style="height: 65px"src="/images/left.png"></a>
+        <a href="#" id="forward" ><img style="height: 90px; width: 90px;"src="/images/forward.png"></a>
+        <a href="#" id="left" ><img style="height: 90px; width: 90px;"src="/images/left.png"></a>
         <input class="col-md-3" type="number" value="50" min="50" max="254" id="pwm">
-        <a href="#" id="right" ><img style="height: 65px"src="/images/right.png"></a>
-        <a href="#" id="reverse" ><img style="height: 65px"src="/images/reverse.png"></a>
-    </div>
-</div>
-<br />
+        <a href="#" id="right" ><img style="height: 90px; width: 90px;"src="/images/right.png"></a>
+        <a href="#" id="reverse" ><img style="height: 90px; width: 90px;"src="/images/reverse.png"></a>
 
-<div class="container">
-    <div class="col-md-5">
-      <div class="row col-md-offset-4">
+
         <a href="#" id="panLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/left.png"></a>
         <a href="#" id="panTiltNeutral" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/neutral.png"></a>
         <a href="#" id="panRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/right.png"></a>
         <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
         <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
-      </div>
     </div>
 </div>
+<br />
 
 
   <script>
@@ -275,6 +306,11 @@
         return _pwm;
       }
   });
+
+
+  function takePic(){
+    console.log("animate");
+  }
 
 
 
