@@ -61,7 +61,7 @@
 
                       <ul class="nav navbar-nav navbar-left">
                         <li>
-                          <a href="#">Pictures</a>
+                          <a href="#">Snapshots</a>
                         </li>
                         <li>
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">

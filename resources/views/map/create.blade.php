@@ -68,19 +68,23 @@
       draggable: true
     });
 
-    var searchBox = new google.maps.places.SearchBox(document.getElementById('address'));
+    var searchBox = new google.maps.places.Autocomplete(document.getElementById('address'));
 
 
     //listener that changes marker to new position depending on new search
-    google.maps.event.addListener(searchBox, 'places_changed', function(){
-      var places = searchBox.getPlaces();
+
+    searchBox.addListener('place_changed', function(){
+      console.log("hello");
+      var place = searchBox.getPlace();
       var bounds = new google.maps.LatLngBounds();
       var i, place;
 
-      for(i = 0; place=places[i]; i++){
-        bounds.extend(place.geometry.location);
-        marker.setPosition(place.geometry.location); //set the marker to a new position
-      }
+      // for(i = 0; place=places[i]; i++){
+      //   bounds.extend(place.geometry.location);
+      //   marker.setPosition(place.geometry.location); //set the marker to a new position
+      // }
+      bounds.extend(place.geometry.location);
+      marker.setPosition(place.geometry.location);
 
       map.fitBounds(bounds);
       map.setZoom(15);
