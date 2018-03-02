@@ -19,8 +19,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/map', 'MapController@index')->name('map.index')->middleware('auth');
 Route::get('/map/details/{id}', 'MapController@details')->name('map.details')->middleware('auth');
+Route::get('/map/edit/{id}', 'MapController@edit')->name('map.edit')->middleware('auth');
 Route::get('/map/create', 'MapController@create')->name('map.create')->middleware('auth');
 Route::post('/map/store', 'MapController@store')->name('map.store')->middleware('auth');
+Route::put('/map/update/{id}', 'MapController@update')->name('map.update')->middleware('auth');
+Route::delete('/map/delete/{id}', 'MapController@delete')->name('map.delete')->middleware('auth');
 
 
 

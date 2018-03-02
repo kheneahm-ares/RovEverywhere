@@ -82,19 +82,19 @@
               {{$picture->updated_at}}
             </td>
             <td style="width:200px; text-align:center">
-              <form method="POST">
+              {!!Form::open(array('route' => array('map.delete', $picture->id), 'method' => 'DELETE'))!!}
                 <div class="form-actions no-color">
                     <a href="{{route('map.details', $picture->id)}}" class="btn btn-default btn-xs" style="color: black;">
                       <i class="fa fa-eye" aria-hidden="true"></i> View
                     </a>
-                    <a class="btn btn-default btn-xs" style="color: black;">
+                    <a href="{{route('map.edit', $picture->id)}}"  class="btn btn-default btn-xs" style="color: black;">
                         <i class="fa fa-pencil" aria-hidden="true"></i> Edit
                     </a>
                   <button type="submit" class="btn btn-default btn-xs" style="color: black;">
                       <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
                   </button>
                 </div>
-            </form>
+            {!!Form::close()!!}
           </td>
         </tr>
         @endforeach

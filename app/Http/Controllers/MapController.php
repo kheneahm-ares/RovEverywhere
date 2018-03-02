@@ -8,6 +8,7 @@ use App\UploadedPicture;
 use Session;
 use Auth;
 use Image;
+use File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
@@ -74,5 +75,73 @@ class MapController extends Controller
 
       return redirect()->route('map.index', $user->id); //url only not actual "html" page
 
+    }
+
+    public function edit($id){
+      $uploadedPicture = UploadedPicture::find($id);
+
+      return view('map.edit')->with('uploadedPicture', $uploadedPicture);
+    }
+
+    public function update(Request $request, $id){
+      $this->validate($request, array(
+        'name' => 'required|max:255',
+        'address' => 'required',
+        'lat' => 'required',
+        'lng' => 'required',
+      ));
+
+      $picture = UploadedPicture::find($id);
+
+      $picture->name = $request->name;
+      $picture->address = $request->address;
+      $picture->lat = $request->lat;
+      $picture->lng = $request->lng;
+
+      //get user
+      $user = Auth::user();
+      $picture->user_id = $user->id;
+
+      $file = 'uploads/pictures/' . $picture->path;
+
+      //if the user updated the browse input
+      if(!File::exists($file)){
+
+        $imageName = time().'.'.request()->path->getClientOriginalExtension();
+
+        //delete picture
+        $file = 'uploads/pictures/' . $picture->path;
+           if (File::exists($file)) {
+             unlink($file);
+        }
+
+        request()->path->move(public_path('uploads/pictures'), $imageName);
+        $picture->path = $imageName;
+      }
+      //else keep the image in there and just change everything else
+      $picture->touch();
+      $picture->save();
+
+
+
+      Session::flash('success', 'The picture has been updated!');
+
+      return redirect()->route('map.index', $user->id); //url only not actual "html" page
+
+    }
+
+    public function delete($id)
+    {
+      // find post in database
+      $picture = UploadedPicture::find($id);
+      //delete post and pictures
+      $file = 'uploads/pictures/' . $picture->path;
+      unlink($file);
+
+      $picture->delete();
+      //show that it deleted using flash Session
+      Session::flash('success', 'The workout has been deleted!');
+      //redirect to all posts aka index
+      return redirect()->route('map.index');
     }
 }
