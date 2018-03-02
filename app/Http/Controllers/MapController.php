@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Picture;
+use App\UploadedPicture;
 use Session;
 use Auth;
 use Image;
@@ -19,9 +19,15 @@ class MapController extends Controller
         //get user
         $user = Auth::user();
         //grab all pictures in pictures table belonging to user
-        $picturesData = Picture::where('user_id', $user->id)->get();
+        $picturesData = UploadedPicture::where('user_id', $user->id)->get();
 
         return view('map.index')->with('picturesData', $picturesData);
+    }
+
+    public function details($id){
+      //get uploaded picture based on pic id
+      $picture = UploadedPicture::where('id','=',$id)->first();
+      return view('map.details')->with('picture', $picture);
     }
 
 
@@ -29,6 +35,7 @@ class MapController extends Controller
     public function create(){
       return view('map.create');
     }
+
 
     //post request to store picture data to database
     public function store(Request $request){
@@ -43,7 +50,7 @@ class MapController extends Controller
         ));
 
       //create new picture
-      $picture = new Picture;
+      $picture = new UploadedPicture;
       $picture->name = $request->name;
       $picture->address = $request->address;
       $picture->lat = $request->lat;
@@ -55,6 +62,9 @@ class MapController extends Controller
 
       $imageName = time().'.'.request()->path->getClientOriginalExtension();
 
+
+      //we need a conditional statement to check if picture is bigger than x*x
+      //then we need to resize
       request()->path->move(public_path('uploads/pictures'), $imageName);
       $picture->path = $imageName;
       $picture->save();

@@ -14,6 +14,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('fontawesome-free-5.0.7/web-fonts-with-css/css/fontawesome-all.min.css') }}" rel="stylesheet">
+
 
     <script src="https://code.jquery.com/jquery-3.3.0.min.js"
     integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4="
@@ -24,13 +26,24 @@
         <script src="{{ asset('js/app.js') }}"></script>
         @yield('scripts')
 
+        <style>
+
+          html, body{
+            font-size: 15px;
+            background-color: #fafaf9;
+          }
+          .nav.navbar-nav.navbar-left li a, .navbar-brand, .nav.navbar-nav.navbar-right li a{
+            color: #429ef4;
+          }
+        </style>
+
 
 </head>
 <body>
     <div id="">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-fized-top" style="box-shadow: 0px 6px 6px -6px #999">
             <div class="container">
-                <div class="navbar-header">
+                <div class="navbar-header" style>
 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
@@ -44,6 +57,24 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                          RovEverywhere
                     </a>
+                    @auth
+
+                      <ul class="nav navbar-nav navbar-left">
+                        <li>
+                          <a href="#">Pictures</a>
+                        </li>
+                        <li>
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            Map <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a href="/map/">Index</a></li>
+                            <li><a href="/map/create">Create</a></li>
+
+                          </ul>
+                        </li>
+                      </ul>
+                    @endauth
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -59,8 +90,6 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                          <li><a href="/map/create">Map</a></li>
-
                             <li class="">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -68,6 +97,9 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
+                                      <a href="#">
+                                        System
+                                      </a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

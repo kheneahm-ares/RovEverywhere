@@ -3,6 +3,9 @@
   <link rel="stylesheet" href="{{ asset('css/parsley.css') }}">
 @endsection
 <style>
+      table thead tr th{
+        text-align: center;
+      }
     /* The Modal (background) */
     .modals {
         display: none; /* Hidden by default */
@@ -44,12 +47,12 @@
 </style>
 @section('content')
   @include('partials._googlemaps')
-<div class="col-md-4 col-md-offset-1">
+<div class="col-md-4">
   <div id="map-canvas"></div>
 </div>
-<div class="col-md-5 col-md-offset-1">
+<div class="col-md-7 col-md-offset-1">
   <div class="panel panel-default">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover table-striped">
       <thead>
         <tr>
           <th>
@@ -59,29 +62,41 @@
             Address
           </th>
           <th>
-            Date Uploaded
+            Date
           </th>
           <th>
-            Date Edited
+            Actions
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style="text-align:center">
         @foreach($picturesData as $picture)
-          <tr onclick="toggleModal({{$picture->id}})">
-            <td>
+          <tr>
+            <td onclick="toggleModal({{$picture->id}})">
               {{$picture->name}}
             </td>
             <td>
               {{$picture->address}}
             </td>
             <td>
-              {{$picture->created_at}}
-            </td>
-            <td>
               {{$picture->updated_at}}
             </td>
-          </tr>
+            <td style="width:200px; text-align:center">
+              <form method="POST">
+                <div class="form-actions no-color">
+                    <a href="{{route('map.details', $picture->id)}}" class="btn btn-default btn-xs" style="color: black;">
+                      <i class="fa fa-eye" aria-hidden="true"></i> View
+                    </a>
+                    <a class="btn btn-default btn-xs" style="color: black;">
+                        <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                    </a>
+                  <button type="submit" class="btn btn-default btn-xs" style="color: black;">
+                      <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                  </button>
+                </div>
+            </form>
+          </td>
+        </tr>
         @endforeach
       </tbody>
     </table>
