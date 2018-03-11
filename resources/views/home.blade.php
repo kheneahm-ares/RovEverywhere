@@ -18,7 +18,7 @@
       padding-left: 10px;
       padding-right: 10px;
       padding-bottom: 10px;
-      
+
 
     }
     #left{
@@ -143,6 +143,9 @@
 
       $("#stop").click(function(){
         $.get('/stop');
+      });
+      $("#takepic").click(function(){
+        $.get('/takePic');
       });
       $("#reverse").on("mousedown", function() {
         //console.log(_pwm + "hello");

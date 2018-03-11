@@ -33,7 +33,7 @@ Route::get('/left/{pwm}', 'WheelController@left')->name('left');
 Route::get('/right/{pwm}', 'WheelController@right')->name('right');
 
 Route::get('/stop', 'WheelController@stop')->name('stop');
-
+Route::get('/takePic', 'CameraController@takePicture')->name('takePic');
 Route::get('/panRight', 'CameraController@panRight')->name('panRight');
 Route::get('/panNeutral', 'CameraController@panNeutral')->name('panNeutral');
 Route::get('/panLeft', 'CameraController@panLeft')->name('panLeft');

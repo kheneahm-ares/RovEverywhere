@@ -5,8 +5,9 @@ use Illuminate\Http\Request;
 
 class CameraController extends Controller
 {
-    public function takePicture(Request $request){
-
+    public function takePicture(){
+      $fileName = time();
+      exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
     }
 
     public function panRight(){

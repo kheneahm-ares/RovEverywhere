@@ -4,6 +4,18 @@
 
 @endsection
 @section('content')
+  @if(count($errors)> 0)
+  <div class="alert alert-warning" role="alert">
+    <strong>Error:</strong>
+    <ul>
+    @foreach($errors->all() as $error)
+      <li>
+        {{$error}}
+      </li>
+    @endforeach
+    </ul>
+  </div>
+@endif
   @include('partials._googlemaps')
   <div class="row">
     <div class="col-md-4 col-md-offset-1">
@@ -13,12 +25,12 @@
       <h1>Add Location to Picture</h1>
         {!! Form::open(array('route' => 'map.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST')) !!}
 
-        Select Image to Upload
+        Select Image Path to Upload
         <div class="input-group">
               <label class="input-group-btn">
                   <span class="btn btn-default btn-file">
                       Browse
-                      {!! Form::file('path', array('class' => 'form-control', 'id' => 'path', 'style' => 'display: none')) !!}
+                      {!! Form::file('path', array('class' => 'form-control', 'id' => 'path', 'name' => 'path', 'style' => 'display: none')) !!}
                   </span>
               </label>
               <br />
