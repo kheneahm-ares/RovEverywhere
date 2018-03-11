@@ -47,61 +47,74 @@
 </style>
 @section('content')
   @include('partials._googlemaps')
-<div class="col-md-4">
-  <div id="map-canvas"></div>
-</div>
-<div class="col-md-7 col-md-offset-1">
-  <div class="panel panel-default">
-    <table class="table table-bordered table-hover table-striped">
-      <thead>
-        <tr>
-          <th>
-            Name
-          </th>
-          <th>
-            Address
-          </th>
-          <th>
-            Date
-          </th>
-          <th>
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody style="text-align:center">
-        @foreach($picturesData as $picture)
-          <tr>
-            <td onclick="toggleModal({{$picture->id}})">
-              {{$picture->name}}
-            </td>
-            <td>
-              {{$picture->address}}
-            </td>
-            <td>
-              {{$picture->updated_at}}
-            </td>
-            <td style="width:200px; text-align:center">
-              {!!Form::open(array('route' => array('map.delete', $picture->id), 'method' => 'DELETE'))!!}
-                <div class="form-actions no-color">
-                    <a href="{{route('map.details', $picture->id)}}" class="btn btn-default btn-xs" style="color: black;">
-                      <i class="fa fa-eye" aria-hidden="true"></i> View
-                    </a>
-                    <a href="{{route('map.edit', $picture->id)}}"  class="btn btn-default btn-xs" style="color: black;">
-                        <i class="fa fa-pencil" aria-hidden="true"></i> Edit
-                    </a>
-                  <button type="submit" class="btn btn-default btn-xs" style="color: black;">
-                      <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
-                  </button>
-                </div>
-            {!!Form::close()!!}
-          </td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
-</div>
+  @if(count($picturesData) > 0)
+    <div class="col-md-4">
+      <div id="map-canvas"></div>
+    </div>
+    <span class="col-md-offset-7">
+        <button id="hideshow" style="margin-bottom: 5px; margin-left:4%" class="btn btn-default btn-sm fa fa-angle-right"></button>
+    </span>
+    <div id="pic_data" class="col-md-7 col-md-offset-1">
+      <div class="panel panel-default">
+        <table class="table table-bordered table-hover table-striped">
+          <thead>
+            <tr>
+              <th>
+                Name
+              </th>
+              <th>
+                Address
+              </th>
+              <th>
+                Date
+              </th>
+              <th>
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody style="text-align:center">
+            @foreach($picturesData as $picture)
+              <tr>
+                <td onclick="toggleModal({{$picture->id}})">
+                  {{$picture->name}}
+                </td>
+                <td>
+                  {{$picture->address}}
+                </td>
+                <td>
+                  {{$picture->updated_at}}
+                </td>
+                <td style="width:200px; text-align:center">
+                  {!!Form::open(array('route' => array('map.delete', $picture->id), 'method' => 'DELETE', 'onsubmit' => 'return validate()'))!!}
+                    <div class="form-actions no-color">
+                        <a href="{{route('map.details', $picture->id)}}" class="btn btn-default btn-xs" style="color: black;">
+                          <i class="fa fa-eye" aria-hidden="true"></i> View
+                        </a>
+                        <a href="{{route('map.edit', $picture->id)}}"  class="btn btn-default btn-xs" style="color: black;">
+                            <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                        </a>
+                      <button type="submit" class="btn btn-default btn-xs" style="color: black;">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                      </button>
+                    </div>
+                {!!Form::close()!!}
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  @else
+    <div style="text-align:center;">
+      <h3 style="color: red">No uploads</h3>
+    </div>
+    <div class="col-md-12">
+      <div id="map-canvas" style="width:100%; height: 80%"></div>
+    </div>
+  @endif
+
   @foreach($picturesData as $picture)
 
       <div id="{{$picture->id}}" class="modals">
@@ -117,6 +130,27 @@
 
 
     <script>
+    $(document).ready(function(){
+      $("#hideshow").click(function(){
+        if($("#pic_data").is(":visible")){
+          $("#pic_data").hide( "slide", { direction: "right"  }, 600 );
+          $("#map-canvas").animate({ width: 1200 }, 'slow');
+          $(this).toggleClass('fa-angle-right fa-angle-left');
+
+        }
+        else{
+          $("#pic_data").show( "slide", { direction: "right"  }, 600 );
+          $("#map-canvas").animate({ width: 500 }, 'slow');
+          $(this).toggleClass('fa-angle-left fa-angle-right');
+
+
+        }
+      });
+    });
+    function validate(){
+      return confirm("Are you sure you want to delete the picture?");
+
+    }
     // Get the modal
     var modals = document.getElementsByClassName("modals");
 
