@@ -20,8 +20,16 @@ public:
 
 	void determineConnection()
 	{
-		if (networkMatchUp()) system(runInternetAP.c_str());
-		else system(runAP.c_str());
+		if (networkMatchUp())
+		{
+			cout << "Running shared internet: \n" << endl;
+			system(runInternetAP.c_str());
+		}	
+		else
+		{
+			cout << "Running without shared internet: \n" << endl;
+			system(runAP.c_str());
+		}	
 	}	
 	void accessKnownNetworks()
 	{
@@ -90,14 +98,18 @@ public:
 		{
 			cout << "comparator: " << network << endl;
 			cout << "What is being compared: " << availableNetworks.at(0) << endl << endl;
-			if (network.compare(availableNetworks.at(0))==0) return true;
+			if (network.compare(availableNetworks.at(0))==0) 
+			{
+				cout << "Found match" << endl;	
+				return true;
+			}	
 			else continue;
 		}	
 		return false;
 	}	
 private:	
-	const string runInternetAP{"create_ap wlan0 wlan1 akknetwork"};
-	const string runAP{"create_ap wlan0 akknetwork"};
+	const string runInternetAP{"/scripts/launchap.sh"};
+	const string runAP{"/scripts/launchnointernetap.sh"};
 	string filename;
 	vector<string> knownNetworks;
 	vector<string> availableNetworks;
