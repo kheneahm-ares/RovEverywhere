@@ -8,104 +8,116 @@
     }
 
     #forward{
-      border-top-left-radius: 25px;
+      /* border-top-left-radius: 25px;
       border-top-right-radius: 25px;
       border-top: solid;
       border-left: solid;
-      border-right: solid;
+      border-right: solid; */
       position:absolute;
-      left: 215px;
+      right: 110px;
+      bottom: 250px;
       padding-left: 10px;
       padding-right: 10px;
       padding-bottom: 10px;
+      opacity: 0.5;
 
 
     }
     #left{
-      border-top-left-radius: 25px;
+      /* border-top-left-radius: 25px;
       border-bottom-left-radius: 25px;
       border-top: solid;
       border-left: solid;
-      border-bottom: solid;
+      border-bottom: solid; */
       position:absolute;
-      top: 100px;
-      left: 100px;
+      bottom: 165px;
+      right: 193px;
       padding-top: 10px;
       padding-bottom: 10px;
       padding-right: 25px;
+      opacity: 0.5;
+
     }
     #pwm{
       border-radius: 10px;
       position:absolute;
-      top: 125px;
-      left: 215px;
-      font-size: 35px;
+      bottom: 180px;
+      right: 105px;
+      font-size: 30px;
+      opacity: 0.5;
+
     }
     #right{
-      border-top-right-radius: 25px;
+      /* border-top-right-radius: 25px;
       border-bottom-right-radius: 25px;
       border-top: solid;
       border-right: solid;
-      border-bottom: solid;
+      border-bottom: solid; */
       position:absolute;
-      top: 100px;
-      left: 330px;
+      bottom: 165px;
+      right: 25px;
       padding-top: 10px;
       padding-bottom: 10px;
       padding-left: 25px;
+      opacity: 0.5;
+
     }
     #reverse{
-      border-bottom-left-radius: 25px;
+      /* border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
       border-bottom: solid;
       border-left: solid;
-      border-right: solid;
+      border-right: solid; */
       position:absolute;
-      top: 215px;
-      left: 215px;
+      right: 110px;
+      bottom: 95px;
       padding-top: 10px;
       padding-left: 10px;
       padding-right: 10px;
+      opacity: 0.5;
+
 
 
     }
     #panLeft {
       position:absolute;
-      left: -130px;
-      top: 40px;
-      opacity: 0.2;
+      right: 150px;
+      top: 50px;
+      opacity: 0.5;
     }
 
     #panRight {
       position:absolute;
-      left: -50px;
-      top: 40px;
-      opacity: 0.2;
+      right: 70px;
+      top: 50px;
+      opacity: 0.5;
 
     }
     #panTiltNeutral {
       position:absolute;
-      left: -90px;
-      top: 40px;
+      right: 110px;
+      top: 50px;
     }
     #tiltLeft {
       position: absolute;
-      left: -90px;
-      opacity: 0.2;
+      right: 110px;
+      top: 10px;
+      opacity: 0.5;
 
     }
     #tiltRight {
       position: absolute;
-      left: -90px;
-      top: 80px;
-      opacity: 0.2;
+      right: 110px;
+      top: 90px;
+      opacity: 0.5;
 
     }
 
     #takepic{
       position: relative;
-      top: -480px;
-      opacity: 0.2;
+      left: 8px;
+      top: -540px;
+      opacity: 0.5;
     }
 
   </style>
@@ -117,11 +129,11 @@
       <button id="takepic" class="fas fa-camera" style="font-size: 50px; width: 100px;" onclick="takePic()"></button>
 
 
-      <a href="#" id="forward" ><img style="height: 90px; width: 90px;"src="/images/forward.png"></a>
-      <a href="#" id="left" ><img style="height: 90px; width: 90px;"src="/images/left.png"></a>
-      <input class="col-md-3" type="number" value="50" min="50" max="254" id="pwm">
-      <a href="#" id="right" ><img style="height: 90px; width: 90px;"src="/images/right.png"></a>
-      <a href="#" id="reverse" ><img style="height: 90px; width: 90px;"src="/images/reverse.png"></a>
+      <a href="#" id="forward" ><img style="height: 60px; width: 60px;"src="/images/forward.png"></a>
+      <a href="#" id="left" ><img style="height: 60px; width: 60px;"src="/images/left.png"></a>
+      <input class="col-md-1" type="number" value="50" min="50" max="254" id="pwm">
+      <a href="#" id="right" ><img style="height: 60px; width: 60px;"src="/images/right.png"></a>
+      <a href="#" id="reverse" ><img style="height: 60px; width: 60px;"src="/images/reverse.png"></a>
 
 
       <a href="#" id="panLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/left.png"></a>
