@@ -13,7 +13,7 @@ class CameraController extends Controller
         $snapshot->path = $fileName;
         $snapshot->save();
         
-        exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
+	exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
     }
 
     public function panRight()
