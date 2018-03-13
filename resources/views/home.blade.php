@@ -112,24 +112,24 @@
 
 <div class="container" >
 
-    <div class="col-md-7">
-      <iframe class="liveStream" src="http://192.168.12.1:9090/stream" frameborder="0" align="middle" width="640" height="480" align="middle" scrolling="no"></iframe>
+    <div class="col-md-12">
+      <iframe class="liveStream" src="http://192.168.12.1:9090/stream" frameborder="0" align="middle" width="100%" height="550" align="middle" scrolling="no"></iframe>
       <button id="takepic" class="fas fa-camera" style="font-size: 50px; width: 100px;" onclick="takePic()"></button>
-    </div>
-
-    <div class="col-md-5">
-        <a href="#" id="forward" ><img style="height: 90px; width: 90px;"src="/images/forward.png"></a>
-        <a href="#" id="left" ><img style="height: 90px; width: 90px;"src="/images/left.png"></a>
-        <input class="col-md-3" type="number" value="50" min="50" max="254" id="pwm">
-        <a href="#" id="right" ><img style="height: 90px; width: 90px;"src="/images/right.png"></a>
-        <a href="#" id="reverse" ><img style="height: 90px; width: 90px;"src="/images/reverse.png"></a>
 
 
-        <a href="#" id="panLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/left.png"></a>
-        <a href="#" id="panTiltNeutral" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/neutral.png"></a>
-        <a href="#" id="panRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/right.png"></a>
-        <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
-        <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
+      <a href="#" id="forward" ><img style="height: 90px; width: 90px;"src="/images/forward.png"></a>
+      <a href="#" id="left" ><img style="height: 90px; width: 90px;"src="/images/left.png"></a>
+      <input class="col-md-3" type="number" value="50" min="50" max="254" id="pwm">
+      <a href="#" id="right" ><img style="height: 90px; width: 90px;"src="/images/right.png"></a>
+      <a href="#" id="reverse" ><img style="height: 90px; width: 90px;"src="/images/reverse.png"></a>
+
+
+      <a href="#" id="panLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/left.png"></a>
+      <a href="#" id="panTiltNeutral" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/neutral.png"></a>
+      <a href="#" id="panRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/right.png"></a>
+      <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
+      <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
+
     </div>
 </div>
 <br />
