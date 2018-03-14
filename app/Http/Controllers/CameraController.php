@@ -3,17 +3,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Snapshot;
+use Auth;
 
 class CameraController extends Controller
 {
     public function takePicture()
     {
+        $user = Auth::user();
         $fileName = time();
         $snapshot = new Snapshot;
         $snapshot->path = $fileName;
+        $snapshot->user_id = $user->id;
+
         $snapshot->save();
-        
-	exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
+
+	    exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
     }
 
     public function panRight()
