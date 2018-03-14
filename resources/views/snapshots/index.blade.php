@@ -22,8 +22,8 @@
             <div class="col-sm-6" id="slider-thumbs">
                 <!-- Bottom switcher of slider -->
                 <ul class="hide-bullets">
+                  <?php $count = 0 ?>
                   @foreach($snapshots as $snap )
-                    <?php $count = 0 ?>
                     <li class="col-md-3">
                       <a class="thumbnail" id="carousel-selector-{{$count}}">
                         <img width="300px" height="300px" src="{{asset("snapshots/".$snap->path.".jpg")}}"/>
@@ -41,8 +41,8 @@
                             <div class="carousel slide" id="myCarousel">
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">
+                                  <?php $count = 0 ?>
                                   @foreach($snapshots as $snap )
-                                    <?php $count = 0 ?>
                                     @if($count == 0){
                                       <div class="active item" data-slide-number="{{$count}}">
                                           <img src="{{asset("snapshots/".$snap->path.".jpg")}}">
