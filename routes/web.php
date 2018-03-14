@@ -27,6 +27,9 @@ Route::put('/map/update/{id}', 'MapController@update')->name('map.update')->midd
 Route::delete('/map/delete/{id}', 'MapController@delete')->name('map.delete')->middleware('auth');
 
 Route::middleware('auth')->group(function(){
+  /*Snapshot Routes */
+  Route::get('snapshots/index', 'SnapshotController@index')->name('snapshots');
+
   /*Feature Routes*/
   Route::get('/features/rover', 'FeatureController@rover')->name('rover');
 

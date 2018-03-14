@@ -66,7 +66,7 @@
 
                       <ul class="nav navbar-nav navbar-left">
                         <li>
-                          <a href="#">Snapshots</a>
+                          <a href="/snapshots/index">Snapshots</a>
                         </li>
 
                         <li>
