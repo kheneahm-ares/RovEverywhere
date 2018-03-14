@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class WheelController extends Controller
 {
     //
-    public function forward(Request $request){
+    public function forward(){
       $pwm = $_GET['pwm'];
 
       exec('cgi-bin/forward.cgi "'. ($pwm) . '" &> /dev/null &');
