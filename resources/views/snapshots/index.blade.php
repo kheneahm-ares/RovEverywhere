@@ -13,6 +13,7 @@
 
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     width: 100%;
+    height: 400px;
 }
 </style>
 <div class="container">
@@ -25,8 +26,8 @@
                   <?php $count = 0 ?>
                   @foreach($snapshots as $snap )
                     <li class="col-md-3">
-                      <a class="thumbnail" id="carousel-selector-{{$count}}">
-                        <img width="300px" height="300px" src="{{asset("snapshots/".$snap->path.".jpg")}}"/>
+                      <a class="img-thumbnail" id="carousel-selector-{{$count}}">
+                        <img width="100px" height="100px" src="{{asset("snapshots/".$snap->path.".jpg")}}"/>
                       </a>
                     </li>
                     <?php $count++ ?>
@@ -43,16 +44,16 @@
                                 <div class="carousel-inner">
                                   <?php $count = 0 ?>
                                   @foreach($snapshots as $snap )
-                                    @if($count == 0){
+                                    @if($count == 0)
                                       <div class="active item" data-slide-number="{{$count}}">
                                           <img src="{{asset("snapshots/".$snap->path.".jpg")}}">
                                         </div>
-                                    }
-                                  @else{
+                                    
+                                  @else
                                       <div class="item" data-slide-number="{{$count}}">
-                                          <img src="{{asset("snapshots/".$snap->path.".jpg")}}">
+                                          <img  src="{{asset("snapshots/".$snap->path.".jpg")}}">
                                         </div>
-                                    }
+                                    
                                   @endif
 
 
@@ -78,17 +79,19 @@
 
 <script>
   $(document).ready(function(){
-    $('#myCarousel').carousel({
-               interval: 5000
-       });
+    //$('#myCarousel').carousel({
+      //         interval: 5000
+      // });
 
        //Handles the carousel thumbnails
        $('[id^=carousel-selector-]').click(function () {
-       var id_selector = $(this).attr("id");
+	       var id_selector = $(this).attr("id");
+
+           $('#myCarousel').carousel();
        try {
            var id = /-(\d+)$/.exec(id_selector)[1];
            console.log(id_selector, id);
-           jQuery('#myCarousel').carousel(parseInt(id));
+           $('#myCarousel').carousel(parseInt(id));
        } catch (e) {
            console.log('Regex failed!', e);
        }
