@@ -26,7 +26,7 @@
                     <?php $count = 0 ?>
                     <li class="col-md-3">
                       <a class="thumbnail" id="carousel-selector-{{$count}}">
-                        <img width="300px" height="300px" src="{{asset("snapshots/".$snap->path)}}"/>
+                        <img width="300px" height="300px" src="{{asset("snapshots/".$snap->path.".jpg")}}"/>
                       </a>
                     </li>
                     <?php $count++ ?>
@@ -45,12 +45,12 @@
                                     <?php $count = 0 ?>
                                     @if($count == 0){
                                       <div class="active item" data-slide-number="{{$count}}">
-                                          <img src="{{asset("snapshots/".$snap->path)}}">
+                                          <img src="{{asset("snapshots/".$snap->path.".jpg")}}">
                                         </div>
                                     }
                                   @else{
                                       <div class="item" data-slide-number="{{$count}}">
-                                          <img src="{{asset("snapshots/".$snap->path)}}">
+                                          <img src="{{asset("snapshots/".$snap->path.".jpg")}}">
                                         </div>
                                     }
                                   @endif

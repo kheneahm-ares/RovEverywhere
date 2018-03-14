@@ -4,7 +4,7 @@
 
   <style>
     .liveStream{
-      background:url('images/loader.gif') center center no-repeat;
+      background:url('/images/loader.gif') center center no-repeat;
     }
 
     #forward{
