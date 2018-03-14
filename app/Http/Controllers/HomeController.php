@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UploadedPicture;
+use App\Snapshot;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,93 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+
+        //get all uploads
+        $uploadedPictures = UploadedPicture::where('user_id', $user->id)
+                            ->orderby('created_at', 'desc')
+                            ->get();
+
+        $date_today = date('d/m/Y');
+        //6 days and not 7 bc we are including today
+        $date_six_days_ago = date('d/m/Y', strtotime('-6 days'));
+        $date_five_days_ago = date('d/m/Y', strtotime('-5 days'));
+        $date_four_days_ago = date('d/m/Y', strtotime('-4 days'));
+        $date_three_days_ago = date('d/m/Y', strtotime('-3 days'));
+        $date_two_days_ago = date('d/m/Y', strtotime('-2 days'));
+        $date_one_days_ago = date('d/m/Y', strtotime('-1 days'));
+
+        $dates = array($date_six_days_ago, $date_five_days_ago,
+                      $date_four_days_ago, $date_three_days_ago,
+                      $date_two_days_ago, $date_one_days_ago,
+                      $date_today);
+
+
+        $size = count($uploadedPictures);
+        $dateArray = array(
+          $date_six_days_ago => 0,
+          $date_five_days_ago => 0,
+          $date_four_days_ago => 0,
+          $date_three_days_ago => 0,
+          $date_two_days_ago  => 0,
+          $date_one_days_ago => 0,
+          $date_today => 0
+        );
+
+        //compute uploaded picture array ($dateArray) values
+        foreach($uploadedPictures as $uploaded){
+            $picDate = date_create((string)$uploaded->created_at);
+            $dateFormat = date_format($picDate,'d/m/Y');
+
+            switch($dateFormat){
+              case $date_six_days_ago : $dateArray[$date_six_days_ago]++;break;
+              case $date_five_days_ago : $dateArray[$date_five_days_ago]++;break;
+              case $date_four_days_ago : $dateArray[$date_four_days_ago]++;break;
+              case $date_three_days_ago : $dateArray[$date_three_days_ago]++;break;
+              case $date_two_days_ago : $dateArray[$date_two_days_ago]++;break;
+              case $date_one_days_ago : $dateArray[$date_one_days_ago]++;break;
+              case $date_today : $dateArray[$date_today]++;break;
+            }
+
+        }
+        //print_r($dateArray);
+
+        //get all Snapshots
+        $snapshots = Snapshot::where('user_id', $user->id)
+                            ->orderby('created_at', 'desc')
+                            ->get();
+
+        //compute snapshots array ($dateArray) values
+        $snapshotsArray = array(
+          $date_six_days_ago => 0,
+          $date_five_days_ago => 0,
+          $date_four_days_ago => 0,
+          $date_three_days_ago => 0,
+          $date_two_days_ago  => 0,
+          $date_one_days_ago => 0,
+          $date_today => 0
+        );
+
+        foreach($snapshots as $snaps){
+            $picDate = date_create((string)$snaps->created_at);
+            $dateFormat = date_format($picDate,'d/m/Y');
+
+            switch($dateFormat){
+              case $date_six_days_ago : $snapshotsArray[$date_six_days_ago]++;break;
+              case $date_five_days_ago : $snapshotsArray[$date_five_days_ago]++;break;
+              case $date_four_days_ago : $snapshotsArray[$date_four_days_ago]++;break;
+              case $date_three_days_ago : $snapshotsArray[$date_three_days_ago]++;break;
+              case $date_two_days_ago : $snapshotsArray[$date_two_days_ago]++;break;
+              case $date_one_days_ago : $snapshotsArray[$date_one_days_ago]++;break;
+              case $date_today : $snapshotsArray[$date_today]++;break;
+            }
+
+        }
+
+
+
+        return view('home')->with('dateArray', $dateArray)
+                          ->with('dates', $dates)
+                          ->with('snapshots', $snapshotsArray);
     }
 }

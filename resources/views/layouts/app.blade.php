@@ -68,6 +68,7 @@
                         <li>
                           <a href="#">Snapshots</a>
                         </li>
+
                         <li>
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                             Map <span class="caret"></span>
@@ -76,6 +77,15 @@
                             <li><a href="/map/">Index</a></li>
                             <li><a href="/map/create">Create</a></li>
 
+                          </ul>
+                        </li>
+                        <li>
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            Features <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a href="/features/rover">Let's Rove</a></li>
+                            <li><a href="#">Object Recognition</a></li>
                           </ul>
                         </li>
                       </ul>
