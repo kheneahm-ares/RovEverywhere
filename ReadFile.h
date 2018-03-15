@@ -97,13 +97,17 @@ public:
 		for (auto network : knownNetworks)
 		{
 			cout << "comparator: " << network << endl;
-			cout << "What is being compared: " << availableNetworks.at(0) << endl << endl;
-			if (network.compare(availableNetworks.at(0))==0) 
+			
+			for (auto scannedNetwork : availableNetworks)
 			{
-				cout << "Found match" << endl;	
-				return true;
-			}	
-			else continue;
+				cout << "What is being compared: " << scannedNetwork << endl << endl;
+				if (network.compare(scannedNetwork)==0) 
+				{
+					cout << "Found match" << endl;	
+					return true;
+				}	
+				else continue;
+			}
 		}	
 		return false;
 	}	
