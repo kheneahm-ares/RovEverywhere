@@ -48,12 +48,12 @@
                                       <div class="active item" data-slide-number="{{$count}}">
                                           <img src="{{asset("snapshots/".$snap->path.".jpg")}}">
                                         </div>
-                                    
+
                                   @else
                                       <div class="item" data-slide-number="{{$count}}">
                                           <img  src="{{asset("snapshots/".$snap->path.".jpg")}}">
                                         </div>
-                                    
+
                                   @endif
 
 
@@ -79,9 +79,9 @@
 
 <script>
   $(document).ready(function(){
-    //$('#myCarousel').carousel({
-      //         interval: 5000
-      // });
+    $('#myCarousel').carousel({
+              interval: 5000
+      });
 
        //Handles the carousel thumbnails
        $('[id^=carousel-selector-]').click(function () {

@@ -28,7 +28,7 @@ Route::delete('/map/delete/{id}', 'MapController@delete')->name('map.delete')->m
 
 Route::middleware('auth')->group(function(){
   /*Snapshot Routes */
-  Route::get('snapshots/index', 'SnapshotController@index')->name('snapshots');
+  Route::get('/snapshots/index', 'SnapshotController@index')->name('snapshots');
 
   /*Feature Routes*/
   Route::get('/features/rover', 'FeatureController@rover')->name('rover');
@@ -52,4 +52,6 @@ Route::middleware('auth')->group(function(){
   Route::get('/tiltStop', 'CameraController@tiltStop')->name('tiltStop');
   Route::get('/panTiltNeutral', 'CameraController@panTiltNeutral')->name('panTiltNeutral');
 
+  /*System Routes*/
+  Route::get('/system', 'SystemController@index')->name('system');
 });
