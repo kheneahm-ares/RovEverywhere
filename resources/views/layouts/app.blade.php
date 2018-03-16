@@ -114,7 +114,7 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                      <a href="#">
+                                      <a href="/system">
                                         System
                                       </a>
                                         <a href="{{ route('logout') }}"
