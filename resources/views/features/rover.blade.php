@@ -141,7 +141,8 @@
       <a href="#" id="panRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/right.png"></a>
       <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
       <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
-
+      <input type="hidden" value="1500" id="freq">
+        <input type="hidden" value="1500" id="tiltFreq">
     </div>
 </div>
 <br />
@@ -222,26 +223,35 @@
 
 //---------------  This section is used for calling panning functions on the camera. -------------//
 
-      $("#panStop").click(function(){
-        $.get('/panStop');
-      });
       $("#panRight").on("mousedown", function() {
-        $.ajax({
-          url: 'panRight',
-                        type: 'GET',
-                        success: function(response)
-                        {
-                            console.log(response);
-                        }
+        //get value of freq 
+        //if value +100 <= 1500 then proceed to go to ajax call
+        //else 
+        var currFreq = parseInt($("#freq").val());
+        var incFreq = currFreq + 100;
+        console.log(incFreq);
 
-        });
-      }).on('mouseup', function() {
-        $.get('/panStop');
+        if(incFreq <= 2500){
+            //dynamically change the freq value
+            $("#freq").val(incFreq);
+            $.ajax({
+            url: 'panMovement/ {freq}',
+                          type: 'GET',
+                          data: { freq: incFreq},
+                          success: function(response)
+                          {
+                              console.log(response);
+                          }
+          });          
+        }
+        else{
+          alert("Cant do that");
+        }
       });
 
-      $("#panNeutral").on("mousedown", function() {
+      $("#panTiltNeutral").on("mousedown", function() {
         $.ajax({
-          url: 'panNeutral',
+          url: 'panTiltNeutral',
                         type: 'GET',
                         success: function(response)
                         {
@@ -249,46 +259,64 @@
                         }
 
         });
-      }).on('mouseup', function() {
-        $.get('/panStop');
       });
 
-      $("#panLeft").on("mousedown", function() {
-        $.ajax({
-          url: 'panLeft',
-                        type: 'GET',
-                        success: function(response)
-                        {
-                            console.log(response);
-                        }
+      $("#panLeft").on("mousedown", function() {//get value of freq 
+        //if value +100 <= 1500 then proceed to go to ajax call
+        //else 
+        var currFreq = parseInt($("#freq").val());
+        var decFreq = currFreq - 100;
+        console.log(decFreq);
 
-        });
-      }).on('mouseup', function() {
-        $.get('/panStop');
+        if(decFreq >= 500){
+            //dynamically change the freq value
+            $("#freq").val(decFreq);
+            $.ajax({
+            url: 'panMovement/ {freq}',
+                          type: 'GET',
+                          data: { freq: decFreq},
+                          success: function(response)
+                          {
+                              console.log(response);
+                          }
+          });          
+        }
+        else{
+          alert("Cant do that");
+        }
       });
 
 //---------------  This section is used for calling tilting functions on the camera. -------------//
 
-      $("#tiltStop").click(function(){
-        $.get('/tiltStop');
-      });
       $("#tiltLeft").on("mousedown", function() {
-        $.ajax({
-          url: 'tiltLeft',
-                        type: 'GET',
-                        success: function(response)
-                        {
-                            console.log(response);
-                        }
+        //get value of freq 
+        //if value +100 <= 1500 then proceed to go to ajax call
+        //else 
+        var currFreq = parseInt($("#tiltFreq").val());
+        var incFreq = currFreq + 100;
+        console.log(incFreq);
 
-        });
-      }).on('mouseup', function() {
-        $.get('/tiltStop');
+        if(incFreq <= 2500){
+            //dynamically change the freq value
+            $("#tiltFreq").val(incFreq);
+            $.ajax({
+            url: 'tiltMovement/ {tiltFreq}',
+                          type: 'GET',
+                          data: { freq: incFreq},
+                          success: function(response)
+                          {
+                              console.log(response);
+                          }
+          });          
+        }
+        else{
+          alert("Cant do that");
+        }
       });
 
-      $("#tiltNeutral").on("mousedown", function() {
+      $("#panTiltNeutral").on("mousedown", function() {
         $.ajax({
-          url: 'tiltNeutral',
+          url: 'panTiltNeutral',
                         type: 'GET',
                         success: function(response)
                         {
@@ -296,22 +324,32 @@
                         }
 
         });
-      }).on('mouseup', function() {
-        $.get('/tiltStop');
       });
 
       $("#tiltRight").on("mousedown", function() {
-        $.ajax({
-          url: 'tiltRight',
-                        type: 'GET',
-                        success: function(response)
-                        {
-                            console.log(response);
-                        }
+        //get value of freq 
+        //if value +100 <= 1500 then proceed to go to ajax call
+        //else 
+        var currFreq = parseInt($("#tiltFreq").val());
+        var decFreq = currFreq - 100;
+        console.log(decFreq);
 
-        });
-      }).on('mouseup', function() {
-        $.get('/tiltStop');
+        if(decFreq >= 500){
+            //dynamically change the freq value
+            $("#tiltFreq").val(decFreq);
+            $.ajax({
+            url: 'tiltMovement/ {tiltFreq}',
+                          type: 'GET',
+                          data: { freq: decFreq},
+                          success: function(response)
+                          {
+                              console.log(response);
+                          }
+          });          
+        }
+        else{
+          alert("Cant do that");
+        }
       });
 
 //---------------  This section is used for showing the pwm value. -------------//
@@ -320,6 +358,13 @@
           //console.log(_pwm);
 
         return _pwm;
+      }
+
+      function getFreq(){
+          var _freq = $("#freq").val();
+          //console.log(_pwm);
+
+        return _freq;
       }
   });
 

@@ -26,32 +26,11 @@ Route::post('/map/store', 'MapController@store')->name('map.store')->middleware(
 Route::put('/map/update/{id}', 'MapController@update')->name('map.update')->middleware('auth');
 Route::delete('/map/delete/{id}', 'MapController@delete')->name('map.delete')->middleware('auth');
 
-
 Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');
 Route::get('/reverse/{pwm}', 'WheelController@reverse')->name('reverse');
 Route::get('/left/{pwm}', 'WheelController@left')->name('left');
 Route::get('/right/{pwm}', 'WheelController@right')->name('right');
-
-Route::get('/panMovement/{freq}', 'CameraController@panMovement')->name('panMovement');
-Route::get('/tiltMovement/{tiltFreq}', 'CameraController@tiltMovement')->name('tiltMovement');
-
-
-Route::get('/stop', 'WheelController@stop')->name('stop');
 Route::get('/takePic', 'CameraController@takePicture')->name('takePic');
-Route::get('/panRight', 'CameraController@panRight')->name('panRight');
-Route::get('/panNeutral', 'CameraController@panNeutral')->name('panNeutral');
-Route::get('/panLeft', 'CameraController@panLeft')->name('panLeft');
-
-Route::get('/panStop', 'CameraController@panStop')->name('panStop');
-
-Route::get('/tiltRight', 'CameraController@tiltRight')->name('tiltRight');
-Route::get('/tiltNeutral', 'CameraController@tiltNeutral')->name('tiltNeutral');
-Route::get('/tiltLeft', 'CameraController@tiltLeft')->name('rigtiltLeftht');
-
-Route::get('/tiltStop', 'CameraController@tiltStop')->name('tiltStop');
-
-Route::get('/panTiltNeutral', 'CameraController@panTiltNeutral')->name('panTiltNeutral');
-
 
 Route::middleware('auth')->group(function(){
   /*Snapshot Routes */
@@ -69,15 +48,12 @@ Route::middleware('auth')->group(function(){
 
   /*Cam Routes*/
   Route::get('/takePic', 'CameraController@takePicture')->name('takePic');
-  Route::get('/panRight', 'CameraController@panRight')->name('panRight');
-  Route::get('/panNeutral', 'CameraController@panNeutral')->name('panNeutral');
-  Route::get('/panLeft', 'CameraController@panLeft')->name('panLeft');
-  Route::get('/panStop', 'CameraController@panStop')->name('panStop');
-  Route::get('/tiltRight', 'CameraController@tiltRight')->name('tiltRight');
-  Route::get('/tiltNeutral', 'CameraController@tiltNeutral')->name('tiltNeutral');
-  Route::get('/tiltLeft', 'CameraController@tiltLeft')->name('rigtiltLeftht');
-  Route::get('/tiltStop', 'CameraController@tiltStop')->name('tiltStop');
+  Route::get('/panMovement/{freq}', 'CameraController@panMovement')->name('panMovement');
+  Route::get('/tiltMovement/{tiltFreq}', 'CameraController@tiltMovement')->name('tiltMovement');
   Route::get('/panTiltNeutral', 'CameraController@panTiltNeutral')->name('panTiltNeutral');
+  Route::get('/panStop', 'CameraController@panStop')->name('panStop');
+  Route::get('/tiltStop', 'CameraController@tiltStop')->name('tiltStop');
+  Route::get('/stop', 'WheelController@stop')->name('stop');
 
   /*System Routes*/
   Route::get('/system', 'SystemController@index')->name('system');

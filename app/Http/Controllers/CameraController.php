@@ -34,7 +34,7 @@ class CameraController extends Controller
         return $freq;
       }
 
-      public function panTiltNeutral(){
+    public function panTiltNeutral() {
         exec('cgi-bin/panTiltNeutral.cgi');
         echo("Stop Horiz");
     }
