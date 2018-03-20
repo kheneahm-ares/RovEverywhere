@@ -13,7 +13,7 @@ class CreatePicturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pictures', function (Blueprint $table) {
+        Schema::create('uploaded_pictures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('user_id');
             $table->string('name');
