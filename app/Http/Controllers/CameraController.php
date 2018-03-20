@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Snapshot;
+use App\Activity;
 use Auth;
 
 class CameraController extends Controller
@@ -29,7 +30,7 @@ class CameraController extends Controller
       public function panMovement() {
         $freq=$_GET['freq'];
         exec('cgi-bin/panMovement.cgi "' . $freq . '" &> /dev/null &');
-        
+
         return $freq;
       }
 
