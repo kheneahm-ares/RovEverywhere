@@ -1,120 +1,14 @@
 @extends('layouts.app')
+@section('scripts')
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
+
+@endsection
 @section('content')
 
-  <style>
-    .liveStream{
-      background:url('images/loader.gif') center center no-repeat;
-    }
-
-    #forward{
-      border-top-left-radius: 25px;
-      border-top-right-radius: 25px;
-      border-top: solid;
-      border-left: solid;
-      border-right: solid;
-      position:absolute;
-      left: 215px;
-      padding-left: 10px;
-      padding-right: 10px;
-      padding-bottom: 10px;
-
-
-    }
-    #left{
-      border-top-left-radius: 25px;
-      border-bottom-left-radius: 25px;
-      border-top: solid;
-      border-left: solid;
-      border-bottom: solid;
-      position:absolute;
-      top: 100px;
-      left: 100px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-right: 25px;
-    }
-    #pwm{
-      border-radius: 10px;
-      position:absolute;
-      top: 125px;
-      left: 215px;
-      font-size: 35px;
-    }
-    #right{
-      border-top-right-radius: 25px;
-      border-bottom-right-radius: 25px;
-      border-top: solid;
-      border-right: solid;
-      border-bottom: solid;
-      position:absolute;
-      top: 100px;
-      left: 330px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-left: 25px;
-    }
-    #reverse{
-      border-bottom-left-radius: 25px;
-      border-bottom-right-radius: 25px;
-      border-bottom: solid;
-      border-left: solid;
-      border-right: solid;
-      position:absolute;
-      top: 215px;
-      left: 215px;
-      padding-top: 10px;
-      padding-left: 10px;
-      padding-right: 10px;
-
-
-    }
-    #panLeft {
-      position:absolute;
-      left: -130px;
-      top: 40px;
-      opacity: 0.2;
-    }
-
-    #panRight {
-      position:absolute;
-      left: -50px;
-      top: 40px;
-      opacity: 0.2;
-
-    }
-    #panTiltNeutral {
-      position:absolute;
-      left: -90px;
-      top: 40px;
-    }
-    #tiltLeft {
-      position: absolute;
-      left: -90px;
-      opacity: 0.2;
-
-    }
-    #tiltRight {
-      position: absolute;
-      left: -90px;
-      top: 80px;
-      opacity: 0.2;
-
-    }
-
-    #takepic{
-      position: relative;
-      top: -480px;
-      opacity: 0.2;
-    }
-
-  </style>
-
-<div class="container" >
-
-    <div class="col-md-7">
-      <iframe class="liveStream" src="http://192.168.12.1:9090/stream" frameborder="0" align="middle" width="640" height="480" align="middle" scrolling="no"></iframe>
-      <button id="takepic" class="fas fa-camera" style="font-size: 50px; width: 100px;" onclick="takePic()"></button>
+    <div class="col-md-12" style="margin-bottom: 50px;">
+      <div id="high-chart" style=""></div>
     </div>
 
     <div class="col-md-5">
@@ -133,7 +27,69 @@
         
         <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
         <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            Recent Rover Activity
+          </div>
+          <div class="panel-body">
+            Activty Stuff
+          </div>
+      </div>
     </div>
+    <div class="col-md-6">
+            <!-- Top part of the slider -->
+            <div class="row">
+                <div class="col-sm-12" id="carousel-bounding-box">
+                    <div class="carousel slide" id="myCarousel" data-interval="2000">
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+
+                              <div class="active item" data-slide-number="0">
+                                <div class="panel-info">
+                                  <div class="panel-heading">
+                                    Outside Temperature
+                                    <a href="#">More</a>
+                                  </div>
+                                  <div class="panel-body">
+
+                                  </div>
+                                </div>                                </div>
+
+
+                              <div class="item" data-slide-number="1">
+                                <div class="panel-info">
+                                  <div class="panel-heading">
+                                    Outside Humidity
+                                    <a href="#">More</a>
+                                  </div>
+                                  <div class="panel-body">
+
+                                  </div>
+                                </div>
+                               </div>
+                               <div class="item" data-slide-number="2">
+                                 <div class="panel-info">
+                                   <div class="panel-heading">
+                                     Internal Temperature
+                                     <a href="#">More</a>
+                                   </div>
+                                   <div class="panel-body">
+                                   </div>
+                                 </div>
+                                </div>
+                        <!-- Carousel nav -->
+                        <a style="opacity:0.0" class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="fas fa-arrow-left"></span>
+                        </a>
+                        <a style="opacity:0.0" class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="fas fa-arrow-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!--/Slider-->
 </div>
 <br />
 
@@ -371,4 +327,67 @@
   </script>
 
 
+<script>
+
+
+Highcharts.chart('high-chart', {
+    chart: {
+        type: 'area',
+        backgroundColor: '#f0f0f0'
+    },
+    title: {
+        text: 'Rover Activity'
+    },
+    subtitle: {
+        text: 'Last 7 Days'
+    },
+    xAxis: {
+        categories: [
+                  "{{$dates[0]}}",
+                  "{{$dates[1]}}",
+                  "{{$dates[2]}}",
+                  "{{$dates[3]}}",
+                  "{{$dates[4]}}",
+                  "{{$dates[5]}}",
+                  "{{$dates[6]}}"
+        ]
+    },
+    yAxis: {
+        title: {
+            text: 'Count'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        }
+    },
+    series: [{
+        name: 'Uploads',
+        data: [
+          {{$dateArray[$dates[0]]}},
+                  {{$dateArray[$dates[1]]}},
+                  {{$dateArray[$dates[2]]}},
+                  {{$dateArray[$dates[3]]}},
+                  {{$dateArray[$dates[4]]}},
+                  {{$dateArray[$dates[5]]}},
+                  {{$dateArray[$dates[6]]}}
+        ]
+    }, {
+        name: 'Snapshots',
+        data: [
+          {{$snapshots[$dates[0]]}},
+                  {{$snapshots[$dates[1]]}},
+                  {{$snapshots[$dates[2]]}},
+                  {{$snapshots[$dates[3]]}},
+                  {{$snapshots[$dates[4]]}},
+                  {{$snapshots[$dates[5]]}},
+                  {{$snapshots[$dates[6]]}}
+        ]
+    }]
+});
+</script>
 @endsection

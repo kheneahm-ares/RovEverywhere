@@ -2,12 +2,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Snapshot;
+use Auth;
 
 class CameraController extends Controller
 {
-    public function takePicture(){
-      $fileName = time();
-      exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
+    public function takePicture()
+    {
+        $user = Auth::user();
+        $fileName = time();
+        $snapshot = new Snapshot;
+        $snapshot->path = $fileName;
+        $snapshot->user_id = $user->id;
+
+        $snapshot->save();
+
+        exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
     }
 
       public function panMovement() {
@@ -27,6 +37,5 @@ class CameraController extends Controller
       public function panTiltNeutral(){
         exec('cgi-bin/panTiltNeutral.cgi');
         echo("Stop Horiz");
-
-      }
+    }
 }

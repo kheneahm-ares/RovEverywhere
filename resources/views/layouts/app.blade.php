@@ -26,6 +26,8 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
 
 
 
@@ -66,8 +68,9 @@
 
                       <ul class="nav navbar-nav navbar-left">
                         <li>
-                          <a href="#">Snapshots</a>
+                          <a href="/snapshots/index">Snapshots</a>
                         </li>
+
                         <li>
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                             Map <span class="caret"></span>
@@ -76,6 +79,15 @@
                             <li><a href="/map/">Index</a></li>
                             <li><a href="/map/create">Create</a></li>
 
+                          </ul>
+                        </li>
+                        <li>
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            Features <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a href="/features/rover">Let's Rove</a></li>
+                            <li><a href="#">Object Recognition</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -102,7 +114,7 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                      <a href="#">
+                                      <a href="/system">
                                         System
                                       </a>
                                         <a href="{{ route('logout') }}"
