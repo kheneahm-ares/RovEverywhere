@@ -29,14 +29,14 @@ class CameraController extends Controller
 
       public function panMovement() {
         $freq=$_GET['freq'];
-        exec('cgi-bin/panMovement.cgi "' . $freq . '" &> /dev/null');
+        exec('cgi-bin/panMovement.cgi "' . $freq . '"');
 
         return $freq;
       }
 
       public function tiltMovement() {
         $freq=$_GET['freq'];
-        exec('cgi-bin/tiltMovement.cgi "' . $freq . '" &> /dev/null');
+        exec('cgi-bin/tiltMovement.cgi "' . $freq . '"');
 
         return $freq;
       }
