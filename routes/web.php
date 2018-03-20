@@ -32,6 +32,10 @@ Route::get('/reverse/{pwm}', 'WheelController@reverse')->name('reverse');
 Route::get('/left/{pwm}', 'WheelController@left')->name('left');
 Route::get('/right/{pwm}', 'WheelController@right')->name('right');
 
+Route::get('/panMovement/{freq}', 'CameraController@panMovement')->name('panMovement');
+Route::get('/tiltMovement/{tiltFreq}', 'CameraController@tiltMovement')->name('tiltMovement');
+
+
 Route::get('/stop', 'WheelController@stop')->name('stop');
 Route::get('/takePic', 'CameraController@takePicture')->name('takePic');
 Route::get('/panRight', 'CameraController@panRight')->name('panRight');
