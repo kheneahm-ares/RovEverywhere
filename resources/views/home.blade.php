@@ -10,7 +10,6 @@
     <div class="col-md-12" style="margin-bottom: 50px;">
       <div id="high-chart" style=""></div>
     </div>
-<<<<<<< HEAD
 
     <div class="col-md-5">
         <a href="#" id="forward" ><img style="height: 90px; width: 90px;"src="/images/forward.png"></a>
@@ -28,7 +27,6 @@
         
         <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
         <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
-=======
     <div class="col-md-6">
       <div class="panel panel-default">
           <div class="panel-heading">
@@ -90,11 +88,9 @@
                     </div>
                 </div>
             </div>
->>>>>>> 0ddeea2be95078d57f7a3125ae19aef13332d070
     </div>
     <!--/Slider-->
 </div>
-<<<<<<< HEAD
 <br />
 
 
@@ -329,8 +325,6 @@
 
 
   </script>
-=======
->>>>>>> 0ddeea2be95078d57f7a3125ae19aef13332d070
 
 
 <script>

@@ -109,6 +109,9 @@ class HomeController extends Controller
 
         }
 
+        //get 3 most recent activities
+        
+
 
 
         return view('home')->with('dateArray', $dateArray)
