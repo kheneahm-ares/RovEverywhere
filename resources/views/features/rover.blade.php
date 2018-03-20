@@ -163,7 +163,7 @@
       $("#reverse").on("mousedown", function() {
         //console.log(_pwm + "hello");
        $.ajax({
-         url: 'reverse/{pwm}',
+         url: '/reverse/{pwm}',
                          type: 'GET',
                          data: { pwm: getPWM() },
                          success: function(response)
@@ -178,7 +178,7 @@
       $("#forward").on("mousedown", function() {
         //console.log(_pwm);
        $.ajax({
-         url: 'forward/{pwm}',
+         url: '/forward/{pwm}',
                          type: 'GET',
                          data: { pwm: getPWM() },
                          success: function(response)
@@ -193,7 +193,7 @@
       $("#left").on("mousedown", function() {
         //console.log(_pwm);
        $.ajax({
-         url: 'left/{pwm}',
+         url: '/left/{pwm}',
                          type: 'GET',
                          data: { pwm: getPWM() },
                          success: function(response)
@@ -208,7 +208,7 @@
       $("#right").on("mousedown", function() {
         // console.log(_pwm);
        $.ajax({
-         url: 'right/{pwm}',
+         url: '/right/{pwm}',
                          type: 'GET',
                          data: { pwm: getPWM() },
                          success: function(response)
@@ -235,7 +235,7 @@
             //dynamically change the freq value
             $("#freq").val(incFreq);
             $.ajax({
-            url: 'panMovement/ {freq}',
+            url: '/panMovement/ {freq}',
                           type: 'GET',
                           data: { freq: incFreq},
                           success: function(response)
@@ -251,7 +251,7 @@
 
       $("#panTiltNeutral").on("mousedown", function() {
         $.ajax({
-          url: 'panTiltNeutral',
+          url: '/panTiltNeutral',
                         type: 'GET',
                         success: function(response)
                         {
@@ -272,7 +272,7 @@
             //dynamically change the freq value
             $("#freq").val(decFreq);
             $.ajax({
-            url: 'panMovement/ {freq}',
+            url: '/panMovement/ {freq}',
                           type: 'GET',
                           data: { freq: decFreq},
                           success: function(response)
@@ -300,7 +300,7 @@
             //dynamically change the freq value
             $("#tiltFreq").val(incFreq);
             $.ajax({
-            url: 'tiltMovement/ {tiltFreq}',
+            url: '/tiltMovement/ {tiltFreq}',
                           type: 'GET',
                           data: { freq: incFreq},
                           success: function(response)
@@ -315,8 +315,9 @@
       });
 
       $("#panTiltNeutral").on("mousedown", function() {
+	currFreq = 1500;
         $.ajax({
-          url: 'panTiltNeutral',
+          url: '/panTiltNeutral',
                         type: 'GET',
                         success: function(response)
                         {
@@ -338,7 +339,7 @@
             //dynamically change the freq value
             $("#tiltFreq").val(decFreq);
             $.ajax({
-            url: 'tiltMovement/ {tiltFreq}',
+            url: '/tiltMovement/ {tiltFreq}',
                           type: 'GET',
                           data: { freq: decFreq},
                           success: function(response)
