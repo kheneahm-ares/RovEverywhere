@@ -8,12 +8,5 @@ GPIO.setwarnings(False)
 GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
-servo = 3
-
-GPIO.setup(servp,GPIO.OUT)
-Pservo = GPIO.PWM(servo, 100)
-try:
-	Pservo.ChangeDutyCycle(0)
-finally:
-	GPIO.cleanup()
-	
+GPIO.cleanup()
+os.system("killall panMovement.cgi")
