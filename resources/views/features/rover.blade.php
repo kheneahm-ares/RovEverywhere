@@ -223,7 +223,7 @@
 
 //---------------  This section is used for calling panning functions on the camera. -------------//
 
-      $("#panRight").on("mousedown", function() {
+      $("#panLeft").on("click", function() {
         //get value of freq
         //if value +100 <= 1500 then proceed to go to ajax call
         //else
@@ -249,7 +249,7 @@
         }
       });
 
-      $("#panTiltNeutral").on("mousedown", function() {
+      $("#panTiltNeutral").on("click", function() {
         $.ajax({
           url: '/panTiltNeutral',
                         type: 'GET',
@@ -261,7 +261,7 @@
         });
       });
 
-      $("#panLeft").on("mousedown", function() {//get value of freq
+      $("#panRight").on("click", function() {//get value of freq
         //if value +100 <= 1500 then proceed to go to ajax call
         //else
         var currFreq = parseInt($("#freq").val());
@@ -288,7 +288,7 @@
 
 //---------------  This section is used for calling tilting functions on the camera. -------------//
 
-      $("#tiltLeft").on("mousedown", function() {
+      $("#tiltLeft").on("click", function() {
         //get value of freq
         //if value +100 <= 1500 then proceed to go to ajax call
         //else
@@ -314,7 +314,7 @@
         }
       });
 
-      $("#panTiltNeutral").on("mousedown", function() {
+      $("#panTiltNeutral").on("click", function() {
 	      currFreq = 1500;
         $.ajax({
           url: '/panTiltNeutral',
@@ -327,7 +327,7 @@
         });
       });
 
-      $("#tiltRight").on("mousedown", function() {
+      $("#tiltRight").on("click", function() {
         //get value of freq
         //if value +100 <= 1500 then proceed to go to ajax call
         //else
