@@ -24,19 +24,19 @@ class CameraController extends Controller
         $newActivity->type = "snapshot";
         $newActivity->save();
 
-        exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
+        exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null');
     }
 
       public function panMovement() {
         $freq=$_GET['freq'];
-        exec('cgi-bin/panMovement.cgi "' . $freq . '" &> /dev/null &');
+        exec('cgi-bin/panMovement.cgi "' . $freq . '" &> /dev/null');
 
         return $freq;
       }
 
       public function tiltMovement() {
         $freq=$_GET['freq'];
-        exec('cgi-bin/tiltMovement.cgi "' . $freq . '" &> /dev/null &');
+        exec('cgi-bin/tiltMovement.cgi "' . $freq . '" &> /dev/null');
 
         return $freq;
       }
