@@ -235,7 +235,7 @@
             //dynamically change the freq value
             $("#freq").val(incFreq);
             $.ajax({
-            url: '/panMovement/ {freq}',
+            url: '/panMovement/{freq}',
                           type: 'GET',
                           data: { freq: incFreq},
                           success: function(response)
@@ -272,7 +272,7 @@
             //dynamically change the freq value
             $("#freq").val(decFreq);
             $.ajax({
-            url: '/panMovement/ {freq}',
+            url: '/panMovement/{freq}',
                           type: 'GET',
                           data: { freq: decFreq},
                           success: function(response)
@@ -300,7 +300,7 @@
             //dynamically change the freq value
             $("#tiltFreq").val(incFreq);
             $.ajax({
-            url: '/tiltMovement/ {tiltFreq}',
+            url: '/tiltMovement/{tiltFreq}',
                           type: 'GET',
                           data: { freq: incFreq},
                           success: function(response)
@@ -339,7 +339,7 @@
             //dynamically change the freq value
             $("#tiltFreq").val(decFreq);
             $.ajax({
-            url: '/tiltMovement/ {tiltFreq}',
+            url: '/tiltMovement/{tiltFreq}',
                           type: 'GET',
                           data: { freq: decFreq},
                           success: function(response)
