@@ -7,6 +7,7 @@
 @endsection
 @section('content')
 
+
     <div class="col-md-12" style="margin-bottom: 50px;">
       <div id="high-chart" style=""></div>
     </div>
