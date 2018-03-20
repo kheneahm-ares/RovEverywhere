@@ -32,7 +32,7 @@
                                 <div class="panel-info">
                                   <div class="panel-heading">
                                     Outside Temperature
-                                    <a class="pull-right" href="#">More</a>
+                                    <a href="#">More</a>
                                   </div>
                                   <div class="panel-body">
 
@@ -43,8 +43,8 @@
                               <div class="item" data-slide-number="1">
                                 <div class="panel-info">
                                   <div class="panel-heading">
-                                    Outside Temperature
-                                    <a class="pull-right" href="#">More</a>
+                                    Outside Humidity
+                                    <a href="#">More</a>
                                   </div>
                                   <div class="panel-body">
 
@@ -54,8 +54,8 @@
                                <div class="item" data-slide-number="2">
                                  <div class="panel-info">
                                    <div class="panel-heading">
-                                     Outside Temperature
-                                     <a class="pull-right" href="#">More</a>
+                                     Internal Temperature
+                                     <a href="#">More</a>
                                    </div>
                                    <div class="panel-body">
                                    </div>
