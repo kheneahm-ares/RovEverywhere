@@ -70,6 +70,13 @@ class MapController extends Controller
       $picture->path = $imageName;
       $picture->save();
 
+
+      //everytime we make an upload successfully, we create an activity for it also
+      $newActivity = new Activity;
+      $newActivity->user_id = $user->id;
+      $newActivity->type = "upload";
+      $newActivity->save();
+
       Session::flash('success', 'The picture has been stored!');
 
 

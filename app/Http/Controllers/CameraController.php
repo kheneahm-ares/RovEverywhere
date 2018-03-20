@@ -17,6 +17,12 @@ class CameraController extends Controller
 
         $snapshot->save();
 
+        //everytime we make a snapshot successfully, we create an activity for it also
+        $newActivity = new Activity;
+        $newActivity->user_id = $user->id;
+        $newActivity->type = "snapshot";
+        $newActivity->save();
+
         exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null &');
     }
 
