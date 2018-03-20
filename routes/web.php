@@ -26,13 +26,15 @@ Route::post('/map/store', 'MapController@store')->name('map.store')->middleware(
 Route::put('/map/update/{id}', 'MapController@update')->name('map.update')->middleware('auth');
 Route::delete('/map/delete/{id}', 'MapController@delete')->name('map.delete')->middleware('auth');
 
-Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');
-Route::get('/reverse/{pwm}', 'WheelController@reverse')->name('reverse');
-Route::get('/left/{pwm}', 'WheelController@left')->name('left');
-Route::get('/right/{pwm}', 'WheelController@right')->name('right');
-Route::get('/takePic', 'CameraController@takePicture')->name('takePic');
 
 Route::middleware('auth')->group(function(){
+  Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');
+  Route::get('/reverse/{pwm}', 'WheelController@reverse')->name('reverse');
+  Route::get('/left/{pwm}', 'WheelController@left')->name('left');
+  Route::get('/right/{pwm}', 'WheelController@right')->name('right');
+  Route::get('/takePic', 'CameraController@takePicture')->name('takePic');
+
+
   /*Snapshot Routes */
   Route::get('/snapshots/index', 'SnapshotController@index')->name('snapshots');
 

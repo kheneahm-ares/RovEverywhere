@@ -224,9 +224,9 @@
 //---------------  This section is used for calling panning functions on the camera. -------------//
 
       $("#panRight").on("mousedown", function() {
-        //get value of freq 
+        //get value of freq
         //if value +100 <= 1500 then proceed to go to ajax call
-        //else 
+        //else
         var currFreq = parseInt($("#freq").val());
         var incFreq = currFreq + 100;
         console.log(incFreq);
@@ -242,7 +242,7 @@
                           {
                               console.log(response);
                           }
-          });          
+          });
         }
         else{
           alert("Cant do that");
@@ -261,9 +261,9 @@
         });
       });
 
-      $("#panLeft").on("mousedown", function() {//get value of freq 
+      $("#panLeft").on("mousedown", function() {//get value of freq
         //if value +100 <= 1500 then proceed to go to ajax call
-        //else 
+        //else
         var currFreq = parseInt($("#freq").val());
         var decFreq = currFreq - 100;
         console.log(decFreq);
@@ -279,7 +279,7 @@
                           {
                               console.log(response);
                           }
-          });          
+          });
         }
         else{
           alert("Cant do that");
@@ -289,9 +289,9 @@
 //---------------  This section is used for calling tilting functions on the camera. -------------//
 
       $("#tiltLeft").on("mousedown", function() {
-        //get value of freq 
+        //get value of freq
         //if value +100 <= 1500 then proceed to go to ajax call
-        //else 
+        //else
         var currFreq = parseInt($("#tiltFreq").val());
         var incFreq = currFreq + 100;
         console.log(incFreq);
@@ -307,7 +307,7 @@
                           {
                               console.log(response);
                           }
-          });          
+          });
         }
         else{
           alert("Cant do that");
@@ -315,7 +315,7 @@
       });
 
       $("#panTiltNeutral").on("mousedown", function() {
-	currFreq = 1500;
+	      currFreq = 1500;
         $.ajax({
           url: '/panTiltNeutral',
                         type: 'GET',
@@ -328,9 +328,9 @@
       });
 
       $("#tiltRight").on("mousedown", function() {
-        //get value of freq 
+        //get value of freq
         //if value +100 <= 1500 then proceed to go to ajax call
-        //else 
+        //else
         var currFreq = parseInt($("#tiltFreq").val());
         var decFreq = currFreq - 100;
         console.log(decFreq);
@@ -346,7 +346,7 @@
                           {
                               console.log(response);
                           }
-          });          
+          });
         }
         else{
           alert("Cant do that");
