@@ -316,6 +316,7 @@
 
       $("#panTiltNeutral").on("click", function() {
 	      currFreq = 1500;
+        $("#tiltFreq").val(1500);
         $.ajax({
           url: '/panTiltNeutral',
                         type: 'GET',
