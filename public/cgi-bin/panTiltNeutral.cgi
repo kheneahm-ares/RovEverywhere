@@ -4,7 +4,6 @@ import pigpio
 import RPi.GPIO as GPIO
 import time
 GPIO.setwarnings(False)
-GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
 servoPan = 21
@@ -19,3 +18,4 @@ try:
   pi.set_servo_pulsewidth(servoTilt, 1500)
 finally:
   pi.stop()
+  GPIO.cleanup()

@@ -10,9 +10,12 @@ servo = 20
 
 freq=int(sys.argv[1])
 
-pi = pigpio.pi()
-pi.set_mode(servo, pigpio.OUTPUT)
-print("Moving to neutral using 1500...")
-pi.set_servo_pulsewidth(servo, freq)
+try:
+  pi = pigpio.pi()
+  pi.set_mode(servo, pigpio.OUTPUT)
+  print("Moving to neutral using 1500...")
+  pi.set_servo_pulsewidth(servo, freq)
 
-GPIO.cleanup()
+finally:
+  pi.stop()
+  GPIO.cleanup()
