@@ -142,7 +142,7 @@
       <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
       <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
       <input type="hidden" value="1500" id="freq">
-        <input type="hidden" value="1500" id="tiltFreq">
+        <input type="hidden" value="1400" id="tiltFreq">
     </div>
 </div>
 <br />
@@ -250,7 +250,8 @@
       });
 
       $("#panTiltNeutral").on("click", function() {
-        $.ajax({
+	$("#freq").val(1500);      
+	$.ajax({
           url: '/panTiltNeutral',
                         type: 'GET',
                         success: function(response)
@@ -268,7 +269,7 @@
         var decFreq = currFreq - 100;
         console.log(decFreq);
 
-        if(decFreq >= 500){
+        if(decFreq >= 600){
             //dynamically change the freq value
             $("#freq").val(decFreq);
             $.ajax({
@@ -296,7 +297,7 @@
         var incFreq = currFreq + 100;
         console.log(incFreq);
 
-        if(incFreq <= 2500){
+        if(incFreq <= 2400){
             //dynamically change the freq value
             $("#tiltFreq").val(incFreq);
             $.ajax({
@@ -315,8 +316,7 @@
       });
 
       $("#panTiltNeutral").on("click", function() {
-	      currFreq = 1500;
-        $("#tiltFreq").val(1500);
+        $("#tiltFreq").val(1400);
         $.ajax({
           url: '/panTiltNeutral',
                         type: 'GET',
@@ -336,7 +336,7 @@
         var decFreq = currFreq - 100;
         console.log(decFreq);
 
-        if(decFreq >= 500){
+        if(decFreq >= 900){
             //dynamically change the freq value
             $("#tiltFreq").val(decFreq);
             $.ajax({

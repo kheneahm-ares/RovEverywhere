@@ -15,7 +15,7 @@ try:
 
   print("Moving to the middle  using 1500...")
   pi.set_servo_pulsewidth(servoPan, 1500)
-  pi.set_servo_pulsewidth(servoTilt, 1500)
+  pi.set_servo_pulsewidth(servoTilt, 1400)
 finally:
   pi.stop()
   GPIO.cleanup()
