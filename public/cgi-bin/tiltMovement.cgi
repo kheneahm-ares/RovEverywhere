@@ -6,7 +6,7 @@ import time
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-servo = 2
+servo = 20
 
 freq=int(sys.argv[1])
 

@@ -4,9 +4,10 @@ import pigpio
 import RPi.GPIO as GPIO
 import time
 GPIO.setwarnings(False)
+GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
-servo = 3
+servo = 21
 
 freq=int(sys.argv[1])
 
@@ -17,4 +18,6 @@ try:
   pi.set_servo_pulsewidth(servo, freq)
 
 finally:
+  time.sleep(0.5)
+  pi.stop()
   GPIO.cleanup()
