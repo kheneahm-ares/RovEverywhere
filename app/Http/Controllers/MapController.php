@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\UploadedPicture;
+use App\Activity;
 use Session;
 use Auth;
 use Image;
@@ -68,13 +69,14 @@ class MapController extends Controller
       //then we need to resize
       request()->path->move(public_path('uploads/pictures'), $imageName);
       $picture->path = $imageName;
-      $picture->save();
 
 
       //everytime we make an upload successfully, we create an activity for it also
       $newActivity = new Activity;
       $newActivity->user_id = $user->id;
       $newActivity->type = "upload";
+
+      $picture->save();
       $newActivity->save();
 
       Session::flash('success', 'The picture has been stored!');
