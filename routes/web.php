@@ -28,6 +28,13 @@ Route::delete('/map/delete/{id}', 'MapController@delete')->name('map.delete')->m
 
 
 Route::middleware('auth')->group(function(){
+  /*System routes*/
+  Route::post('/system/restart', 'SystemController@restart')->name('restart');
+  Route::post('/system/shutdown', 'SystemController@shutdown')->name('shutdown');
+  Route::post('/system/refresh', 'SystemController@refresh')->name('refresh');
+
+
+  /*Wheel routes*/
   Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');
   Route::get('/reverse/{pwm}', 'WheelController@reverse')->name('reverse');
   Route::get('/left/{pwm}', 'WheelController@left')->name('left');

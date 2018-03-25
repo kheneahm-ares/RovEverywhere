@@ -48,13 +48,10 @@
 @section('content')
   @include('partials._googlemaps')
   @if(count($picturesData) > 0)
-    <div class="col-md-4">
-      <div id="map-canvas"></div>
+    <div class="col-md-12" style="margin-bottom: 50px;">
+      <div id="map-canvas" style="width:100%"></div>
     </div>
-    <span class="col-md-offset-7">
-        <button id="hideshow" style="margin-bottom: 5px; margin-left:4%" class="btn btn-default btn-sm fa fa-angle-right"></button>
-    </span>
-    <div id="pic_data" class="col-md-7 col-md-offset-1">
+    <div id="pic_data" class="col-md-12">
       <div class="panel panel-default">
         <table class="table table-bordered table-hover table-striped">
           <thead>
