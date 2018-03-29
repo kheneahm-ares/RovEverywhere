@@ -42,13 +42,22 @@
           .nav.navbar-nav.navbar-left li a, .navbar-brand, .nav.navbar-nav.navbar-right li a{
             color: #429ef4;
           }
+
+          .navbar .navbar-toggle .icon-bar {
+              background-color: #429ef4; /* Changes regular toggle color */
+          }
+          .navbar .navbar-toggle:hover {
+              background-color: #eee; /* Changes toggle color on hover */
+          }
+
+
         </style>
 
 
 </head>
 <body>
     <div id="">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" style="box-shadow: 0px 6px 6px -6px #999">
+        <nav class="navbar" role="navigation" style="box-shadow: 0px 6px 6px -6px #999;">
                 <div class="navbar-header">
                   <button type = "button" class = "navbar-toggle"
                      data-toggle = "collapse" data-target = "#example-navbar-collapse">
