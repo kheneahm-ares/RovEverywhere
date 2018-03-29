@@ -13,11 +13,14 @@ class SystemController extends Controller
 
     public function restart(Request $request){
       //exec command to restart
+      exec('cgi-bin/restart.cgi');
 
       return "restarted!";
     }
     public function shutdown(Request $request){
       //exec command to shut down
+      exec('cgi-bin/shutdown.cgi');
+
       return "shutting down!";
     }
 
