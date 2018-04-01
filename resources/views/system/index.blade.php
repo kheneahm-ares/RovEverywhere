@@ -16,25 +16,25 @@
          <div class="form-group row">
            <label style="text-align:right"  class="col-md-4 col-form-label">System Time:</label>
            <div class="col-md-8">
-             <label id="systime">N/A</label>
+             <label style="color:green" id="systime">N/A</label>
            </div>
          </div>
          <div class="form-group row">
            <label style="text-align:right" class="col-md-4 col-form-label">Uptime:</label>
            <div class="col-md-8">
-             <label id="uptime">N/A</label>
+             <label style="color:green" id="uptime">N/A</label>
            </div>
          </div>
          <div class="form-group row">
            <label style="text-align:right"  class="col-md-4 col-form-label">CPU Usage:</label>
            <div class="col-md-8">
-             <label id="cpu_usage">N/A</label>
+             <label style="color:green" id="cpu_usage">N/A</label>
            </div>
          </div>
          <div class="form-group row">
            <label style="text-align:right" class="col-md-4 col-form-label">Internet:</label>
            <div class="col-md-8">
-             <label id="internet">N/A</label>
+             <label style="color:green" id="internet">N/A</label>
            </div>
          </div>
          <hr />
