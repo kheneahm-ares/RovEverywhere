@@ -25,11 +25,40 @@ class SystemController extends Controller
     }
 
     public function refresh(Request $request){
+      $sysTime = $this->getSysTime();
+      $uptime = $this->getUpTime();
+
+      // print_r($sysTime);
+      // print_r($uptime);
+
+
+
       $system_data = array(
-                    'systime' => 1,
-                    'uptime' => 2,
+                    'systime' => $sysTime,
+                    'uptime' => $uptime,
                     'cpu_usage' => 3,
                     'internet' => False );
       return $system_data;
+    }
+
+
+    private function getSysTime(){
+      $output = shell_exec('cgi-bin/sys_time.cgi');
+
+      if($output != ""){
+        return $output;
+      }
+
+      return -1;
+    }
+
+    private function getUpTime(){
+      $output = shell_exec('cgi-bin/uptime.cgi');
+
+      if($output != ""){
+        return $output;
+      }
+
+      return -1;
     }
 }
