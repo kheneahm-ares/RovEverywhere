@@ -17,12 +17,13 @@ public class FormatOutput {
 
 	public void outputiAllToFile() {
 		outputUnsecured();
+		outputWPA_PSK();
+		//outputMSCHAPv2();
 	}	
 
 	public void outputUnsecured() {
 		collectUnsecured();
 		try {
-			//System.out.println("Size of array list: " + ucList.size());
 			for (int index = 0; index < ucList.size(); ++index) {
 				FileWriter fw;
 				if (index!=0) {
@@ -43,7 +44,52 @@ public class FormatOutput {
 			e.printStackTrace();
 		}	
 	}
+	public void outputWPA_PSK() {
+		collectWPA_PSK();
+		try {
+			for (int index = 0; index < ucList.size(); ++index) {
+				FileWriter fw = new FileWriter(filename, true);
+					 
+				PrintWriter pw = new PrintWriter(fw);
+				pw.println("network={");
+				pw.println("\tssid=\"" + wpa_pskList.get(index).ssidRetrieval() + "\"");
+				pw.println("\tpsk=\"" + wpa_pskList.get(index).pskRetrieval() + "\"");
+				pw.println("}");
+				pw.close();
+				System.out.println("out this bitch");
+			}	
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}	
+
+	}
+	public void outputMSCHAPv2() {
+		collectMSCHAPv2();
+		try {
+			for (int index = 0; index < ucList.size(); ++index) {
+				FileWriter fw = new FileWriter(filename, true);
+					 
+				PrintWriter pw = new PrintWriter(fw);
+				pw.println("network={");
+				pw.println("\tssid=\"" + mv2List.get(index).ssidRetrieval() + "\"");
+				pw.println("\tkey_mgmt=" + mv2List.get(index).key_mgmtRetrieval());
+				pw.println("\teap=" + mv2List.get(index).eapRetrieval());
+				pw.println("\tidentity=\"" + mv2List.get(index).identityRetrieval() + "\"");
+				pw.println("\tpassword=\"" + mv2List.get(index).passwordRetrieval() + "\"");
+				pw.println("\tphase1=\"" + mv2List.get(index).phase1Retrieval() + "\"");
+				pw.println("\tphase2=\"" + mv2List.get(index).phase2Retrieval() + "\"");
+				pw.println("}");
+				pw.close();
+				System.out.println("out this bitch");
+			}	
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
 	public void collectUnsecured() {
+		ucList = new ArrayList<UnsecuredConnection>();
 		try {
 			Connection cn = DriverManager.getConnection(dw.urlRetrieval(), dw.usernameRetrieval(), dw.passwordRetrieval());
 			stm = cn.createStatement();
@@ -55,13 +101,57 @@ public class FormatOutput {
 				UnsecuredConnection uc = new UnsecuredConnection();
 				uc.ssidModifiy(rs.getString(1));
 				ucList.add(uc);
-				//System.out.println("run through: " + i + " ssid: " + uc.ssidRetrieval() + " size: " + ucList.size());
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}	
 	}	
+	public void collectWPA_PSK() {
+		wpa_pskList = new ArrayList<WPA_PSK>();
+		try {
+			Connection cn = DriverManager.getConnection(dw.urlRetrieval(), dw.usernameRetrieval(), dw.passwordRetrieval());
+			stm = cn.createStatement();
+			String query = "select SSID, PSK from WPA_PSK";
+
+			ResultSet rs = stm.executeQuery(query);
+
+			for (int i = 0; rs.next(); ++i) {
+				WPA_PSK wpa = new WPA_PSK();
+				wpa.ssidModifiy(rs.getString(1));
+				wpa.pskModify(rs.getString(2));
+				wpa_pskList.add(wpa);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	public void collectMSCHAPv2() {
+		mv2List = new ArrayList<MSCHAPv2>();
+		try {
+			Connection cn = DriverManager.getConnection(dw.urlRetrieval(), dw.usernameRetrieval(), dw.passwordRetrieval());
+			stm = cn.createStatement();
+
+			String query = "select SSID, KEY_MGMT, EAP, IDENTITY, PASSWORD, PHASE1, PHASE2 from MSCHAPv2";
+
+			ResultSet rs = stm.executeQuery(query);
+
+			for (int i = 0; rs.next(); ++i) {
+				MSCHAPv2 mv2 = new MSCHAPv2();
+				mv2.ssidModifiy(rs.getString(1));
+				mv2.eapModify(rs.getString(3));
+				mv2.identityModify(rs.getString(4));
+				mv2.passwordModify(rs.getString(5));
+				mv2.phase1Modify(rs.getString(6));
+				mv2.phase2Modify(rs.getString(7));
+				mv2List.add(mv2);
+			}	
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
 	private void initList() {
 		ucList = new ArrayList<UnsecuredConnection>();
 		wpa_pskList = new ArrayList();
