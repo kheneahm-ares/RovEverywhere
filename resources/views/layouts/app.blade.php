@@ -17,10 +17,10 @@
     <link href="{{ asset('fontawesome-free-5.0.7/web-fonts-with-css/css/fontawesome-all.min.css') }}" rel="stylesheet">
 
 
-    <script src="https://code.jquery.com/jquery-3.3.0.min.js"
+    {{-- <script src="https://code.jquery.com/jquery-3.3.0.min.js"
     integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4="
     crossorigin="anonymous">
-    </script>
+    </script> --}}
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
@@ -48,6 +48,15 @@
           }
           .navbar .navbar-toggle:hover {
               background-color: #eee; /* Changes toggle color on hover */
+          }
+          #search_button{
+            color: #429ef4;
+            height: 35px;
+            width: 40px;
+            border-color: #429ef4;
+          }
+          #search_button:hover{
+            background-color: #eee;
           }
 
 
@@ -94,10 +103,22 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li><a href="/features/rover">Let's Rove</a></li>
-                          <li><a href="#">Object Recognition</a></li>
+                          <li><a href="/features/imagerecognition">Image Recognition</a></li>
                         </ul>
                       </li>
                     </ul>
+                    <div class="col-sm-6 col-md-6">
+                      {!!Form::open(array('route' => 'map.search', 'method' => 'GET', 'role'=> 'search', 'class'=>'navbar-form'))!!}
+                        <div class="input-group">
+                          <input style="height: 35px;width: 400px;" type="text" class="form-control" placeholder="Search Uploads" name="search" required>
+                          <div class="input-group-btn">
+                            <button id="search_button" class="btn" type="submit">
+                              <label class="fas fa-search"></label>
+                            </button>
+                          </div>
+                        </div>
+                      {!!Form::close()!!}
+                    </div>
                   @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">

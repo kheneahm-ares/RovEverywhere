@@ -55,6 +55,10 @@
             <label for="lng">Longitude</label>
             <input type="text" class="form-control" name="lng" id="lng" required/>
           </div>
+          <div class="form-group">
+            <label for="date_taken">Date Picture Taken</label>
+            <input type="date" class="form-control" name="date_taken" id="date_taken" required />
+          </div>
 
           <button class="col-md-offset-10 btn btn-md btn-primary">Save</button>
           {{Form::close()}}
