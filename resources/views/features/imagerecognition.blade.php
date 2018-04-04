@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-
   <style>
     .liveStream{
       background:url('/images/loader.gif') center center no-repeat;
@@ -113,11 +111,20 @@
 
     }
 
-    #takepic{
+    #detectimage{
       position: relative;
       left: 8px;
       top: -540px;
       opacity: 0.5;
+    }
+    #detectface{
+      position: relative;
+      left: 8px;
+      top: -540px;
+      opacity: 0.5;
+    }
+    tr>th, tr>td{
+      text-align: center;
     }
 
   </style>
@@ -126,8 +133,12 @@
 
     <div class="col-md-12">
       <iframe class="liveStream" src="http://192.168.12.1:9090/stream" frameborder="0" align="middle" width="100%" height="550" align="middle" scrolling="no"></iframe>
-      <button id="takepic" class="fas fa-camera" style="font-size: 50px; width: 100px;" onclick="takePic()"></button>
-
+      <a href="#results" id="detectimage" class="btn btn-md" style="font-size: 60px; width: 400px;" >
+        <h2 id="label_text">Detect Image</h2>
+      </a>
+      <a href="#results" id="detectface" class="btn btn-md" style="font-size: 60px; width: 400px;" >
+        <h2 id="face_text">Detect Face</h2>
+      </a>
 
       <a href="#" id="forward" ><img style="height: 60px; width: 60px;"src="/images/forward.png"></a>
       <a href="#" id="left" ><img style="height: 60px; width: 60px;"src="/images/left.png"></a>
@@ -144,69 +155,28 @@
       <input type="hidden" value="1500" id="freq">
         <input type="hidden" value="1400" id="tiltFreq">
     </div>
+
+    <div class="col-md-6 col-md-offset-3">
+      <h1 style="text-align:center">Results</h1>
+      <table class="table table-responsive table-bordered table-hover" id="results">
+        <thead>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
 </div>
 
-<select id="mp3Files">
-<option value=""> </option>
-  <?php
-  foreach (glob("/Users/anthonybarrios/Desktop/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
-    ?> <option value="<?php echo basename($sounds) ?>"> <?php echo basename($sounds) ?> </option> <?php
-  }
-  ?>
-</select>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
-<a href="#" id="playSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/play.png"></a>
-<a href="#" id="pauseSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/pause.png"></a>
-<br />
-
-
-  <script>
 
   $(document).ready(function(){
-
-//---------------  This section is used for playing audio on the pi. -------------//
-
-    $('#mp3Files').change(function () {
-      var file=$('#mp3Files').val();
-      alert(file);
-    });
-    /*$('#playSound').click(function() {
-      var mp3Files=$('#mp3Files').val();
-      $.ajax({
-        url: '/features/playSound',
-                        type: 'GET',
-                        success: function(response)
-                        {
-                          console.log(respone);
-                        }
-      }); 
-    });
-    */
-    $("#playSound").click(function() {
-      $.ajax({
-         url: '/features/playSound',
-                         type: 'GET',
-                         data: { mp3Files: getSelect() },
-                         success: function(response)
-                         {
-                             console.log(response);
-
-                         }
-         });
-    });
-
-    $("#pauseSound").click(function() {
-      $.ajax({
-         url: '/features/pauseSound',
-                         type: 'GET',
-                         data: { mp3Files: getSelect() },
-                         success: function(response)
-                         {
-                             console.log(response);
-
-                         }
-         });
-    });
 
 //---------------  This section is used for calling moving functions on the camera. -------------//
 
@@ -406,38 +376,164 @@
           });
         }
         else{
-          alert("Cant do that");
+          alert("Can't do that");
         }
       });
 
-//---------------  This section is used for showing the pwm value. -------------//
-      function getPWM(){
-          var _pwm = $("#pwm").val();
-          //console.log(_pwm);
+      $("#detectimage").click(function(e){
+        $("#label_text").text("Detecting Image...");
+        $(this).addClass('disabled');
+        $("#detectface").addClass('disabled');
+        $.ajax({
+          type:'POST',
+          url: '/features/imagerecognition/detectimage',
+          success:function(data){
+            console.log(data);
 
-        return _pwm;
-      }
+            /*Clears and sets up table*/
+            $("#results").html("");
+            setUpTable();
 
-      function getFreq(){
-          var _freq = $("#freq").val();
-          //console.log(_pwm);
+            var head = '<tr><th>Label</th><th>Confidence %</th> </tr>';
+            $("#results > thead").append(head);
+            for(i = 0; i < data.length; i++){
+              var newLabel = ''+
+              '<tr>'+
+               '<td>'+
+                 data[i]["Name"]+
+               '</td>'+
+               '<td>'+
+                 data[i]["Confidence"].toFixed(2)+
+               '</td>'+
+              '</tr>';
 
-        return _freq;
-      }
+              $("#results > tbody").append(newLabel);
 
-      function getSelect(){
-          var _file = $("#mp3Files").val();
 
-        return _file;
-      }
+            }
+          }
+        });
+
+        e.preventDefault();
+
+        var position = $($(this).attr("href")).offset().top;
+
+
+        //delays moving to table by 4 secs
+        setTimeout(function(){
+          $("body, html").animate({
+            scrollTop: position
+          });
+          $("#label_text").text("Detect Image");
+          $("#detectimage").removeClass('disabled');
+          $("#detectface").removeClass('disabled');
+
+        }, 4000);
+
+      });
+
+
+      $("#detectface").click(function(e){
+        $("#face_text").text("Analyzing Face...");
+        $(this).addClass('disabled');
+        $("#detectimage").addClass('disabled');
+        $.ajax({
+          type:'POST',
+          url: '/features/imagerecognition/detectface',
+          success:function(data){
+            console.log(data);
+
+            /*Clears and sets up table*/
+            $("#results").html("");
+            setUpTable();
+
+            var head = '<tr><th>Description</th><th>Value</th> </tr>';
+            $("#results > thead").append(head);
+
+            //have to manually append what we want
+            var face_desc = '<tr><td> Is a face? ' +
+             '</td><td> '+
+             data[0]["Confidence"].toFixed(2) + ' % ';
+
+            var gender_desc = '<tr><td> Male or Female? ' +
+              '</td><td> '+
+              data[0]["Gender"]["Value"] + ' ('+
+              data[0]["Gender"]["Confidence"].toFixed(2) + ' %)</td></tr>';
+
+            var emotion_desc = '<tr><td> Main Emotion: ' +
+               '</td><td> '+
+               data[0]["Emotions"][0]["Type"] + ' ( '+
+               data[0]["Emotions"][0]["Confidence"].toFixed(2)+ ' %)</td></tr>';
+
+            var beard_desc = '<tr><td> Has a beard? ' +
+              '</td><td> '+
+              data[0]["Beard"]["Value"] + ' ( '+
+              data[0]["Beard"]["Confidence"].toFixed(2)+ ' %)</td></tr>';
+
+
+            var ageRange = '<tr><td> Age Range' +
+             '</td><td> '+
+             data[0]["AgeRange"]["Low"] + ' - '+
+             data[0]["AgeRange"]["High"]+ ' years old</td></tr>';
+
+            $("#results > tbody").append(face_desc);
+            $("#results > tbody").append(gender_desc);
+            $("#results > tbody").append(ageRange);
+            $("#results > tbody").append(emotion_desc);
+            $("#results > tbody").append(beard_desc);
+
+
+
+
+
+
+          }
+        });
+
+        e.preventDefault();
+
+        var position = $($(this).attr("href")).offset().top;
+
+
+        //delays moving to table by 4 secs
+        setTimeout(function(){
+          $("body, html").animate({
+            scrollTop: position
+          });
+          $("#face_text").text("Detect Face");
+          $("#detectface").removeClass('disabled');
+          $("#detectimage").removeClass('disabled');
+        }, 4000);
+
+
+
+
+      });
+
   });
 
-
-  function takePic(){
-    console.log("animate");
+  function setUpTable(){
+    var setup = "<thead></thead><tbody> </tbody>";
+    $("#results").append(setup);
   }
 
-  </script>
+  //---------------  This section is used for showing the pwm value. -------------//
+        function getPWM(){
+            var _pwm = $("#pwm").val();
+            //console.log(_pwm);
 
+          return _pwm;
+        }
+
+        function getFreq(){
+            var _freq = $("#freq").val();
+            //console.log(_pwm);
+
+          return _freq;
+        }
+
+
+
+</script>
 
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\UploadedPicture;
 use App\Snapshot;
+use App\Activity;
 use Auth;
 
 class HomeController extends Controller
@@ -110,12 +111,12 @@ class HomeController extends Controller
         }
 
         //get 3 most recent activities
-        
-
+        $activities = Activity::orderBy('created_at', 'desc')->take(3)->get();
 
 
         return view('home')->with('dateArray', $dateArray)
                           ->with('dates', $dates)
-                          ->with('snapshots', $snapshotsArray);
+                          ->with('snapshots', $snapshotsArray)
+                          ->with('activities', $activities);
     }
 }
