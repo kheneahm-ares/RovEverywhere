@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function(){
 
   /*Feature Routes*/
   Route::get('/features/rover', 'FeatureController@rover')->name('rover');
+  Route::get('/features/playSound', 'FeatureController@playSound')->name('playSound');
+  Route::get('/features/pauseSound', 'FeatureController@pauseSound')->name('pauseSound');
 
   /*Wheel Routes*/
   Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');
