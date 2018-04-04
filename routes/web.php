@@ -29,13 +29,13 @@ Route::delete('/map/delete/{id}', 'MapController@delete')->name('map.delete')->m
 
 
 Route::middleware('auth')->group(function(){
-  /*System routes*/
+  /*System Routes*/
   Route::post('/system/restart', 'SystemController@restart')->name('restart');
   Route::post('/system/shutdown', 'SystemController@shutdown')->name('shutdown');
   Route::post('/system/refresh', 'SystemController@refresh')->name('refresh');
 
 
-  /*Wheel routes*/
+  /*Wheel Routes*/
   Route::get('/forward/{pwm}', 'WheelController@forward')->name('forward');
   Route::get('/reverse/{pwm}', 'WheelController@reverse')->name('reverse');
   Route::get('/left/{pwm}', 'WheelController@left')->name('left');
@@ -48,10 +48,12 @@ Route::middleware('auth')->group(function(){
 
   /*Feature Rover Routes*/
   Route::get('/features/rover', 'FeatureController@rover')->name('rover');
-  Route::get('/features/playSound', 'FeatureController@playSound')->name('playSound');
-  Route::get('/features/pauseSound', 'FeatureController@pauseSound')->name('pauseSound');
 
-  /*Feature Image Recognition routes*/
+  /*Feature Audio Player Routes*/
+  Route::get('/features/playSound', 'AudioController@playSound')->name('playSound');
+  Route::get('/features/pauseSound', 'AudioController@pauseSound')->name('pauseSound');
+
+  /*Feature Image Recognition Routes*/
   Route::get('/features/imagerecognition', 'ImageRecognitionController@index')->name('imagerec');
   Route::post('/features/imagerecognition/detectimage', 'ImageRecognitionController@detectimage')->name('detectimage');
   Route::post('/features/imagerecognition/detectface', 'ImageRecognitionController@detectface')->name('detectface');
