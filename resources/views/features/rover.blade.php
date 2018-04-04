@@ -146,6 +146,7 @@
     </div>
 </div>
 
+<div class="container">
 <select id="mp3Files">
 <option value=""> </option>
   <?php
@@ -157,6 +158,7 @@
 
 <a href="#" id="playSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/play.png"></a>
 <a href="#" id="pauseSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/pause.png"></a>
+</div>
 <br />
 
 
@@ -166,22 +168,7 @@
 
 //---------------  This section is used for playing audio on the pi. -------------//
 
-    $('#mp3Files').change(function () {
-      var file=$('#mp3Files').val();
-      alert(file);
-    });
-    /*$('#playSound').click(function() {
-      var mp3Files=$('#mp3Files').val();
-      $.ajax({
-        url: '/features/playSound',
-                        type: 'GET',
-                        success: function(response)
-                        {
-                          console.log(respone);
-                        }
-      }); 
-    });
-    */
+    
     $("#playSound").click(function() {
       $.ajax({
          url: '/features/playSound',

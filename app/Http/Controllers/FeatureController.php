@@ -11,16 +11,4 @@ class FeatureController extends Controller
       exec('cgi-bin/panTiltNeutral.cgi');
       return view('features.rover');
     }
-
-    public function playSound() {
-      $selectOption = $_GET['mp3Files'];
-      echo $selectOption;
-      //exec('sudo omxplayer sounds/'.$selectOption);
-    }
-
-    public function pauseSound() {
-      $selectOption = $_GET['mp3Files'];
-      echo $selectOption;
-      //exec('sudo omxplayer sounds/'.$selectOption);
-    }
 }
