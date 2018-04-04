@@ -34,6 +34,12 @@
       </div>
     </div>
     <div class="form-group">
+      <label class="control-label">Date Picture Taken</label>
+      <div>
+        {{$picture->date_taken}}
+      </div>
+    </div>
+    <div class="form-group">
       <label class="control-label">Date Uploaded</label>
       <div>
         {{$picture->created_at}}

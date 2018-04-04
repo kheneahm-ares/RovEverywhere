@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('scripts')
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="{{asset('bower_components/highcharts/highcharts.js')}}"></script>
+  <script src="{{asset('bower_components/highcharts/modules/exporting.js')}}"></script>
 
 
 @endsection
@@ -18,7 +18,20 @@
             Recent Rover Activity
           </div>
           <div class="panel-body">
-            Activty Stuff
+            @foreach ($activities as $ac)
+              <p>
+                @if($ac->type == "snapshot")
+                  Took a snapshot at:
+                @else
+                  Uploaded at:
+                @endif
+                <label class="pull-right">
+                  {{$ac->created_at}}
+                </label>
+
+              </p>
+
+            @endforeach
           </div>
       </div>
     </div>

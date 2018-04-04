@@ -39,6 +39,8 @@
      {{Form::text('lat', $uploadedPicture->lat, array('class' => 'form-control'))}}
      {{Form::label('lng', 'Long') }}
      {{Form::text('lng', $uploadedPicture->lng, array('class' => 'form-control'))}}
+     {{Form::label('date_taken', 'Date Picture Taken') }}
+     {{Form::date('date_taken', $uploadedPicture->date_taken, array('class' => 'form-control'))}}
       <br />
      <div class="pull-right">
        <button type="submit" name="button" class="btn btn-success btn-lg">

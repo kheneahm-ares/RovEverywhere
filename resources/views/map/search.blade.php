@@ -1,8 +1,6 @@
 @extends('layouts.app')
-@section('scripts')
-  <link rel="stylesheet" href="{{ asset('css/parsley.css') }}">
-@endsection
-<style>
+@section('content')
+  <style>
       table thead tr th{
         text-align: center;
       }
@@ -38,20 +36,18 @@
         font-weight: bold;
     }
 
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
-@section('content')
   @include('partials._googlemaps')
+  <div class="col-md-12" style="margin-bottom: 50px;">
+    <div id="map-canvas" style="width:100%"></div>
+  </div>
   @if(count($picturesData) > 0)
-    <div class="col-md-12" style="margin-bottom: 50px;">
-      <div id="map-canvas" style="width:100%"></div>
-    </div>
-    </div>
     <div id="pic_data" class="col-md-12">
       <div class="panel panel-default">
         <table class="table table-bordered table-hover table-striped">
@@ -106,10 +102,7 @@
     </div>
   @else
     <div style="text-align:center;">
-      <h3 style="color: red">No uploads</h3>
-    </div>
-    <div class="col-md-12">
-      <div id="map-canvas" style="width:100%; height: 80%"></div>
+      <h1 style="color: red">No uploads found</h1>
     </div>
   @endif
 
@@ -126,83 +119,82 @@
     </div>
 @endforeach
 
+  <script>
+  $(document).ready(function(){
+    $("#hideshow").click(function(){
+      if($("#pic_data").is(":visible")){
+        $("#pic_data").hide( "slide", { direction: "right"  }, 600 );
+        $("#map-canvas").animate({ width: 1200 }, 'slow');
+        $(this).toggleClass('fa-angle-right fa-angle-left');
 
-    <script>
-    $(document).ready(function(){
-      $("#hideshow").click(function(){
-        if($("#pic_data").is(":visible")){
-          $("#pic_data").hide( "slide", { direction: "right"  }, 600 );
-          $("#map-canvas").animate({ width: 1200 }, 'slow');
-          $(this).toggleClass('fa-angle-right fa-angle-left');
-
-        }
-        else{
-          $("#pic_data").show( "slide", { direction: "right"  }, 600 );
-          $("#map-canvas").animate({ width: 500 }, 'slow');
-          $(this).toggleClass('fa-angle-left fa-angle-right');
+      }
+      else{
+        $("#pic_data").show( "slide", { direction: "right"  }, 600 );
+        $("#map-canvas").animate({ width: 500 }, 'slow');
+        $(this).toggleClass('fa-angle-left fa-angle-right');
 
 
-        }
-      });
+      }
     });
-    function validate(){
-      return confirm("Are you sure you want to delete the picture?");
+  });
+  function validate(){
+    return confirm("Are you sure you want to delete the picture?");
 
-    }
-    // Get the modal
-    var modals = document.getElementsByClassName("modals");
+  }
+  // Get the modal
+  var modals = document.getElementsByClassName("modals");
 
-    // Get the button that opens the modal
-    var btns = document.getElementsByClassName("myBtns");
+  // Get the button that opens the modal
+  var btns = document.getElementsByClassName("myBtns");
 
-    // Get the <span> element that closes the modal
-    var spans = document.getElementsByClassName("close");
-      var map = new google.maps.Map(document.getElementById('map-canvas'), {
-            center:{
-              lat: 41.88,
-              lng: -87.63
-            },
-            zoom: 10
-      });
-
-
-      @foreach($picturesData as $picture)
-        var marker = new google.maps.Marker({
-          position: {
-            lat: {{$picture->lat}},
-            lng: {{$picture->lng}}
+  // Get the <span> element that closes the modal
+  var spans = document.getElementsByClassName("close");
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+          center:{
+            lat: 41.88,
+            lng: -87.63
           },
-          map: map,
-          animation: google.maps.Animation.DROP,
-          draggable: false,
-        });
-        marker.addListener('click', function(){
-
-          // When the user clicks the button, open the modal
-          var modal = document.getElementById("{{$picture->id}}");
-          modal.style.display = "block";
+          zoom: 10
+    });
 
 
-          // When the user clicks on <span> (x), close the modal
-          for (let i = 0; i < spans.length; i++) {
-              spans[i].onclick = function () {
-                  modals[i].style.display = "none";
-              }
-          }
-        });
-      @endforeach
-      function toggleModal(id){
+    @foreach($picturesData as $picture)
+      var marker = new google.maps.Marker({
+        position: {
+          lat: {{$picture->lat}},
+          lng: {{$picture->lng}}
+        },
+        map: map,
+        animation: google.maps.Animation.DROP,
+        draggable: false,
+      });
+      marker.addListener('click', function(){
+
         // When the user clicks the button, open the modal
-        var modal = document.getElementById(id);
+        var modal = document.getElementById("{{$picture->id}}");
         modal.style.display = "block";
+
+
         // When the user clicks on <span> (x), close the modal
         for (let i = 0; i < spans.length; i++) {
             spans[i].onclick = function () {
                 modals[i].style.display = "none";
             }
         }
+      });
+    @endforeach
+    function toggleModal(id){
+      // When the user clicks the button, open the modal
+      var modal = document.getElementById(id);
+      modal.style.display = "block";
+      // When the user clicks on <span> (x), close the modal
+      for (let i = 0; i < spans.length; i++) {
+          spans[i].onclick = function () {
+              modals[i].style.display = "none";
+          }
       }
+    }
 
-    </script>
+  </script>
 
 @endsection

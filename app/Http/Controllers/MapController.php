@@ -57,6 +57,8 @@ class MapController extends Controller
       $picture->address = $request->address;
       $picture->lat = $request->lat;
       $picture->lng = $request->lng;
+      $picture->date_taken = date('Y-m-d', strtotime($request->date_taken));
+
 
       //get user
       $user = Auth::user();
@@ -76,6 +78,8 @@ class MapController extends Controller
       $newActivity->user_id = $user->id;
       $newActivity->type = "upload";
 
+
+      //save to database
       $picture->save();
       $newActivity->save();
 
@@ -100,12 +104,16 @@ class MapController extends Controller
         'lng' => 'required',
       ));
 
+
+      //edit specified picture based on id
       $picture = UploadedPicture::find($id);
 
       $picture->name = $request->name;
       $picture->address = $request->address;
       $picture->lat = $request->lat;
       $picture->lng = $request->lng;
+      $picture->date_taken = date('Y-m-d', strtotime($request->date_taken));
+
 
       //get user
       $user = Auth::user();
@@ -113,12 +121,13 @@ class MapController extends Controller
 
       $file = 'uploads/pictures/' . $picture->path;
 
+
       //if the user updated the browse input
       if(!File::exists($file)){
 
         $imageName = time().'.'.request()->path->getClientOriginalExtension();
 
-        //delete picture
+        //delete the older picture
         $file = 'uploads/pictures/' . $picture->path;
            if (File::exists($file)) {
              unlink($file);
@@ -152,5 +161,11 @@ class MapController extends Controller
       Session::flash('success', 'The workout has been deleted!');
       //redirect to all posts aka index
       return redirect()->route('map.index');
+    }
+
+    public function search(Request $request){
+      $picturesData = UploadedPicture::where('name', 'like', '%'.$request->search.'%')->paginate(5);
+
+      return view('map.search')->with("picturesData", $picturesData);
     }
 }
