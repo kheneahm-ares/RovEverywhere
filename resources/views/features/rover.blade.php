@@ -146,9 +146,67 @@
     </div>
 </div>
 
+<select id="mp3Files">
+<option value=""> </option>
+  <?php
+  foreach (glob("/Users/anthonybarrios/Desktop/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
+    ?> <option value="<?php echo basename($sounds) ?>"> <?php echo basename($sounds) ?> </option> <?php
+  }
+  ?>
+</select>
+
+<a href="#" id="playSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/play.png"></a>
+<a href="#" id="pauseSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/pause.png"></a>
+<br />
+
+
   <script>
 
   $(document).ready(function(){
+
+//---------------  This section is used for playing audio on the pi. -------------//
+
+    $('#mp3Files').change(function () {
+      var file=$('#mp3Files').val();
+      alert(file);
+    });
+    /*$('#playSound').click(function() {
+      var mp3Files=$('#mp3Files').val();
+      $.ajax({
+        url: '/features/playSound',
+                        type: 'GET',
+                        success: function(response)
+                        {
+                          console.log(respone);
+                        }
+      }); 
+    });
+    */
+    $("#playSound").click(function() {
+      $.ajax({
+         url: '/features/playSound',
+                         type: 'GET',
+                         data: { mp3Files: getSelect() },
+                         success: function(response)
+                         {
+                             console.log(response);
+
+                         }
+         });
+    });
+
+    $("#pauseSound").click(function() {
+      $.ajax({
+         url: '/features/pauseSound',
+                         type: 'GET',
+                         data: { mp3Files: getSelect() },
+                         success: function(response)
+                         {
+                             console.log(response);
+
+                         }
+         });
+    });
 
 //---------------  This section is used for calling moving functions on the camera. -------------//
 
@@ -366,14 +424,18 @@
 
         return _freq;
       }
+
+      function getSelect(){
+          var _file = $("#mp3Files").val();
+
+        return _file;
+      }
   });
 
 
   function takePic(){
     console.log("animate");
   }
-
-
 
   </script>
 

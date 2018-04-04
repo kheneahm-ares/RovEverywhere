@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function(){
 
   /*Feature Rover Routes*/
   Route::get('/features/rover', 'FeatureController@rover')->name('rover');
+  Route::get('/features/playSound', 'FeatureController@playSound')->name('playSound');
+  Route::get('/features/pauseSound', 'FeatureController@pauseSound')->name('pauseSound');
 
   /*Feature Image Recognition routes*/
   Route::get('/features/imagerecognition', 'ImageRecognitionController@index')->name('imagerec');
