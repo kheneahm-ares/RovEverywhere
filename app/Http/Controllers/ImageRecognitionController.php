@@ -24,19 +24,22 @@ class ImageRecognitionController extends Controller
     }
 
     public function index(){
+     
+
       return view('features.imagerecognition');
     }
 
     public function detectimage(){
 
-      //$fileName = time();
-      //exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null');
-      //file_get_contents("/snapshots/".$fileName.".jpg")
 
-
+      $fileName = time();
+      exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null');
+      //sleep(2);
+      //print_r(file_get_contents("snapshots/".$fileName.".jpg"));
+     // exit(1);
       $result = $this->client->detectLabels([
         'Image' => [
-          'Bytes' => file_get_contents("images/obama.jpg"),
+          'Bytes' => file_get_contents("snapshots/".$fileName.".jpg"),
         ],
         'MaxLabels' => 10,
         'MinConfidence' => 20,
@@ -44,9 +47,8 @@ class ImageRecognitionController extends Controller
       ]);
 
 
-      // $file = '/snapshots/' . $fileName;
-      // unlink($file);
-
+      $file = "snapshots/". $fileName.".jpg";
+      unlink($file);
 
 
 
@@ -58,20 +60,23 @@ class ImageRecognitionController extends Controller
 
       //$fileName = time();
       //exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null');
-      //file_get_contents("/snapshots/".$fileName.".jpg")
+	    //file_get_contents("/snapshots/".$fileName.".jpg"
+	    //)
+      $fileName = time();
+      exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null');
 
 
       $result = $this->client->detectFaces([
         'Attributes' => ['ALL'],
         'Image' => [
-          'Bytes' => file_get_contents("images/obama.jpg"),
+          'Bytes' => file_get_contents("snapshots/".$fileName.".jpg"),
         ]
 
       ]);
 
 
-      // $file = '/snapshots/' . $fileName;
-      // unlink($file);
+      $file = "snapshots/". $fileName.".jpg";
+      unlink($file);
 
 
 
