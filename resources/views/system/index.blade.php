@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('content')
-  <div class="col-md-8">
-    <h1>Graphs</h1>
+  <?php
+    header_remove();
+?>
+  <div class="col-md-12">
+    <iframe src="http://192.168.12.1:5555" frameborder="0" align="middle" width="100%" height="550" align="middle" scrolling="no"></iframe>
   </div>
   <div class="col-md-4">
        <div class="well" style="">
