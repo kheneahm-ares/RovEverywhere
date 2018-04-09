@@ -51,11 +51,19 @@ public class Main {
 						dw.wpa_pskEdit(ssid, ssidNew, pskNew);
 						break;
 					case "mschapv2":
-						String eap = args[3];
-						String identity = args[4];
-						String password = args[5];
-						String phase1 = args[6];
-						String phase2 = args[7];
+						String eap = args[4];
+						String identity = args[6];
+						String password = args[8];
+						String phase1 = args[10];
+						String phase2 = args[12];
+						String ssidNew = args[3];
+						String eapNew = args[5];
+						String identityNew = args[7];
+						String passwordNew = args[9];
+						String phase1New = args[11];
+						String phase2New = args[13];
+
+						dw.mschapv2Edit(ssid, ssidNew, eap, eapNew, identity, identityNew, password, passwordNew, phase1, phase1New, phase2, phase2New);
 						break;	
 					default:
 						break;

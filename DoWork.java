@@ -128,6 +128,15 @@ public class DoWork {
 			e.printStackTrace();
 		} 	
 	}	
+	public void mschapv2Edit(final String ssid, final String ssidNew, final String eap, final String eapNew, final String identity, final String identityNew, final String password, 
+			final String passwordNew, final String phase1, final String phase1New, final String phase2, final String phase2New) {
+		String query = "update MSCHAPv2 set SSID=" + ssidNew + ", EAP=" + eapNew + ";
+		try {
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public void deleteNetwork(final String ssid, String type) {
 		try {
 			type = standardizeType(type);
