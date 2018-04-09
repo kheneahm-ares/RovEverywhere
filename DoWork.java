@@ -99,7 +99,7 @@ public class DoWork {
 			e.printStackTrace();
 		}
 	}
-	public void UnsecuredConnectionEdit(final String ssid, final String ssidNew) {
+	public void unsecuredConnectionEdit(final String ssid, final String ssidNew) {
 		String query = "update UNSECUREDCONNECTION set SSID=\"" + ssidNew + "\"" + " where SSID=\"" + ssid + "\"";
 		try {
 			cn = DriverManager.getConnection(url, username, password);
@@ -113,6 +113,21 @@ public class DoWork {
 			e.printStackTrace();
 		}
 	}
+	public void wpa_pskEdit(final String ssid, final String ssidNew, final String pskNew) {
+		String query = "update WPA_PSK set SSID=\"" + ssidNew + "\", PSK=\"" + pskNew + "\"" + " where SSID=\"" + ssid + "\"";
+		try {
+			cn = DriverManager.getConnection(url, username, password);
+			PreparedStatement ps = cn.prepareStatement(query);
+			ps.execute(query);
+
+			if (!cn.isClosed()) {
+				cn.close();
+			}	
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		} 	
+	}	
 	public void deleteNetwork(final String ssid, String type) {
 		try {
 			type = standardizeType(type);

@@ -43,10 +43,12 @@ public class Main {
 				switch (connectionType) {
 					case "none":
 						String ssidNew = args[3];
-						dw.UnsecuredConnectionEdit(ssid, ssidNew);
+						dw.unsecuredConnectionEdit(ssid, ssidNew);
 						break;
 					case "wpa-psk":
-						String psk = args[3];
+						ssidNew = args[3];
+						String pskNew = args[4];
+						dw.wpa_pskEdit(ssid, ssidNew, pskNew);
 						break;
 					case "mschapv2":
 						String eap = args[3];
