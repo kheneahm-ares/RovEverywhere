@@ -11,10 +11,10 @@ public class DoWork {
 	private ArrayList<String> connectionAction = new ArrayList<String>();
 	private ArrayList<String> typesOfConnections = new ArrayList<String>();
 	private String connectionType;
-	private String username = "hm";
-	private String password = "panther";
+	private String username = "mars";
+	private String password = "roverrover";
 	private String database = "netman";
-	private String url = "jdbc:mysql://108.255.70.130:3306/" + database;
+	private String url = "jdbc:mysql://localhost/" + database;
 	private Connection cn;
 
 	public DoWork() {
@@ -94,6 +94,20 @@ public class DoWork {
 			if (!cn.isClosed()) {
 				cn.close();
 			}		
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void UnsecuredConnectionEdit(final String ssid, final String ssidNew) {
+		String query = "update UNSECUREDCONNECTION set SSID=\"" + ssidNew + "\"" + " where SSID=\"" + ssid + "\"";
+		try {
+			cn = DriverManager.getConnection(url, username, password);
+			PreparedStatement ps = cn.prepareStatement(query);
+			ps.execute();
+			if (!cn.isClosed()) {
+				cn.close();
+			}	
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

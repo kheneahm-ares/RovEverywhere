@@ -42,10 +42,18 @@ public class Main {
 			else if (connectionAction.equals("edit")) {
 				switch (connectionType) {
 					case "none":
+						String ssidNew = args[3];
+						dw.UnsecuredConnectionEdit(ssid, ssidNew);
 						break;
 					case "wpa-psk":
+						String psk = args[3];
 						break;
 					case "mschapv2":
+						String eap = args[3];
+						String identity = args[4];
+						String password = args[5];
+						String phase1 = args[6];
+						String phase2 = args[7];
 						break;	
 					default:
 						break;
