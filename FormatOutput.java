@@ -18,7 +18,7 @@ public class FormatOutput {
 	public void outputiAllToFile() {
 		outputUnsecured();
 		outputWPA_PSK();
-		//outputMSCHAPv2();
+		outputMSCHAPv2();
 	}	
 
 	public void outputUnsecured() {

@@ -56,7 +56,7 @@ public class Main {
 						String password = args[8];
 						String phase1 = args[10];
 						String phase2 = args[12];
-						String ssidNew = args[3];
+						ssidNew = args[3];
 						String eapNew = args[5];
 						String identityNew = args[7];
 						String passwordNew = args[9];

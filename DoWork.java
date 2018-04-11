@@ -11,10 +11,13 @@ public class DoWork {
 	private ArrayList<String> connectionAction = new ArrayList<String>();
 	private ArrayList<String> typesOfConnections = new ArrayList<String>();
 	private String connectionType;
-	private String username = "mars";
-	private String password = "roverrover";
+	//private String username = "mars";
+	private String username = "hm";
+	//private String password = "roverrover";
+	private String password = "panther";
 	private String database = "netman";
-	private String url = "jdbc:mysql://localhost/" + database;
+	//private String url = "jdbc:mysql://localhost/" + database;
+	private String url = "jdbc:mysql://108.255.70.130/" + database;
 	private Connection cn;
 
 	public DoWork() {
@@ -130,8 +133,15 @@ public class DoWork {
 	}	
 	public void mschapv2Edit(final String ssid, final String ssidNew, final String eap, final String eapNew, final String identity, final String identityNew, final String password, 
 			final String passwordNew, final String phase1, final String phase1New, final String phase2, final String phase2New) {
-		String query = "update MSCHAPv2 set SSID=" + ssidNew + ", EAP=" + eapNew + ";
+		String query = "update MSCHAPv2 set SSID=" + ssidNew + ", EAP=" + eapNew + ", IDENTITY=" + identityNew + ", PASSWORD=" + passwordNew + ", PHASE1=" + phase1New + ", PHASE2=" + phase2New + " where SSID=" + ssid;
 		try {
+			cn = DriverManager.getConnection(url, username, password);
+			PreparedStatement ps = cn.prepareStatement(query);
+			ps.execute(query);
+
+			if (!cn.isClosed()) {
+				cn.close();
+			}	
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
