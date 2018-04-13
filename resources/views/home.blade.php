@@ -5,6 +5,16 @@
 
 
 @endsection
+<style>
+  #fahr_panel{
+    color: white;
+    font-size: 40px;
+    background-color: #ff4d4d;
+  }
+  .panel-heading{
+    font-size: 10px;
+  }
+</style>
 @section('content')
 
     <div class="col-md-12" style="margin-bottom: 50px;">
@@ -35,63 +45,41 @@
       </div>
     </div>
     <div class="col-md-6">
-            <!-- Top part of the slider -->
-            <div class="row">
-                <div class="col-sm-12" id="carousel-bounding-box">
-                    <div class="carousel slide" id="myCarousel" data-interval="2000">
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">
-
-                              <div class="active item" data-slide-number="0">
-                                <div class="panel-info">
-                                  <div class="panel-heading">
-                                    Outside Temperature
-                                    <a class="pull-right" href="#">More</a>
-                                  </div>
-                                  <div class="panel-body">
-                                    {{$fahr}}
-
-                                  </div>
-                                </div>
-                              </div>
-
-
-                              <div class="item" data-slide-number="1">
-                                <div class="panel-info">
-                                  <div class="panel-heading">
-                                    Outside Humidity
-                                    <a class="pull-right" href="#">More</a>
-                                  </div>
-                                  <div class="panel-body">
-                                    {{$humid}}
-                                  </div>
-                                </div>
-                               </div>
-                               <div class="item" data-slide-number="2">
-                                 <div class="panel-info">
-                                   <div class="panel-heading">
-                                     Internal Temperature
-                                     <a class="pull-right" href="#">More</a>
-                                   </div>
-                                   <div class="panel-body">
-                                   </div>
-                                 </div>
-                                </div>
-                        <!-- Carousel nav -->
-                        <a style="opacity:0.0" class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                            <span class="fas fa-arrow-left"></span>
-                        </a>
-                        <a style="opacity:0.0" class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                            <span class="fas fa-arrow-right"></span>
-                        </a>
-                    </div>
+            <div class="col-md-4">
+                <div class="panel-info">
+                  <div class="panel-heading">
+                    Outside Temperature
+                  </div>
+                  <div id="fahr_panel" class="panel-body">
+                    {{$fahr}}
+                  </div>
                 </div>
             </div>
-    </div>
-    <!--/Slider-->
-</div>
-<br />
-
+            <div class="col-md-4">
+              <div>
+                <div class="panel-info">
+                  <div class="panel-heading">
+                    Outside Temperature
+                  </div>
+                  <div id="fahr_panel" class="panel-body">
+                    {{$fahr}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div>
+                <div class="panel-info">
+                  <div class="panel-heading">
+                    Outside Temperature
+                  </div>
+                  <div id="fahr_panel" class="panel-body">
+                    {{$fahr}}
+                  </div>
+                </div>
+              </div>
+            </div>
+  </div>
 <script>
 
 
