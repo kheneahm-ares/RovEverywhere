@@ -28,10 +28,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        //get temp
-        $temp_string = exec('cgi-bin/temp.cgi');
-        print_r($temp_string);
-        exit(1);
+       
+
         $user = Auth::user();
 
 
@@ -120,11 +118,16 @@ class HomeController extends Controller
         $activities = Activity::orderBy('created_at', 'desc')->take(3)->get();
 
 
-
-
+	//get temp
+        $temp_string = exec('cgi-bin/temperature.cgi');
+	$temps = explode(" ", $temp_string); //split by spaces
+	$fahr = $temps[0];
+	$humid = $temps[1];
         return view('home')->with('dateArray', $dateArray)
                           ->with('dates', $dates)
                           ->with('snapshots', $snapshotsArray)
-                          ->with('activities', $activities);
+			  ->with('activities', $activities)
+			  ->with('fahr', $fahr)
+			  ->with('humid', $humid);
     }
 }
