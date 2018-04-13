@@ -6,7 +6,7 @@
 
 @endsection
 @section('content')
-  
+
     <div class="col-md-12" style="margin-bottom: 50px;">
       <div id="high-chart" style=""></div>
     </div>
@@ -49,26 +49,28 @@
                                     <a class="pull-right" href="#">More</a>
                                   </div>
                                   <div class="panel-body">
+                                    {{$fahr}}
 
                                   </div>
-                                </div>                                </div>
+                                </div>
+                              </div>
 
 
                               <div class="item" data-slide-number="1">
                                 <div class="panel-info">
                                   <div class="panel-heading">
-                                    Outside Temperature
+                                    Outside Humidity
                                     <a class="pull-right" href="#">More</a>
                                   </div>
                                   <div class="panel-body">
-
+                                    {{$humid}}
                                   </div>
                                 </div>
                                </div>
                                <div class="item" data-slide-number="2">
                                  <div class="panel-info">
                                    <div class="panel-heading">
-                                     Outside Temperature
+                                     Internal Temperature
                                      <a class="pull-right" href="#">More</a>
                                    </div>
                                    <div class="panel-body">
