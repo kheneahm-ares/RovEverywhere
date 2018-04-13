@@ -12,3 +12,4 @@ yarn-error.log
 .env
 /public/snapshots
 /public/uploads
+/config/actualrekognition.php
