@@ -8,17 +8,17 @@
 <style>
   #fahr_panel{
     color: white;
-    font-size: 50px;
+    font-size: 40px;
     background-color: #ff4d4d;
   }
   #inter_panel{
     color: white;
-    font-size: 50px;
+    font-size: 40px;
     background-color: #e6e600;
   }
   #humidity_panel{
     color: white;
-    font-size: 50px;
+    font-size: 40px;
     background-color: #3399ff;
   }
   .panel-heading{
@@ -96,7 +96,7 @@
                     Internal Temperature
                   </div>
                   <div id="inter_panel" class="panel-body panel-body-temp">
-                    {{$fahr}}<span>&#176;</span> F
+                    {{$internal}}<span>&#176;</span> F
                     <br />
                     <label class="fas fa-thermometer" style="font-size: 25px;"></label>
                   </div>

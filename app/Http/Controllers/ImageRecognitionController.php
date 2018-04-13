@@ -25,7 +25,6 @@ class ImageRecognitionController extends Controller
 
     public function index(){
 
-
       return view('features.imagerecognition');
     }
 
