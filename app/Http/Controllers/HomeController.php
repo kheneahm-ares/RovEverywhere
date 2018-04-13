@@ -27,7 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        //get temp
+        $temp_string = exec('cgi-bin/temp.cgi');
+        print_r($temp_string);
+        exit(1);
         $user = Auth::user();
+
 
         //get all uploads
         $uploadedPictures = UploadedPicture::where('user_id', $user->id)
@@ -112,6 +118,8 @@ class HomeController extends Controller
 
         //get 3 most recent activities
         $activities = Activity::orderBy('created_at', 'desc')->take(3)->get();
+
+
 
 
         return view('home')->with('dateArray', $dateArray)

@@ -15,16 +15,16 @@ class ImageRecognitionController extends Controller
 
     public function __construct(){
        $this->args = [
-           'credentials' => config('rekognition.credentials'),
-           'region' => config('rekognition.region'),
-           'version' => config('rekognition.version')
+           'credentials' => config('actualrekognition.credentials'),
+           'region' => config('actualrekognition.region'),
+           'version' => config('actualrekognition.version')
        ];
 
        $this->client = new RekognitionClient($this->args);
     }
 
     public function index(){
-     
+
 
       return view('features.imagerecognition');
     }
