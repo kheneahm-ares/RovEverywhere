@@ -65,7 +65,7 @@
 
 </head>
 <body>
-    <div id="">
+    <div class="loader">
         <nav class="navbar" role="navigation" style="box-shadow: 0px 6px 6px -6px #999;">
                 <div class="navbar-header">
                   <button type = "button" class = "navbar-toggle"
@@ -156,8 +156,5 @@
 
         @yield('content')
     </div>
-
-
-
 </body>
 </html>

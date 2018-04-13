@@ -1,10 +1,17 @@
 @extends('layouts.app')
 @section('content')
+<style>
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #8eb4cb;
+}
+
+</style>
   <?php
     header_remove();
 ?>
+<h1> Users </h1>
   <div class="col-md-12">
-    <iframe src="http://192.168.12.1:5555" frameborder="0" align="middle" width="100%" height="550" align="middle" scrolling="no"></iframe>
+    <iframe src="http://192.168.12.1:5555" frameborder="1" align="middle" width="100%" height="550"></iframe>
   </div>
   <div class="col-md-4">
        <div class="well" style="">
@@ -16,6 +23,28 @@
            </h2>
          </div>
          <hr />
+         <div class="form-group row" >
+           <div class="col-md-8" class="table-responsive">
+             <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>IP Addr</th>
+                  <th>MAC Addr</th>
+                  <th>Brand</th>
+                </tr>
+              </thead>
+              @php ($count = -1)
+              @foreach($lines as $line)
+              <tr>
+              @php ($count += 1)
+                <td>{{$ips[$count]}}</td>
+                <td>{{$macs[$count]}}</td>
+                <td>{{$brands[$count]}}</td>
+              </tr>
+              @endforeach
+             </table>
+           </div>
+         </div>
          <div class="form-group row">
            <label style="text-align:right"  class="col-md-4 col-form-label">System Time:</label>
            <div class="col-md-8">
