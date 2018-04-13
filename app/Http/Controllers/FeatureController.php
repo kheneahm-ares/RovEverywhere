@@ -11,4 +11,10 @@ class FeatureController extends Controller
       exec('cgi-bin/panTiltNeutral.cgi');
       return view('features.rover');
     }
+
+    public function speak(){
+      $phrase = $_POST['phrase'];
+      exec('cgi-bin/voice.cgi "'. ($phrase) . '" &> /dev/null');
+      return $phrase;
+    }
 }

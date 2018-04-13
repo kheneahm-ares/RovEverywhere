@@ -115,8 +115,26 @@
 
     #takepic{
       position: relative;
+      border-radius: 10px;
       left: 8px;
       top: -540px;
+      opacity: 0.5;
+    }
+    #phrase{
+      border-radius: 10px;
+      position:absolute;
+      bottom: 100px;
+      left: 25px;
+      font-size: 40px;
+      opacity: 0.5;
+      width: 40%;
+      height: 60px;
+    }
+    #speak{
+      border-radius: 10px;
+      position:absolute;
+      bottom: 100px;
+      left: 482px;
       opacity: 0.5;
     }
 
@@ -126,8 +144,7 @@
 
     <div class="col-md-12">
       <iframe class="liveStream" src="http://192.168.12.1:9090/stream" frameborder="0" align="middle" width="100%" height="550" align="middle" scrolling="no"></iframe>
-      <button id="takepic" class="fas fa-camera" style="font-size: 50px; width: 100px;" onclick="takePic()"></button>
-
+      <button id="takepic" class="fas fa-camera" style="font-size: 50px; width: 100px;"></button>
 
       <a href="#" id="forward" ><img style="height: 60px; width: 60px;"src="/images/forward.png"></a>
       <a href="#" id="left" ><img style="height: 60px; width: 60px;"src="/images/left.png"></a>
@@ -141,8 +158,11 @@
       <a href="#" id="panRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/right.png"></a>
       <a href="#" id="tiltLeft" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/forward.png"></a>
       <a href="#" id="tiltRight" style="height: 35px; width: 35px"><img style="height: 25px"src="/images/reverse.png"></a>
+      <input id="phrase" type="text" class="form-control" maxlength="25"/>
+      <button id="speak" class="btn" style="font-size: 30px;">Speak</button>
+
       <input type="hidden" value="1500" id="freq">
-        <input type="hidden" value="1400" id="tiltFreq">
+      <input type="hidden" value="1400" id="tiltFreq">
     </div>
 </div>
 
@@ -165,10 +185,29 @@ foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
   <script>
 
   $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    //-- Section for speaking ---------------//
+    $("#speak").click(function(){
+      var phrase = $("#phrase").val();
+      $.ajax({
+        url: '/features/speak/{phrase}',
+        type: 'POST',
+        data: {phrase: phrase},
+        success: function(response){
+          console.log(response);
+        }
+
+      });
+
+    });
 
 //---------------  This section is used for playing audio on the pi. -------------//
 
-    
+
     $("#playSound").click(function() {
       $.ajax({
          url: '/features/playSound',
@@ -418,11 +457,6 @@ foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
         return _file;
       }
   });
-
-
-  function takePic(){
-    console.log("animate");
-  }
 
   </script>
 

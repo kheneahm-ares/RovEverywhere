@@ -8,11 +8,29 @@
 <style>
   #fahr_panel{
     color: white;
-    font-size: 40px;
+    font-size: 50px;
     background-color: #ff4d4d;
   }
+  #inter_panel{
+    color: white;
+    font-size: 50px;
+    background-color: #e6e600;
+  }
+  #humidity_panel{
+    color: white;
+    font-size: 50px;
+    background-color: #3399ff;
+  }
   .panel-heading{
-    font-size: 10px;
+    font-size: 12px;
+  }
+  .panel-body-temp{
+    text-align: center;
+  }
+  .panel-body{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
   }
 </style>
 @section('content')
@@ -50,8 +68,10 @@
                   <div class="panel-heading">
                     Outside Temperature
                   </div>
-                  <div id="fahr_panel" class="panel-body">
-                    {{$fahr}}
+                  <div id="fahr_panel" class="panel-body panel-body-temp">
+                    {{$fahr}}<span>&#176;</span> F
+                    <br />
+                    <label class="fas fa-cloud" style="font-size: 25px;"></label>
                   </div>
                 </div>
             </div>
@@ -59,10 +79,12 @@
               <div>
                 <div class="panel-info">
                   <div class="panel-heading">
-                    Outside Temperature
+                    Outside Humidity
                   </div>
-                  <div id="fahr_panel" class="panel-body">
-                    {{$fahr}}
+                  <div id="humidity_panel" class="panel-body panel-body-temp">
+                    {{$humid}} %
+                    <br />
+                    <label class="fas fa-tint" style="font-size: 25px;"></label>
                   </div>
                 </div>
               </div>
@@ -71,10 +93,12 @@
               <div>
                 <div class="panel-info">
                   <div class="panel-heading">
-                    Outside Temperature
+                    Internal Temperature
                   </div>
-                  <div id="fahr_panel" class="panel-body">
-                    {{$fahr}}
+                  <div id="inter_panel" class="panel-body panel-body-temp">
+                    {{$fahr}}<span>&#176;</span> F
+                    <br />
+                    <label class="fas fa-thermometer" style="font-size: 25px;"></label>
                   </div>
                 </div>
               </div>

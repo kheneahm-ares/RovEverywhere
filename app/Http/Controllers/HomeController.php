@@ -129,7 +129,8 @@ class HomeController extends Controller
           $temps = explode(" ", $temp_string); //split by spaces
           $fahr = $temps[0];
           $humid = $temps[1];
-          $internal = exec('cgi-bin/internal_temp.cgi');
+          $inter_cels = exec('cgi-bin/internal_temp.cgi');
+          $internal = (9/5.0) * floatval($inter_cels) + 32;
 
         }
 
