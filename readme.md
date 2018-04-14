@@ -56,3 +56,25 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Hardware Setup
+
+Hardware needed:
+
+Raspberry Pi 3
+Chassis (kit - motors, wheels...)
+Batteries and Battery Holder
+L298N
+DHT11 Temperature Sensor
+Raspberry PiCam v2
+Speaker
+60 RGB LED Strip
+Servo Motor
+HDMI Audio Adapter
+18 Ga. Wires (Different Colors)
+Wifi Adapter
+Portable Charger
+
+<a src="/images/Motors.png"> </a>
+<a src="/images/ServoMotors.png"> </a>
+<a src="/images/LedAndTemp.png"> </a>
