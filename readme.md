@@ -75,6 +75,6 @@ HDMI Audio Adapter
 Wifi Adapter
 Portable Charger
 
-<a src="/images/Motors.png"> </a>
-<a src="/images/ServoMotors.png"> </a>
-<a src="/images/LedAndTemp.png"> </a>
+<a src="https://github.com/mr-robot9/RovEverywhere/tree/master/public/images/Motors.png"> </a>
+<a src="https://github.com/mr-robot9/RovEverywhere/tree/master/public/images/ServoMotors.png"> </a>
+<a src="https://github.com/mr-robot9/RovEverywhere/tree/master/public/images/LedAndTemp.png"> </a>
