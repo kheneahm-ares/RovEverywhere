@@ -102,6 +102,13 @@ class HomeController extends Controller
             $picDate = date_create((string)$snaps->created_at);
             $dateFormat = date_format($picDate,'d/m/Y');
 
+            //if the date has already past the date six days ago,
+            //since we ordered desc, we know that everything past that
+            //is also less so no need to traverse anymore
+            if($dateFormat < $date_six_days_ago){
+              break;
+            }
+            
             switch($dateFormat){
               case $date_six_days_ago : $snapshotsArray[$date_six_days_ago]++;break;
               case $date_five_days_ago : $snapshotsArray[$date_five_days_ago]++;break;
