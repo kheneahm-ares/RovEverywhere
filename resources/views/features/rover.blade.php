@@ -158,6 +158,13 @@
       top: -540px;
       opacity: 0.5;
     }
+    #colorBox{
+      position: relative;
+      border-radius: 10px;
+      left: 8px;
+      top: -540px;
+      opacity: 0.5;
+    }
 
   </style>
 
@@ -169,6 +176,8 @@
       <button id="honk" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/honkRover.png"></button>
       <button id="lightsOn" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/lighton.png"></button>
       <button id="lightsOff" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/lightoff.png"></button>
+      <input  id="colorBox" class="jscolor {onFineChange:'update(this)'}" value="FFFFFF">
+      <span id="colorBox"> R, G, B = <span id="rgb"></span> </span>
 
       <a href="#" id="forward" ><img style="height: 60px; width: 60px;"src="/images/forward.png"></a>
       <a href="#" id="left" ><img style="height: 60px; width: 60px;"src="/images/left.png"></a>
@@ -208,9 +217,7 @@
 <script src="{{ asset('js/jscolor.js') }}"></script>
 
 <div class="container">
-    <input class="jscolor {onFineChange:'update(this)'}" value="FFFFFF">
-    &emsp;
-    R, G, B = <span id="rgb"></span> 
+    
 </div>
 
   <script>
