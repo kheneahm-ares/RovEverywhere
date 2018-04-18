@@ -66,6 +66,13 @@ Route::middleware('auth')->group(function(){
   Route::get('/right/{pwm}', 'WheelController@right')->name('right');
   Route::get('/stop', 'WheelController@stop')->name('stop');
 
+  /*Honk Routes*/
+  Route::get('/features/honkSound', 'HonkController@honkSound')->name('honkSound');
+
+  /*Lights Routes*/
+  Route::get('/features/lightsOn', 'LightsController@lightsOn')->name('lightsOn');
+  Route::get('/features/lightsOff', 'LightsController@lightsOff')->name('lightsOff');
+
   /*Cam Routes*/
   Route::get('/takePic', 'CameraController@takePicture')->name('takePic');
   Route::get('/panMovement/{freq}', 'CameraController@panMovement')->name('panMovement');

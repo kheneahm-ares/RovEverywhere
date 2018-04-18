@@ -137,6 +137,27 @@
       left: 482px;
       opacity: 0.5;
     }
+    #honk{
+      position: relative;
+      border-radius: 10px;
+      left: 8px;
+      top: -540px;
+      opacity: 0.5;
+    }
+    #lightsOn{
+      position: relative;
+      border-radius: 10px;
+      left: 8px;
+      top: -540px;
+      opacity: 0.5;
+    }
+    #lightsOff{
+      position: relative;
+      border-radius: 10px;
+      left: 8px;
+      top: -540px;
+      opacity: 0.5;
+    }
 
   </style>
 
@@ -145,6 +166,9 @@
     <div class="col-md-12">
       <iframe class="liveStream" src="http://192.168.12.1:9090/stream" frameborder="0" align="middle" width="100%" height="550" align="middle" scrolling="no"></iframe>
       <button id="takepic" class="fas fa-camera" style="font-size: 50px; width: 100px;"></button>
+      <button id="honk" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/honkRover.png"></button>
+      <button id="lightsOn" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/lighton.png"></button>
+      <button id="lightsOff" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/lightoff.png"></button>
 
       <a href="#" id="forward" ><img style="height: 60px; width: 60px;"src="/images/forward.png"></a>
       <a href="#" id="left" ><img style="height: 60px; width: 60px;"src="/images/left.png"></a>
@@ -165,14 +189,14 @@
       <input type="hidden" value="1400" id="tiltFreq">
     </div>
 </div>
-
+<!--
 <div class="container">
 <select id="mp3Files">
 <option value=""> </option>
   <?php
-foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
-    ?> <option value="<?php echo basename($sounds) ?>"> <?php echo basename($sounds) ?> </option> <?php
-  }
+//foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
+    ?> <option value="<?php //echo basename($sounds) ?>"> <?php //echo basename($sounds) ?> </option> <?php
+  //}
   ?>
 </select>
 
@@ -180,9 +204,25 @@ foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
 <a href="#" id="pauseSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/pause.png"></a>
 </div>
 <br />
+-->
+<script src="{{ asset('js/jscolor.js') }}"></script>
 
+<div class="container">
+    <input class="jscolor {onFineChange:'update(this)'}" value="FFFFFF">
+    &emsp;
+    R, G, B = <span id="rgb"></span> 
+</div>
 
   <script>
+
+  //-- Section for Color Picker ---------------//
+  function update(picker) {
+        document.getElementById('rgb').innerHTML =
+            Math.round(picker.rgb[0]) + ', ' +
+            Math.round(picker.rgb[1]) + ', ' +
+            Math.round(picker.rgb[2]);
+
+  }
 
   $(document).ready(function(){
     $.ajaxSetup({
@@ -205,25 +245,49 @@ foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
 
     });
 
+//---------------  This section is used for turning led lights on. -------------//
+$("#lightsOn").on("click", function() {
+        $.ajax({
+          url: '/features/lightsOn',
+                        type: 'GET',
+                        success: function(response)
+                        {
+                            console.log(response);
+                        }
+
+        });
+      });
+
+$("#lightsOff").on("click", function() {
+        $.ajax({
+          url: '/features/lightsOff',
+                        type: 'GET',
+                        success: function(response)
+                        {
+                            console.log(response);
+                        }
+
+        });
+      });
+
+//---------------  This section is used for honking the horn. -------------//
+$("#honk").click(function() {
+      $.ajax({
+         url: '/features/honkSound',
+                         type: 'GET',
+                         success: function(response)
+                         {
+                             console.log(response);
+                         }
+         });
+    });
+
 //---------------  This section is used for playing audio on the pi. -------------//
 
 
     $("#playSound").click(function() {
       $.ajax({
          url: '/features/playSound',
-                         type: 'GET',
-                         data: { mp3Files: getSelect() },
-                         success: function(response)
-                         {
-                             console.log(response);
-
-                         }
-         });
-    });
-
-    $("#pauseSound").click(function() {
-      $.ajax({
-         url: '/features/pauseSound',
                          type: 'GET',
                          data: { mp3Files: getSelect() },
                          success: function(response)
