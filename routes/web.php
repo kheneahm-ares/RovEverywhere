@@ -84,4 +84,20 @@ Route::middleware('auth')->group(function(){
 
   /*System Routes*/
   Route::get('/system', 'SystemController@index')->name('system');
+
+  /*Network Routes*/
+  Route::get('/network', 'NetworkManager@index')->name('network');
+  Route::get('/network/add', 'NetworkManager@add')->name('addnetwork');
+  Route::get('/network/edit', 'NetworkManager@edit')->name('editnetwork');
+  Route::get('/network/destroy', 'NetworkManager@destroy')->name('destroynetwork');
+
+  Route::get('/network/add/new/none', 'NetworkManager@newnone')->name('newnonenetwork');
+  Route::get('/network/add/new/wpapsk', 'NetworkManager@newwpapsk')->name('newwpapsknetwork');
+  Route::get('/network/add/new/mschapv2', 'NetworkManager@newmschapv2')->name('newmschapv2network');
+  Route::get('/network/add/new/destroy', 'NetworkManager@newmschapv2')->name('newmschapv2network');
+
+  Route::post('network/add/none', 'NetworkManager@none')->name('addnonenetwork');
+  Route::post('network/add/wpapsk', 'NetworkManager@wpapsk')->name('addwpapsknetwork');
+  Route::post('network/add/mschapv2', 'NetworkManager@mschapv2')->name('addmschapv2network');
+
 });
