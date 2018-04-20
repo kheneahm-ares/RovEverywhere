@@ -136,6 +136,9 @@
                                       <a href="/system">
                                         System
                                       </a>
+				      <a href="/network">
+					Network
+				     </a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
