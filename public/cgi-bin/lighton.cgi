@@ -5,6 +5,14 @@ import RPi.GPIO as GPIO
 import time
 from neopixel import *
 
+red = int(argv[1])
+green = int(argv[2])
+blue = int(argv[3])
+
+print (red)
+print (green)
+print (blue)
+
 # LED strip configuration:
 LED_COUNT      = 16      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
@@ -21,5 +29,5 @@ strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, 
 strip.begin()
 
 for i in range(strip.numPixels()):
-    strip.setPixelColor(i, Color(255, 255, 255))
+    strip.setPixelColor(i, Color(red, green, blue))
     strip.show()

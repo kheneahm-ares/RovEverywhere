@@ -158,6 +158,13 @@
       top: -540px;
       opacity: 0.5;
     }
+    #btnPicker{
+      position: relative;
+      border-radius: 10px;
+      left: 8px;
+      top: -540px;
+      opacity: 0.5;
+    }
     #colorBox{
       position: relative;
       border-radius: 10px;
@@ -176,7 +183,7 @@
       <button id="honk" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/honkRover.png"></button>
       <button id="lightsOn" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/lighton.png"></button>
       <button id="lightsOff" class="fas" style="font-size: 50px; width: 100px;"><img style="height: 45px"src="/images/lightoff.png"></button>
-      <input  id="colorBox" class="jscolor {onFineChange:'update(this)'}" value="FFFFFF">
+      <input  id="btnPicker" class="jscolor {onFineChange:'update(this)'}" value="FFFFFF" type="button">
       <span id="colorBox"> R, G, B = <span id="rgb"></span> </span>
 
       <a href="#" id="forward" ><img style="height: 60px; width: 60px;"src="/images/forward.png"></a>
@@ -198,37 +205,14 @@
       <input type="hidden" value="1400" id="tiltFreq">
     </div>
 </div>
-<!--
-<div class="container">
-<select id="mp3Files">
-<option value=""> </option>
-  <?php
-//foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
-    ?> <option value="<?php //echo basename($sounds) ?>"> <?php //echo basename($sounds) ?> </option> <?php
-  //}
-  ?>
-</select>
-
-<a href="#" id="playSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/play.png"></a>
-<a href="#" id="pauseSound" style="height: 35px; width: 35px" ><img style="height: 25px"src="/images/pause.png"></a>
-</div>
-<br />
--->
 <script src="{{ asset('js/jscolor.js') }}"></script>
-
-<div class="container">
-    
-</div>
-
   <script>
-
   //-- Section for Color Picker ---------------//
   function update(picker) {
         document.getElementById('rgb').innerHTML =
             Math.round(picker.rgb[0]) + ', ' +
             Math.round(picker.rgb[1]) + ', ' +
             Math.round(picker.rgb[2]);
-
   }
 
   $(document).ready(function(){
@@ -237,6 +221,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     //-- Section for speaking ---------------//
     $("#speak").click(function(){
       var phrase = $("#phrase").val();
@@ -254,9 +239,15 @@
 
 //---------------  This section is used for turning led lights on. -------------//
 $("#lightsOn").on("click", function() {
+      var picker = document.getElementById('btnPicker').jscolor;
+      var rgbColor = 
+            Math.round(picker.rgb[0]) + ' ' +
+            Math.round(picker.rgb[1]) + ' ' +
+            Math.round(picker.rgb[2]);
         $.ajax({
           url: '/features/lightsOn',
                         type: 'GET',
+                        data: { rgb: rgbColor },
                         success: function(response)
                         {
                             console.log(response);
@@ -264,7 +255,7 @@ $("#lightsOn").on("click", function() {
 
         });
       });
-
+      
 $("#lightsOff").on("click", function() {
         $.ajax({
           url: '/features/lightsOff',
@@ -526,6 +517,12 @@ $("#honk").click(function() {
           var _file = $("#mp3Files").val();
 
         return _file;
+      }
+
+      function getColor() {
+        var _color = $("#rgb").val();
+
+        return _color;
       }
   });
 
