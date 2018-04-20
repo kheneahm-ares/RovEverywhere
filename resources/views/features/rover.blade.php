@@ -222,24 +222,6 @@
         }
     });
 
-    $("#lightsOn").on("click", function() {
-      var picker = document.getElementById('btnPicker').jscolor;
-      var rgbColor = 
-            Math.round(picker.rgb[0]) + ' ' +
-            Math.round(picker.rgb[1]) + ' ' +
-            Math.round(picker.rgb[2]);
-        $.ajax({
-          url: '/features/lightsOn',
-                        type: 'GET',
-                        data: { rgb: rgbColor },
-                        success: function(response)
-                        {
-                            console.log(response);
-                        }
-
-        });
-      });
-
     //-- Section for speaking ---------------//
     $("#speak").click(function(){
       var phrase = $("#phrase").val();
@@ -256,6 +238,24 @@
     });
 
 //---------------  This section is used for turning led lights on. -------------//
+$("#lightsOn").on("click", function() {
+      var picker = document.getElementById('btnPicker').jscolor;
+      var rgbColor = 
+            Math.round(picker.rgb[0]) + ' ' +
+            Math.round(picker.rgb[1]) + ' ' +
+            Math.round(picker.rgb[2]);
+        $.ajax({
+          url: '/features/lightsOn',
+                        type: 'GET',
+                        data: { rgb: rgbColor },
+                        success: function(response)
+                        {
+                            console.log(response);
+                        }
+
+        });
+      });
+      
 $("#lightsOff").on("click", function() {
         $.ajax({
           url: '/features/lightsOff',
