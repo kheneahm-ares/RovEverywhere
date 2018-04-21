@@ -9,7 +9,6 @@
   <?php
     header_remove();
 ?>
-<h1> Users </h1>
   <div class="col-md-12">
     <iframe src="http://192.168.12.1:5555" frameborder="1" align="middle" width="100%" height="550"></iframe>
   </div>
