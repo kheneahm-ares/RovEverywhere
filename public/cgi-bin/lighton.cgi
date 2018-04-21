@@ -4,9 +4,10 @@ import os
 import RPi.GPIO as GPIO
 import time
 from neopixel import *
+from sys import argv
 
-red = int(argv[1])
-green = int(argv[2])
+green = int(argv[1])
+red = int(argv[2])
 blue = int(argv[3])
 
 print (red)
@@ -29,5 +30,5 @@ strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, 
 strip.begin()
 
 for i in range(strip.numPixels()):
-    strip.setPixelColor(i, Color(red, green, blue))
+    strip.setPixelColor(i, Color(green, red, blue))
     strip.show()

@@ -58,6 +58,8 @@ class NetworkManager extends Controller
 
 	//Editing controllers
 	public function edit(){
+		
+
 		return view('network.edit');
 	}
 

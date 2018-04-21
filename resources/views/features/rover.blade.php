@@ -245,7 +245,7 @@ $("#lightsOn").on("click", function() {
             Math.round(picker.rgb[1]) + ' ' +
             Math.round(picker.rgb[2]);
         $.ajax({
-          url: '/features/lightsOn',
+          url: '/features/lightsOn/{rgb}',
                         type: 'GET',
                         data: { rgb: rgbColor },
                         success: function(response)

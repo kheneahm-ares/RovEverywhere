@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function(){
   Route::get('/features/honkSound', 'HonkController@honkSound')->name('honkSound');
 
   /*Lights Routes*/
-  Route::get('/features/lightsOn', 'LightsController@lightsOn')->name('lightsOn');
+  Route::get('/features/lightsOn/{rgb}', 'LightsController@lightsOn')->name('lightsOn');
   Route::get('/features/lightsOff', 'LightsController@lightsOff')->name('lightsOff');
 
   /*Cam Routes*/
@@ -94,7 +94,8 @@ Route::middleware('auth')->group(function(){
   Route::get('/network/add/new/none', 'NetworkManager@newnone')->name('newnonenetwork');
   Route::get('/network/add/new/wpapsk', 'NetworkManager@newwpapsk')->name('newwpapsknetwork');
   Route::get('/network/add/new/mschapv2', 'NetworkManager@newmschapv2')->name('newmschapv2network');
-  Route::get('/network/add/new/destroy', 'NetworkManager@newmschapv2')->name('newmschapv2network');
+
+  Route::get('/network/add/new/destroy', 'NetworkManager@newmschapv2')->name('delmschapv2network');
 
   Route::post('network/add/none', 'NetworkManager@none')->name('addnonenetwork');
   Route::post('network/add/wpapsk', 'NetworkManager@wpapsk')->name('addwpapsknetwork');
