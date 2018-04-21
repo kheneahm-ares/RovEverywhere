@@ -156,9 +156,10 @@ class MapController extends Controller
       $file = 'uploads/pictures/' . $picture->path;
       unlink($file);
 
+      //delete from db
       $picture->delete();
       //show that it deleted using flash Session
-      Session::flash('success', 'The workout has been deleted!');
+      Session::flash('success', 'The picture has been deleted!');
       //redirect to all posts aka index
       return redirect()->route('map.index');
     }

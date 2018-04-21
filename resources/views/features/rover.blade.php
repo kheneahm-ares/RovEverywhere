@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('scripts')
+  <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
+@endsection
 
 @section('content')
 
@@ -164,6 +167,16 @@
       <input type="hidden" value="1500" id="freq">
       <input type="hidden" value="1400" id="tiltFreq">
     </div>
+
+    <div id="confirmScreenshot" class="modals">
+
+        <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 style="text-align:center;">Screenshot Taken!</h3>
+          </div>
+
+  </div>
 </div>
 
 <div class="container">
@@ -240,6 +253,7 @@ foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
         $.get('/stop');
       });
       $("#takepic").click(function(){
+        toggleModal("confirmScreenshot");
         $.get('/takePic');
       });
       $("#reverse").on("mousedown", function() {
@@ -457,6 +471,20 @@ foreach (glob("/var/www/RovEverywhere/public/sounds/*.mp3") as $sounds ) {
         return _file;
       }
   });
+
+  function toggleModal(id){
+    // When the user clicks the button, open the modal
+    var modal = document.getElementById(id);
+    var spans = document.getElementsByClassName("close");
+    var modals = document.getElementsByClassName("modals");
+    modal.style.display = "block";
+    // When the user clicks on <span> (x), close the modal
+    for (let i = 0; i < spans.length; i++) {
+        spans[i].onclick = function () {
+            modals[i].style.display = "none";
+        }
+    }
+  }
 
   </script>
 
