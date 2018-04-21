@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function(){
 
   /*Snapshot Routes */
   Route::get('/snapshots/index', 'SnapshotController@index')->name('snapshots');
+  Route::delete('/snapshots/{id}', 'SnapshotController@delete')->name('snapshots.delete');
 
   /*Feature Rover Routes*/
   Route::get('/features/rover', 'FeatureController@rover')->name('rover');
