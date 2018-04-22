@@ -23,6 +23,12 @@ class SystemController extends Controller
       return view('system.index', compact('ips', 'macs', 'brands', 'lines'));
     }
 
+    public function restartNetwork(){
+      exec('cgi-bin/restartNetwork.cgi');
+
+      return "network restarted!";
+    }
+
     public function restart(Request $request){
       //exec command to restart
       exec('cgi-bin/restart.cgi');

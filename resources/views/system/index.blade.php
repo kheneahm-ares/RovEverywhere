@@ -44,51 +44,27 @@
              </table>
            </div>
          </div>
-         <div class="form-group row">
-           <label style="text-align:right"  class="col-md-4 col-form-label">System Time:</label>
-           <div class="col-md-8">
-             <label style="color:green" id="systime">N/A</label>
-           </div>
-         </div>
-         <div class="form-group row">
-           <label style="text-align:right" class="col-md-4 col-form-label">Uptime:</label>
-           <div class="col-md-8">
-             <label style="color:green" id="uptime">N/A</label>
-           </div>
-         </div>
-         <div class="form-group row">
-           <label style="text-align:right"  class="col-md-4 col-form-label">CPU Usage:</label>
-           <div class="col-md-8">
-             <label style="color:green" id="cpu_usage">N/A</label>
-           </div>
-         </div>
-         <div class="form-group row">
-           <label style="text-align:right" class="col-md-4 col-form-label">Internet:</label>
-           <div class="col-md-8">
-             <label style="color:green" id="internet">N/A</label>
-           </div>
-         </div>
          <hr />
          <div class="row">
            <div class="col-md-6" style="padding-left: 45px;">
-             <a href="#" id="restart" class="btn btn-warning btn-edit btn-block">
+             <a href="#" id="restart" class="btn btn-warning btn-block">
                Restart
              </a>
-             {{--{!! Html::linkRoute('workouts.edit', 'Edit', array('id' => $workout->id), array('class' =>
-                   'btn btn-primary btn-block'))!!}--}}
            </div>
            <div class="col-md-6" style="padding-right: 45px;">
-             <a href="#" id="shutdown" class="btn btn-danger btn-edit btn-block">
+             <a href="#" id="shutdown" class="btn btn-danger btn-block">
                Shut Down
              </a>
            </div>
          </div>
          <hr />
-         <div align="center">
-
+         <div class="row">
+           <div class="col-md-12">
+               <a id="restartNetwork" class="btn btn-default btn-block">
+                 Restart Network
+               </a>
+           </div>
          </div>
-           {{--{!! Html::linkRoute('workouts.all', 'Show all workouts', array(), array('class' =>
-                 'btn btn-md btn-block'))!!}--}}
        </div>
      </div>
 <script type="text/javascript">
@@ -103,10 +79,7 @@
       url: '/system/refresh',
       success:function(data){
         console.log(data);
-        $('#systime').text(data['systime']);
         $('#uptime').text(data['uptime']);
-        $('#cpu_usage').text(data['cpu_usage']);
-        $('#internet').text(data['internet']);
       }
     });
   });
