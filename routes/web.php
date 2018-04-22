@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function(){
   Route::post('/system/restart', 'SystemController@restart')->name('restart');
   Route::post('/system/shutdown', 'SystemController@shutdown')->name('shutdown');
   Route::post('/system/refresh', 'SystemController@refresh')->name('refresh');
+  Route::post('/system/restartNetwork', 'SystemController@restartNetwork')->name('restartNetwork');
+
 
 
   /*Wheel Routes*/
