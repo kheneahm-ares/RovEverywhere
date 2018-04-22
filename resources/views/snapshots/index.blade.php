@@ -31,7 +31,7 @@
                           <img class="img-responsive" width="400px" max-length="400px" src="{{asset("snapshots/".$snap->path.".jpg")}}"/>
                         </a>
                         <div style="text-align:center; margin-top: 10px;">
-                          {!!Form::open(array('route' => array('snapshots.delete', $snap->id), 'method' => 'DELETE', 'onsubmit' => 'return validate()'))!!}
+                          {!!Form::open(array('route' => array('snapshots.delete', $snap->id), 'method' => 'DELETE', 'onsubmit' => 'return validateSnapshot()'))!!}
                             <button type="submit" class="btn btn-warning btn-sm">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
                             </button>
@@ -95,7 +95,7 @@
 
 <script>
 
-function validate(){
+function validateSnapshot(){
   return confirm("Are you sure you want to delete the picture?");
 
 }

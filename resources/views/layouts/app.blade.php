@@ -178,7 +178,7 @@
 </body>
 
 <script type="text/javascript">
-function validate(){
+function validateNetwork(){
   return confirm("Are you sure you want to restart the network? This will take ~12 seconds.");
 
 }
@@ -193,7 +193,7 @@ $.ajaxSetup({
       var span = document.getElementsByClassName("closeNetworkModal")[0];
 
       //if yes then ajax call to restart network
-       if(validate()){
+       if(validateNetwork()){
          //add img
          $("#confirm_network").append('Restarting Network...');
          modal.style.display = "block";
