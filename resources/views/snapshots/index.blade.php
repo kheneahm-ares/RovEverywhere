@@ -62,12 +62,12 @@
                                   @foreach($snapshots as $snap )
                                     @if($count == 0)
                                       <div class="active item" data-slide-number="{{$count}}">
-                                          <img src="{{asset("snapshots/".$snap->path.".jpg")}}">
+                                          <img class="img-responsive" src="{{asset("snapshots/".$snap->path.".jpg")}}">
                                         </div>
 
                                   @else
                                       <div class="item" data-slide-number="{{$count}}">
-                                          <img  src="{{asset("snapshots/".$snap->path.".jpg")}}">
+                                          <img class="img-responsive"  src="{{asset("snapshots/".$snap->path.".jpg")}}">
                                         </div>
 
                                   @endif

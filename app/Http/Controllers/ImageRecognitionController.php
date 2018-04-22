@@ -24,15 +24,17 @@ class ImageRecognitionController extends Controller
     }
 
     public function index(){
+ 
+	    return view('features.imagerecognition');
 
-      return view('features.imagerecognition');
+   
     }
 
     public function detectimage(){
 
 
       $fileName = time();
-      exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null');
+      exec('cgi-bin/takePic.cgi "'. ($fileName) . '" ');
       //sleep(2);
       //print_r(file_get_contents("snapshots/".$fileName.".jpg"));
      // exit(1);
@@ -62,7 +64,7 @@ class ImageRecognitionController extends Controller
 	    //file_get_contents("/snapshots/".$fileName.".jpg"
 	    //)
       $fileName = time();
-      exec('cgi-bin/takePic.cgi "'. ($fileName) . '" &> /dev/null');
+      exec('cgi-bin/takePic.cgi "'. ($fileName) . '" ');
 
 
       $result = $this->client->detectFaces([
