@@ -1,7 +1,10 @@
 #!/bin/bash
-killall dhcpcd
-systemctl stop wpa_supplicant@wlan1
+sudo killall dhcpcd
+sudo systemctl stop wpa_supplicant@wlan1
+sudo killall dnsmasq
+sudo killall hostapd
 
-sleep 5
 
-internetSwitch.sh
+sudo sleep 5
+
+sudo internetswitch.sh
