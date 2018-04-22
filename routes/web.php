@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function(){
 
   /*Feature Rover Routes*/
   Route::get('/features/rover', 'FeatureController@rover')->name('rover');
-  Route::post('/features/speak/{phrase}', 'FeatureController@speak')->name('speak');
+  Route::post('/features/speak/{phrase}/{range}', 'FeatureController@speak')->name('speak');
 
   /*Feature Audio Player Routes*/
   Route::get('/features/playSound', 'AudioController@playSound')->name('playSound');

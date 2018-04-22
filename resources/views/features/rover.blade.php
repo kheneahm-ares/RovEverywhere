@@ -18,7 +18,7 @@
       border-right: solid; */
       position:absolute;
       right: 110px;
-      bottom: 250px;
+      bottom: 290px;
       padding-left: 10px;
       padding-right: 10px;
       padding-bottom: 10px;
@@ -33,7 +33,7 @@
       border-left: solid;
       border-bottom: solid; */
       position:absolute;
-      bottom: 165px;
+      bottom: 205px;
       right: 193px;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -44,7 +44,7 @@
     #pwm{
       border-radius: 10px;
       position:absolute;
-      bottom: 180px;
+      bottom: 220px;
       right: 105px;
       font-size: 30px;
       opacity: 0.5;
@@ -57,7 +57,7 @@
       border-right: solid;
       border-bottom: solid; */
       position:absolute;
-      bottom: 165px;
+      bottom: 205px;
       right: 25px;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -73,7 +73,7 @@
       border-right: solid; */
       position:absolute;
       right: 110px;
-      bottom: 95px;
+      bottom: 135px;
       padding-top: 10px;
       padding-left: 10px;
       padding-right: 10px;
@@ -126,7 +126,7 @@
     #phrase{
       border-radius: 10px;
       position:absolute;
-      bottom: 100px;
+      bottom: 140px;
       left: 25px;
       font-size: 40px;
       opacity: 0.5;
@@ -136,7 +136,7 @@
     #speak{
       border-radius: 10px;
       position:absolute;
-      bottom: 100px;
+      bottom: 140px;
       left: 482px;
       opacity: 0.5;
     }
@@ -175,6 +175,21 @@
       top: -540px;
       opacity: 0.5;
     }
+    #rangePicker{
+      position: relative;
+      border-radius: 10px;
+      right: 120px;
+      top: -380px;
+      transform: rotate(270deg);
+    }
+    #rangeValue{
+      position: relative;
+      border-radius: 10px;
+      top: -420px;
+      left: 50px;
+      color: white;
+
+    }
 
   </style>
 
@@ -189,6 +204,8 @@
       <input  id="btnPicker" class="jscolor {onFineChange:'update(this)'}" value="FFFFFF" type="button">
       <span id="colorBox"> R, G, B = <span id="rgb"></span> </span>
 
+      <input id="rangePicker" style=" width: 300px" min="1" max="100" value="50" type="range"/>
+      <h3 id="rangeValue"></h3>
       <a href="#" id="forward" ><img style="height: 60px; width: 60px;"src="/images/forward.png"></a>
       <a href="#" id="left" ><img style="height: 60px; width: 60px;"src="/images/left.png"></a>
       <input class="col-md-1" type="number" value="50" min="50" max="254" id="pwm">
@@ -229,6 +246,12 @@
   }
 
   $(document).ready(function(){
+    $("#rangeValue").text(50);
+    $("#rangePicker").on('change', function() {
+      $("#rangeValue").text(this.value);
+    });
+
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -238,10 +261,11 @@
     //-- Section for speaking ---------------//
     $("#speak").click(function(){
       var phrase = $("#phrase").val();
+      var range = $("#rangePicker").val();
       $.ajax({
-        url: '/features/speak/{phrase}',
+        url: '/features/speak/{phrase}/{range}',
         type: 'POST',
-        data: {phrase: phrase},
+        data: {phrase: phrase, range: range},
         success: function(response){
           console.log(response);
         }
@@ -253,7 +277,7 @@
 //---------------  This section is used for turning led lights on. -------------//
 $("#lightsOn").on("click", function() {
       var picker = document.getElementById('btnPicker').jscolor;
-      var rgbColor = 
+      var rgbColor =
             Math.round(picker.rgb[0]) + ' ' +
             Math.round(picker.rgb[1]) + ' ' +
             Math.round(picker.rgb[2]);
@@ -268,7 +292,7 @@ $("#lightsOn").on("click", function() {
 
         });
       });
-      
+
 $("#lightsOff").on("click", function() {
         $.ajax({
           url: '/features/lightsOff',
