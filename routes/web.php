@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function(){
   Route::get('/features/honkSound', 'HonkController@honkSound')->name('honkSound');
 
   /*Lights Routes*/
-  Route::get('/features/lightsOn', 'LightsController@lightsOn')->name('lightsOn');
+  Route::get('/features/lightsOn/{rgb}', 'LightsController@lightsOn')->name('lightsOn');
   Route::get('/features/lightsOff', 'LightsController@lightsOff')->name('lightsOff');
 
   /*Cam Routes*/
