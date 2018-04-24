@@ -14,6 +14,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
+
     <link href="{{ asset('fontawesome-free-5.0.7/web-fonts-with-css/css/fontawesome-all.min.css') }}" rel="stylesheet">
 
 
@@ -106,19 +108,19 @@
                           <li><a href="/features/imagerecognition">Image Recognition</a></li>
                         </ul>
                       </li>
-                    </ul>
-                    <div class="col-sm-6 col-md-6">
-                      {!!Form::open(array('route' => 'map.search', 'method' => 'GET', 'role'=> 'search', 'class'=>'navbar-form'))!!}
-                        <div class="input-group">
-                          <input style="height: 35px;width: 400px;" type="text" class="form-control" placeholder="Search Uploads" name="search" required>
-                          <div class="input-group-btn">
-                            <button id="search_button" class="btn" type="submit">
-                              <label class="fas fa-search"></label>
-                            </button>
+                      <div class="col-sm-6 col-md-6">
+                        {!!Form::open(array('route' => 'map.search', 'method' => 'GET', 'role'=> 'search', 'class'=>'navbar-form'))!!}
+                          <div class="input-group">
+                            <input style="height: 35px;width: 300px;" type="text" class="form-control" placeholder="Search Uploads" name="search" required>
+                            <div class="input-group-btn">
+                              <button id="search_button" class="btn" type="submit">
+                                <label class="fas fa-search"></label>
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      {!!Form::close()!!}
-                    </div>
+                        {!!Form::close()!!}
+                      </div>
+                    </ul>
                   @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -127,6 +129,9 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                          <li>
+                            <a id="restartNetwork">Restart Network</a>
+                          </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -136,6 +141,9 @@
                                       <a href="/system">
                                         System
                                       </a>
+				      <a href="/network">
+					Network
+				     </a>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -153,8 +161,58 @@
                 </div>
         </nav>
         @include('partials._messages')
+        <!-- The Modal -->
+        <div id="network_modal" class="modal">
 
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="closeNetworkModal">&times;</span>
+            <p id="confirm_network">
+                <img style="max-height: 80px;" class="img-responsivee" src='{{asset('images/loader.gif')}}'/>
+            </p>
+          </div>
+
+        </div>
         @yield('content')
     </div>
 </body>
+
+<script type="text/javascript">
+function validateNetwork(){
+  return confirm("Are you sure you want to restart the network? This will take ~12 seconds.");
+
+}
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+  $(document).ready(function(){
+    $("#restartNetwork").on('click', function(){
+      var modal = document.getElementById('network_modal');
+      var span = document.getElementsByClassName("closeNetworkModal")[0];
+
+      //if yes then ajax call to restart network
+       if(validateNetwork()){
+         //add img
+         $("#confirm_network").append('Restarting Network...');
+         modal.style.display = "block";
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+              modal.style.display = "none";
+          }
+
+         $.ajax({
+           type:'POST',
+           url: '/system/restartNetwork',
+           success:function(data){
+             $("#confirm_network").text(' ');
+             $("#confirm_network").append("<label style='color:green'> Network has been restarted! Try internet connection now! </label>");
+
+           }
+         });
+       }
+    });
+  });
+</script>
 </html>

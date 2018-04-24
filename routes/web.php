@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function(){
   Route::post('/system/restart', 'SystemController@restart')->name('restart');
   Route::post('/system/shutdown', 'SystemController@shutdown')->name('shutdown');
   Route::post('/system/refresh', 'SystemController@refresh')->name('refresh');
+  Route::post('/system/restartNetwork', 'SystemController@restartNetwork')->name('restartNetwork');
+
 
 
   /*Wheel Routes*/
@@ -45,10 +47,11 @@ Route::middleware('auth')->group(function(){
 
   /*Snapshot Routes */
   Route::get('/snapshots/index', 'SnapshotController@index')->name('snapshots');
+  Route::delete('/snapshots/{id}', 'SnapshotController@delete')->name('snapshots.delete');
 
   /*Feature Rover Routes*/
   Route::get('/features/rover', 'FeatureController@rover')->name('rover');
-  Route::post('/features/speak/{phrase}', 'FeatureController@speak')->name('speak');
+  Route::post('/features/speak/{phrase}/{range}', 'FeatureController@speak')->name('speak');
 
   /*Feature Audio Player Routes*/
   Route::get('/features/playSound', 'AudioController@playSound')->name('playSound');
@@ -84,4 +87,21 @@ Route::middleware('auth')->group(function(){
 
   /*System Routes*/
   Route::get('/system', 'SystemController@index')->name('system');
+
+  /*Network Routes*/
+  Route::get('/network', 'NetworkManager@index')->name('network');
+  Route::get('/network/add', 'NetworkManager@add')->name('addnetwork');
+  Route::get('/network/edit', 'NetworkManager@edit')->name('editnetwork');
+  Route::get('/network/destroy', 'NetworkManager@destroy')->name('destroynetwork');
+
+  Route::get('/network/add/new/none', 'NetworkManager@newnone')->name('newnonenetwork');
+  Route::get('/network/add/new/wpapsk', 'NetworkManager@newwpapsk')->name('newwpapsknetwork');
+  Route::get('/network/add/new/mschapv2', 'NetworkManager@newmschapv2')->name('newmschapv2network');
+
+  Route::get('/network/add/new/destroy', 'NetworkManager@newmschapv2')->name('delmschapv2network');
+
+  Route::post('network/add/none', 'NetworkManager@none')->name('addnonenetwork');
+  Route::post('network/add/wpapsk', 'NetworkManager@wpapsk')->name('addwpapsknetwork');
+  Route::post('network/add/mschapv2', 'NetworkManager@mschapv2')->name('addmschapv2network');
+
 });

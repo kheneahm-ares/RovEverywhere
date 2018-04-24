@@ -21,7 +21,7 @@ class MapController extends Controller
         //get user
         $user = Auth::user();
         //grab all pictures in pictures table belonging to user
-        $picturesData = UploadedPicture::where('user_id', $user->id)->get();
+        $picturesData = UploadedPicture::where('user_id', $user->id)->paginate(5);
 
         return view('map.index')->with('picturesData', $picturesData);
     }
@@ -86,7 +86,7 @@ class MapController extends Controller
       Session::flash('success', 'The picture has been stored!');
 
 
-      return redirect()->route('map.index', $user->id); //url only not actual "html" page
+      return redirect()->route('map.index'); //url only not actual "html" page
 
     }
 
@@ -144,7 +144,7 @@ class MapController extends Controller
 
       Session::flash('success', 'The picture has been updated!');
 
-      return redirect()->route('map.index', $user->id); //url only not actual "html" page
+      return redirect()->route('map.index'); //url only not actual "html" page
 
     }
 
@@ -156,9 +156,10 @@ class MapController extends Controller
       $file = 'uploads/pictures/' . $picture->path;
       unlink($file);
 
+      //delete from db
       $picture->delete();
       //show that it deleted using flash Session
-      Session::flash('success', 'The workout has been deleted!');
+      Session::flash('success', 'The picture has been deleted!');
       //redirect to all posts aka index
       return redirect()->route('map.index');
     }

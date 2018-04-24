@@ -8,8 +8,7 @@ class LightsController extends Controller
 {
     public function lightsOn() {
         $color = $_GET['rgb'];
-        echo $color;
-        exec('cgi-bin/lighton.cgi'. $color);
+        exec('cgi-bin/lighton.cgi ' . ($color));
     }
 
     public function lightsOff() { 

@@ -12,8 +12,11 @@ class FeatureController extends Controller
       return view('features.rover');
     }
 
-    public function speak(){
-      $phrase = $_POST['phrase'];
+    public function speak(Request $request){
+      $phrase = $request->phrase;
+      $range = $request->range;
+
+      exec('sudo amixer cset numid=1 "'. ($range). '"% &> /dev/null');
       exec('cgi-bin/voice.cgi "'. ($phrase) . '" &> /dev/null');
       return $phrase;
     }

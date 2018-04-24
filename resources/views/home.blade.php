@@ -48,12 +48,12 @@
             @foreach ($activities as $ac)
               <p>
                 @if($ac->type == "snapshot")
-                  Took a snapshot at:
+                  Took a <b>snapshot</b> at:
                 @else
-                  Uploaded at:
+                  <b>Uploaded</b> at:
                 @endif
                 <label class="pull-right">
-                  {{$ac->created_at}}
+                  {{date('M j, Y h:i A' ,strtotime($ac->created_at))}}
                 </label>
 
               </p>

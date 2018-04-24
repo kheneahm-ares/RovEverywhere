@@ -1,3 +1,3 @@
 #!/bin/bash
 
-init 6
+reboot -f
