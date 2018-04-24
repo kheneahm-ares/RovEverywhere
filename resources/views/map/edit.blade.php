@@ -29,7 +29,7 @@
           <br />
       </div>
       <br />
-
+      
      <!--- make sure first paramater matches column in database -->
      {{Form::label('name', 'Name') }}
      {{Form::text('name', $uploadedPicture->name, array('class' => 'form-control'))}}
