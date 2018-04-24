@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('content')
 </style>
-  <?php
-    header_remove();
-?>
 
 <div class="col-md-12">
 {{ Form::open(array('url' => '/network/add/mschapv2')) }}
@@ -28,6 +25,6 @@
 	<br>
 	{{ Form::submit('Add') }}
 
-{{ Form::close() }} 
+{{ Form::close() }}
 </div>
 @endsection
