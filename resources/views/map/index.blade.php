@@ -91,35 +91,20 @@
 
 
     <script>
-    $(document).ready(function(){
-      $("#hideshow").click(function(){
-        if($("#pic_data").is(":visible")){
-          $("#pic_data").hide( "slide", { direction: "right"  }, 600 );
-          $("#map-canvas").animate({ width: 1200 }, 'slow');
-          $(this).toggleClass('fa-angle-right fa-angle-left');
-
-        }
-        else{
-          $("#pic_data").show( "slide", { direction: "right"  }, 600 );
-          $("#map-canvas").animate({ width: 500 }, 'slow');
-          $(this).toggleClass('fa-angle-left fa-angle-right');
-
-
-        }
-      });
-    });
     function validate(){
       return confirm("Are you sure you want to delete the picture?");
 
     }
-    // Get the modal
-    var modals = document.getElementsByClassName("modals");
 
-    // Get the button that opens the modal
-    var btns = document.getElementsByClassName("myBtns");
+    $(document).ready(function(){
+      // Get the modal
+      var modals = document.getElementsByClassName("modals");
 
-    // Get the <span> element that closes the modal
-    var spans = document.getElementsByClassName("close");
+      // Get the button that opens the modal
+      var btns = document.getElementsByClassName("myBtns");
+
+      // Get the <span> element that closes the modal
+      var spans = document.getElementsByClassName("close");
       var map = new google.maps.Map(document.getElementById('map-canvas'), {
             center:{
               lat: 41.88,
@@ -127,6 +112,55 @@
             },
             zoom: 10
       });
+
+      //geolocation, infowindow
+      var infoWindow = new google.maps.InfoWindow;
+
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          infoWindow.open(map);
+          map.setCenter(pos);
+          var image = {
+            url: "{{asset("images/roverMarker.png")}}",
+            // This marker is 20 pixels wide by 32 pixels high.
+           size: new google.maps.Size(50, 50)
+          };
+          var marker = new google.maps.Marker({
+            position: {
+              lat: pos.lat,
+              lng: pos.lng
+            },
+            map: map,
+            icon: image,
+            animation: google.maps.Animation.DROP,
+            draggable: false,
+          });
+
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+      }
+      else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
 
 
       @foreach($picturesData as $picture)
@@ -154,6 +188,7 @@
           }
         });
       @endforeach
+    });
       function toggleModal(id){
         // When the user clicks the button, open the modal
         var modal = document.getElementById(id);

@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
 </style>
-  <?php
-    header_remove();
-?>
+
 
 <div class="col-md-12">
 	<a href="/network/add"><h1>Add</h1></a>

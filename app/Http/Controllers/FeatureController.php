@@ -19,5 +19,6 @@ class FeatureController extends Controller
       exec('sudo amixer cset numid=1 "'. ($range). '"% &> /dev/null');
       exec('cgi-bin/voice.cgi "'. ($phrase) . '" &> /dev/null');
       return $phrase;
+      
     }
 }

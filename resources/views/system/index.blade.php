@@ -12,9 +12,6 @@
 }
 
 </style>
-  <?php
-    header_remove();
-?>
   <div class="col-md-12">
       <iframe scrolling="no" src="http://192.168.12.1:5555" frameborder="1" align="middle" width="100%" height="800px">Loading..</iframe>
   </div>
