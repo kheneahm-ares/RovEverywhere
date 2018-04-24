@@ -59,13 +59,50 @@ class NetworkManager extends Controller
 	//Editing controllers
 	public function edit(){
 		
+		$unconn = array(DB::table('UNSECUREDCONNECTION')->pluck('SSID'));
+		$wpa = array(DB::table('WPA_PSK')->pluck('SSID'));
+		$mschapv2 = array(DB::table('MSCHAPv2')->pluck('SSID'));
 
-		return view('network.edit');
+		return view('network.edit', ['unconn' => $unconn, 'wpa' => $wpa, 'mschapv2' => $mschapv2]);
 	}
+	public function editCurrent(Request $request){
+		return view('network.index');
+	}
+	public function editNone(Request $request){
+		$network = $request->input('type');
+		$choice = "none";
+		return view('network.editform', ['choice' => $choice, 'network' => $network]);
+	}
+	public function editWPA(Request $request){
+		$choice = "wpa";
+		return view('network.editform', ['choice' => $choice]);
+	}
+	public function editMSCHAPV2(Request $request){
+		$choice = "mschapv2";
+		return view('network.editform');
+	}
+
 
 	//Destroying controllers
 	public function destroy(){
-		return view('network.destroy');
+		$unconn = array(DB::table('UNSECUREDCONNECTION')->pluck('SSID'));
+		$wpa = array(DB::table('WPA_PSK')->pluck('SSID'));
+		$mschapv2 = array(DB::table('MSCHAPv2')->pluck('SSID'));
+		$ssids = array_merge($unconn, $mschapv2);
+		$ssids = array_merge($ssids, $wpa);
+		
+		//array_push($ssids, $wpa);	
+		//array_push($ssids, $mschapv2);
+		return view('network.destroy', ['ssids' => $ssids]);
 	}
+	public function destroyOne(Request $request){
+		$ssid = $request->input('ssid');
+		$type = $request->input('networktype');
 
+		echo $ssid . " " . $type;
+
+		shell_exec("java -cp .:/home/pi/NetMan/roveverywhere/ Main delete " . $type . " " . $ssid);	
+
+		return view('network.index');
+	}	
 }

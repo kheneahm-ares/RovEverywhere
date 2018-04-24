@@ -24,7 +24,7 @@ class SystemController extends Controller
     }
 
     public function restartNetwork(){
-      exec("su root -c 'sudo /root/restartNetwork.sh'");
+	    shell_exec("/root/restartNetwork.sh");
 
       return "network restarted!";
     }

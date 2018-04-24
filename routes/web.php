@@ -98,10 +98,16 @@ Route::middleware('auth')->group(function(){
   Route::get('/network/add/new/wpapsk', 'NetworkManager@newwpapsk')->name('newwpapsknetwork');
   Route::get('/network/add/new/mschapv2', 'NetworkManager@newmschapv2')->name('newmschapv2network');
 
-  Route::get('/network/add/new/destroy', 'NetworkManager@newmschapv2')->name('delmschapv2network');
+  Route::get('/network/edit/current', 'NetworkManager@editCurrent')->name('editform');
 
-  Route::post('network/add/none', 'NetworkManager@none')->name('addnonenetwork');
-  Route::post('network/add/wpapsk', 'NetworkManager@wpapsk')->name('addwpapsknetwork');
-  Route::post('network/add/mschapv2', 'NetworkManager@mschapv2')->name('addmschapv2network');
 
+  Route::post('/network/add/none', 'NetworkManager@none')->name('addnonenetwork');
+  Route::post('/network/add/wpapsk', 'NetworkManager@wpapsk')->name('addwpapsknetwork');
+  Route::post('/network/add/mschapv2', 'NetworkManager@mschapv2')->name('addmschapv2network');
+
+  Route::post('/network/edit/none', 'NetworkManager@editNone')->name('editnone');
+  Route::post('/network/edit/wpa', 'NetworkManager@editWPA')->name('editwpa');
+  Route::post('/network/edit/mschapv2', 'NetworkManager@editMSCHAPV2')->name('editmschapv2');
+
+  Route::post('/network/destroy/wipe', 'NetworkManager@destroyOne')->name('destorynetworknow');
 });
