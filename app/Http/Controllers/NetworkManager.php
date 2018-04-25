@@ -51,6 +51,7 @@ class NetworkManager extends Controller
 		$phase1 = $request->input('phase1');
 		$phase2 = $request->input('phase2');
 
+		shell_exec('java -cp .:/home/pi/NetMan/roveverywhere Main new mschapv2 ' . $ssid . " " . $eap . " " . $identity . " " . $password . " " . $phase1 . " " . $phase2);
 
 		return view('network.index');
 	}
