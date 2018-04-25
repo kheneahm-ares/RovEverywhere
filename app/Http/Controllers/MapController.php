@@ -154,8 +154,10 @@ class MapController extends Controller
       $picture = UploadedPicture::find($id);
       //delete post and pictures
       $file = 'uploads/pictures/' . $picture->path;
-      unlink($file);
 
+      if(File::exists($file)){
+        unlink($file);
+      }
       //delete from db
       $picture->delete();
       //show that it deleted using flash Session
