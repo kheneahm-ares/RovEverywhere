@@ -60,7 +60,7 @@
             <input type="date" class="form-control" name="date_taken" id="date_taken" required />
           </div>
 
-          <button class="col-md-offset-10 btn btn-md btn-primary">Save</button>
+          <button type="submit" class="col-md-offset-10 btn btn-md btn-primary">Save</button>
           {{Form::close()}}
     </div>
 
