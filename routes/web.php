@@ -98,7 +98,7 @@ Route::middleware('auth')->group(function(){
   Route::get('/network/add/new/wpapsk', 'NetworkManager@newwpapsk')->name('newwpapsknetwork');
   Route::get('/network/add/new/mschapv2', 'NetworkManager@newmschapv2')->name('newmschapv2network');
 
-  Route::get('/network/edit/current', 'NetworkManager@editCurrent')->name('editform');
+  Route::post('/network/edit/current', 'NetworkManager@editCurrent')->name('editform');
 
 
   Route::post('/network/add/none', 'NetworkManager@none')->name('addnonenetwork');

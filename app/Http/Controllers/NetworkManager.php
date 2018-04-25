@@ -25,7 +25,6 @@ class NetworkManager extends Controller
 		$ssid = $request->input('ssid');
 
 		$output = shell_exec('java -cp .:/home/pi/NetMan/roveverywhere Main new none ' . $ssid);	
-		echo $output;
 
 		return view('network.index');
 	}
@@ -66,6 +65,27 @@ class NetworkManager extends Controller
 		return view('network.edit', ['unconn' => $unconn, 'wpa' => $wpa, 'mschapv2' => $mschapv2]);
 	}
 	public function editCurrent(Request $request){
+		$ssidOld = $request->input('ssid');
+		$ssid = $request->input('ssidNew');
+		$type = $request->input('nettype');
+
+		if ($type==='none') {
+			DB::table('UNSECUREDCONNECTION')->where('SSID', $ssidOld)->update(['SSID' => $ssid]);
+		}
+		else if ($type==='wpa') {
+			$psk = $request->input('pskNew');
+			DB::table('WPA_PSK')->where('SSID', $ssidOld)->update(['SSID' => $ssid, 'PSK' =>$psk]);
+		}
+		else {
+			$eap = $request->input('eap');
+			$identity = $request->input('identity');
+			$password = $request->input('password');
+			$phase1 = $request->input('phase1');
+			$phase2 = $request->input('phase2');
+
+			DB::table('MSCHAPv2')->where('SSID', $ssidOld)->update(['SSID' => $ssid, 'eap' => $eap, 'identity' => $identity, 'password' => $password, 'phase1' => $phase1, 'phase2' => $phase2]);
+		}
+		shell_exec('java -cp .:/home/pi/NetMan/roveverywhere Main');
 		return view('network.index');
 	}
 	public function editNone(Request $request){
@@ -74,12 +94,20 @@ class NetworkManager extends Controller
 		return view('network.editform', ['choice' => $choice, 'network' => $network]);
 	}
 	public function editWPA(Request $request){
+		$network = $request->input('type');
+		$psk = DB::table('WPA_PSK')->where('SSID', $network)->pluck('PSK')->first();
 		$choice = "wpa";
-		return view('network.editform', ['choice' => $choice]);
+		return view('network.editform', ['choice' => $choice, 'network' => $network, 'psk' => $psk]);
 	}
 	public function editMSCHAPV2(Request $request){
+		$network = $request->input('type');
+		$eap = DB::table('MSCHAPv2')->where('SSID', $network)->pluck('EAP')->first();
+		$identity = DB::table('MSCHAPv2')->where('SSID', $network)->pluck('IDENTITY')->first();
+		$password = DB::table('MSCHAPv2')->where('SSID', $network)->pluck('PASSWORD')->first();
+		$phase1 = DB::table('MSCHAPv2')->where('SSID', $network)->pluck('PHASE1')->first();
+		$phase2 = DB::table('MSCHAPv2')->where('SSID', $network)->pluck('PHASE2')->first();
 		$choice = "mschapv2";
-		return view('network.editform');
+		return view('network.editform', ['choice' => $choice, 'network' => $network, 'eap' => $eap, 'identity' => $identity, 'password' => $password, 'phase1' => $phase1, 'phase2' => $phase2]);
 	}
 
 
@@ -91,15 +119,12 @@ class NetworkManager extends Controller
 		$ssids = array_merge($unconn, $mschapv2);
 		$ssids = array_merge($ssids, $wpa);
 		
-		//array_push($ssids, $wpa);	
-		//array_push($ssids, $mschapv2);
 		return view('network.destroy', ['ssids' => $ssids]);
 	}
 	public function destroyOne(Request $request){
 		$ssid = $request->input('ssid');
 		$type = $request->input('networktype');
 
-		echo $ssid . " " . $type;
 
 		shell_exec("java -cp .:/home/pi/NetMan/roveverywhere/ Main delete " . $type . " " . $ssid);	
 
