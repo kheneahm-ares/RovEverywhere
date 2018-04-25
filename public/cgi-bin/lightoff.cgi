@@ -25,5 +25,5 @@ try:
         strip.setPixelColor(i, Color(0, 0, 0))
         strip.show();
 finally:
-    os.system("killall whiteLight.py")
+    #os.system("killall whiteLight.py")
     GPIO.cleanup()
