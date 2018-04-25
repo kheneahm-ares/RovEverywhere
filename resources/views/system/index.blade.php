@@ -11,6 +11,7 @@
   width: 340px;
 }
 
+
 </style>
   <div class="col-md-12">
       <iframe scrolling="no" src="http://192.168.12.1:5555" frameborder="1" align="middle" width="100%" height="800px">Loading..</iframe>
@@ -23,8 +24,8 @@
              </h2>
            </div>
            <hr />
-             <div class="table-responsive">
-               <table class="table table-hover">
+             <div id="table_addr" style="max-height: 150px;overflow: auto;">
+               <table class="table table-hover table-responsive">
                 <thead>
                   <tr>
                     <th>IP Addr</th>
@@ -33,15 +34,17 @@
                   </tr>
                 </thead>
                 @php ($count = -1)
-                @foreach($lines as $line)
-                <tr>
-                @php ($count += 1)
-                  <td>{{$ips[$count]}}</td>
-                  <td>{{$macs[$count]}}</td>
-                  <td>{{$brands[$count]}}</td>
-                </tr>
-                @endforeach
-               </table>
+                <tbody>
+                  @foreach($lines as $line)
+                  <tr>
+                  @php ($count += 1)
+                    <td>{{$ips[$count]}}</td>
+                    <td>{{$macs[$count]}}</td>
+                    <td>{{$brands[$count]}}</td>
+                  </tr>
+                  @endforeach
+                 </table>
+                </tbody>
              </div>
            <hr />
            <div class="row">
