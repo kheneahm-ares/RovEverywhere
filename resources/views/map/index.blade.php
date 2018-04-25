@@ -37,7 +37,7 @@
           <tbody style="text-align:center">
             @foreach($picturesData as $picture)
               <tr>
-                <td onclick="toggleModal({{$picture->id}})">
+                <td onclick="return toggleModal({{$picture->id}}, {{$picture->lat}}, {{$picture->lng}})">
                   {{$picture->name}}
                 </td>
                 <td>
@@ -95,72 +95,73 @@
       return confirm("Are you sure you want to delete the picture?");
 
     }
+    // Get the modal
+    var modals = document.getElementsByClassName("modals");
+
+    // Get the button that opens the modal
+    var btns = document.getElementsByClassName("myBtns");
+
+    // Get the <span> element that closes the modal
+    var spans = document.getElementsByClassName("close");
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+          center:{
+            lat: 41.88,
+            lng: -87.63
+          },
+          zoom: 10
+    });
+
 
     $(document).ready(function(){
-      // Get the modal
-      var modals = document.getElementsByClassName("modals");
-
-      // Get the button that opens the modal
-      var btns = document.getElementsByClassName("myBtns");
-
-      // Get the <span> element that closes the modal
-      var spans = document.getElementsByClassName("close");
-      var map = new google.maps.Map(document.getElementById('map-canvas'), {
-            center:{
-              lat: 41.88,
-              lng: -87.63
-            },
-            zoom: 10
-      });
 
       //geolocation, infowindow
-      var infoWindow = new google.maps.InfoWindow;
-
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
-          map.setCenter(pos);
-          var image = {
-            url: "{{asset("images/roverMarker.png")}}",
-            // This marker is 20 pixels wide by 32 pixels high.
-           size: new google.maps.Size(50, 50)
-          };
-          var marker = new google.maps.Marker({
-            position: {
-              lat: pos.lat,
-              lng: pos.lng
-            },
-            map: map,
-            icon: image,
-            animation: google.maps.Animation.DROP,
-            draggable: false,
-          });
-
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      }
-      else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
+      // var infoWindow = new google.maps.InfoWindow;
+      //
+      // // Try HTML5 geolocation.
+      // if (navigator.geolocation) {
+      //   navigator.geolocation.getCurrentPosition(function(position) {
+      //     var pos = {
+      //       lat: position.coords.latitude,
+      //       lng: position.coords.longitude
+      //     };
+      //
+      //     infoWindow.setPosition(pos);
+      //     infoWindow.setContent('Location found.');
+      //     infoWindow.open(map);
+      //     map.setCenter(pos);
+      //     var image = {
+            // url: "{{asset("images/roverMarker.png")}}",
+      //       // This marker is 20 pixels wide by 32 pixels high.
+      //      size: new google.maps.Size(50, 50)
+      //     };
+      //     var marker = new google.maps.Marker({
+      //       position: {
+      //         lat: pos.lat,
+      //         lng: pos.lng
+      //       },
+      //       map: map,
+      //       icon: image,
+      //       animation: google.maps.Animation.DROP,
+      //       draggable: false,
+      //     });
+      //
+      //   }, function() {
+      //     handleLocationError(true, infoWindow, map.getCenter());
+      //   });
+      // }
+      // else {
+      //   // Browser doesn't support Geolocation
+      //   handleLocationError(false, infoWindow, map.getCenter());
+      // }
+      //
+      //
+      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      //   infoWindow.setPosition(pos);
+      //   infoWindow.setContent(browserHasGeolocation ?
+      //                         'Error: The Geolocation service failed.' :
+      //                         'Error: Your browser doesn\'t support geolocation.');
+      //   infoWindow.open(map);
+      // }
 
 
       @foreach($picturesData as $picture)
@@ -188,18 +189,23 @@
           }
         });
       @endforeach
+
     });
-      function toggleModal(id){
-        // When the user clicks the button, open the modal
-        var modal = document.getElementById(id);
-        modal.style.display = "block";
-        // When the user clicks on <span> (x), close the modal
-        for (let i = 0; i < spans.length; i++) {
-            spans[i].onclick = function () {
-                modals[i].style.display = "none";
-            }
-        }
+    function toggleModal(id, latitude, long){
+      // When the user clicks the button, open the modal
+
+      map.setCenter({lat: latitude, lng: long});
+      map.setZoom(10);
+
+      var modal = document.getElementById(id);
+      modal.style.display = "block";
+      // When the user clicks on <span> (x), close the modal
+      for (let i = 0; i < spans.length; i++) {
+          spans[i].onclick = function () {
+              modals[i].style.display = "none";
+          }
       }
+    }
 
     </script>
 
