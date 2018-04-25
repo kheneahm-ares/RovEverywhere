@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,6 +9,7 @@ import java.util.*;
 public class Main {
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		DoWork dw = new DoWork();
+
 		if (args.length<1) {
 			System.out.println("No additional arguments");
 		}
@@ -15,7 +17,6 @@ public class Main {
 			String connectionAction = args[0];
 			String connectionType = args[1];
 			String ssid = args[2];
-			System.out.println(connectionAction + " " + connectionType + " " + ssid);
 
 			if (connectionAction.equals("new")) {
 				switch (connectionType) {

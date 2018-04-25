@@ -10,7 +10,7 @@ public class FormatOutput {
 	private ArrayList<MSCHAPv2> mv2List;
 	private Statement stm;
 	private	DoWork dw = new DoWork();
-	private String filename = "/tmp/runup.conf";
+	private String filename = "/etc/wpa_supplicant/wpa_supplicant.conf";
 	public FormatOutput() {
 		initList();
 	}	
@@ -35,7 +35,7 @@ public class FormatOutput {
 				PrintWriter pw = new PrintWriter(fw);
 				pw.println("network={");
 				pw.println("\tssid=\"" + ucList.get(index).ssidRetrieval() + "\"");
-				pw.println("\tkey_mgmt=\"" + ucList.get(index).key_mgmtRetrieval() + "\"");
+				pw.println("\tkey_mgmt=" + ucList.get(index).key_mgmtRetrieval());
 				pw.println("}");
 				pw.close();
 			}	
@@ -47,7 +47,7 @@ public class FormatOutput {
 	public void outputWPA_PSK() {
 		collectWPA_PSK();
 		try {
-			for (int index = 0; index < ucList.size(); ++index) {
+			for (int index = 0; index < wpa_pskList.size(); ++index) {
 				FileWriter fw = new FileWriter(filename, true);
 					 
 				PrintWriter pw = new PrintWriter(fw);
@@ -56,7 +56,6 @@ public class FormatOutput {
 				pw.println("\tpsk=\"" + wpa_pskList.get(index).pskRetrieval() + "\"");
 				pw.println("}");
 				pw.close();
-				System.out.println("out this bitch");
 			}	
 		}
 		catch (IOException e) {
@@ -67,7 +66,7 @@ public class FormatOutput {
 	public void outputMSCHAPv2() {
 		collectMSCHAPv2();
 		try {
-			for (int index = 0; index < ucList.size(); ++index) {
+			for (int index = 0; index < mv2List.size(); ++index) {
 				FileWriter fw = new FileWriter(filename, true);
 					 
 				PrintWriter pw = new PrintWriter(fw);
@@ -81,7 +80,6 @@ public class FormatOutput {
 				pw.println("\tphase2=\"" + mv2List.get(index).phase2Retrieval() + "\"");
 				pw.println("}");
 				pw.close();
-				System.out.println("out this bitch");
 			}	
 		}
 		catch (IOException e) {

@@ -11,13 +11,10 @@ public class DoWork {
 	private ArrayList<String> connectionAction = new ArrayList<String>();
 	private ArrayList<String> typesOfConnections = new ArrayList<String>();
 	private String connectionType;
-	//private String username = "mars";
-	private String username = "hm";
-	//private String password = "roverrover";
-	private String password = "panther";
-	private String database = "netman";
-	//private String url = "jdbc:mysql://localhost/" + database;
-	private String url = "jdbc:mysql://108.255.70.130/" + database;
+	private String username = "mars";
+	private String password = "roverrover";
+	private String database = "roveverywhere";
+	private String url = "jdbc:mysql://localhost/" + database;
 	private Connection cn;
 
 	public DoWork() {
@@ -43,7 +40,6 @@ public class DoWork {
 		uc.ssidModifiy(ssid);
 
 		String query = "insert into " + typesOfConnections.get(0) + "(SSID, KEY_MGMT)" + " values(\"" + uc.ssidRetrieval() + "\", \"" + uc.key_mgmtRetrieval() + "\")";
-		System.out.println(query);
 
 		try {
 			cn = DriverManager.getConnection(url, username, password);
@@ -63,7 +59,6 @@ public class DoWork {
 		wpa.pskModify(psk);
 
 		String query = "insert into " + typesOfConnections.get(1) + " values(\"" + wpa.ssidRetrieval() + "\", \"" + wpa.pskRetrieval() + "\")";
-		System.out.println(query);
 
 		try {
 			cn = DriverManager.getConnection(url, username, password);
@@ -77,7 +72,7 @@ public class DoWork {
 			e.printStackTrace();
 		}	
 	}
-	public void mschapv2New(final String ssid, final String eap, final String identity, final String password, final String phase1, final String phase2) {
+	public void mschapv2New(final String ssid, final String eap, final String identity, final String password, final String phase1, final String phase2) throws SQLException {
 		MSCHAPv2 mv2 = new MSCHAPv2();
 		mv2.ssidModifiy(ssid);
 		mv2.eapModify(eap);
@@ -86,9 +81,7 @@ public class DoWork {
 		mv2.phase1Modify(phase1);
 		mv2.phase2Modify(phase2);
 
-		String query = "insert into " + typesOfConnections.get(2) + " values(\"" + mv2.ssidRetrieval() + "\", \"" + mv2.key_mgmtRetrieval() + "\", \"" + mv2.eapRetrieval() +
-			"\", \"" + mv2.identityRetrieval() + "\", \"" + mv2.passwordRetrieval() + "\", \"" + mv2.phase1Retrieval() + "\", \"" + mv2.phase2Retrieval() + "\")";
-		System.out.println(query);
+		String query = "insert into " + "MSCHAPv2" + " values(\"" + mv2.ssidRetrieval() + "\", \"" + mv2.key_mgmtRetrieval() + "\", \"" + mv2.eapRetrieval() + "\", \"" + mv2.identityRetrieval() + "\", \"" + mv2.passwordRetrieval() + "\", \"" + mv2.phase1Retrieval() + "\", \"" + mv2.phase2Retrieval() + "\")";
 
 		try {
 			cn = DriverManager.getConnection(url, username, password);
@@ -105,8 +98,8 @@ public class DoWork {
 	public void unsecuredConnectionEdit(final String ssid, final String ssidNew) {
 		String query = "update UNSECUREDCONNECTION set SSID=\"" + ssidNew + "\"" + " where SSID=\"" + ssid + "\"";
 		try {
-			cn = DriverManager.getConnection(url, username, password);
-			PreparedStatement ps = cn.prepareStatement(query);
+			Connection cni = DriverManager.getConnection(url, username, password);
+			PreparedStatement ps = cni.prepareStatement(query);
 			ps.execute();
 			if (!cn.isClosed()) {
 				cn.close();
@@ -178,6 +171,9 @@ public class DoWork {
 		if (type.equals("MSCHAPV2")) {
 			type = "MSCHAPv2";
 			return type;
+		}	
+		else if (type.equals("WPA-PSK")) {
+			type = "WPA_PSK";
 		}	
 		else if (type.equals("NONE")) {
 			type = "UNSECUREDCONNECTION";
