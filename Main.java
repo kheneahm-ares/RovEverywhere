@@ -34,7 +34,16 @@ public class Main {
 						String phase1 = args[6];
 						String phase2 = args[7];
 
-						dw.mschapv2New(ssid, eap, identity, password, phase1, phase2);
+						MSCHAPv2 mv2 = new MSCHAPv2();
+						mv2.ssidModifiy(ssid);
+						mv2.eapModify(eap);
+						mv2.identityModify(identity);
+						mv2.passwordModify(password);
+						mv2.phase1Modify(phase1);
+						mv2.phase2Modify(phase2);
+						dw.testMe(mv2);
+						//DoWork dwS = new DoWork();
+						//dwS.mschapv2New(ssid, eap, identity, password, phase1, phase2);
 						break;	
 					default:
 						break;

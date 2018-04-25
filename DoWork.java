@@ -82,7 +82,7 @@ public class DoWork {
 		mv2.phase2Modify(phase2);
 
 		String query = "insert into " + "MSCHAPv2" + " values(\"" + mv2.ssidRetrieval() + "\", \"" + mv2.key_mgmtRetrieval() + "\", \"" + mv2.eapRetrieval() + "\", \"" + mv2.identityRetrieval() + "\", \"" + mv2.passwordRetrieval() + "\", \"" + mv2.phase1Retrieval() + "\", \"" + mv2.phase2Retrieval() + "\")";
-
+		System.out.println(query);
 		try {
 			cn = DriverManager.getConnection(url, username, password);
 			PreparedStatement ps = cn.prepareStatement(query);
@@ -95,11 +95,26 @@ public class DoWork {
 			e.printStackTrace();
 		}
 	}
+	public void testMe(final MSCHAPv2 mv2) {
+		String query = "insert into " + "MSCHAPv2" + " values(\"" + mv2.ssidRetrieval() + "\", \"" + mv2.key_mgmtRetrieval() + "\", \"" + mv2.eapRetrieval() + "\", \"" + mv2.identityRetrieval() + "\", \"" + mv2.passwordRetrieval() + "\", \"" + mv2.phase1Retrieval() + "\", \"" + mv2.phase2Retrieval() + "\")";
+
+		try {
+			cn = DriverManager.getConnection(url, username, password);
+			PreparedStatement ps = cn.prepareStatement(query);
+			ps.execute();
+			if (!cn.isClosed()) {
+				cn.close();
+			}	
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public void unsecuredConnectionEdit(final String ssid, final String ssidNew) {
 		String query = "update UNSECUREDCONNECTION set SSID=\"" + ssidNew + "\"" + " where SSID=\"" + ssid + "\"";
 		try {
-			Connection cni = DriverManager.getConnection(url, username, password);
-			PreparedStatement ps = cni.prepareStatement(query);
+			cn = DriverManager.getConnection(url, username, password);
+			PreparedStatement ps = cn.prepareStatement(query);
 			ps.execute();
 			if (!cn.isClosed()) {
 				cn.close();
