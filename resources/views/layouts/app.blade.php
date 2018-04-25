@@ -182,11 +182,6 @@ function validateNetwork(){
   return confirm("Are you sure you want to restart the network? This will take ~12 seconds.");
 
 }
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
   $(document).ready(function(){
     $("#restartNetwork").on('click', function(){
       var modal = document.getElementById('network_modal');
@@ -203,7 +198,7 @@ $.ajaxSetup({
           }
 
          $.ajax({
-           type:'POST',
+           type:'GET',
            url: '/system/restartNetwork',
            success:function(data){
              $("#confirm_network").text(' ');
