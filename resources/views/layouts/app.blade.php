@@ -17,6 +17,7 @@
     <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
 
     <link href="{{ asset('fontawesome-free-5.0.7/web-fonts-with-css/css/fontawesome-all.min.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{asset('images/roverMarker.png')}}">
 
 
     {{-- <script src="https://code.jquery.com/jquery-3.3.0.min.js"
