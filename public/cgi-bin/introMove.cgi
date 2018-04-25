@@ -12,7 +12,9 @@ pan = 21
 
 try:
     pi = pigpio.pi()
-    pi.set_mode(servo, pigpio.OUTPUT)
+    
+    pi.set_mode(tilt, pigpio.OUTPUT)
+    pi.set_mode(pan, pigpio.OUTPUT)
 
     pi.set_servo_pulsewidth(pan, 1000)
     pi.set_servo_pulsewidth(tilt, 800)

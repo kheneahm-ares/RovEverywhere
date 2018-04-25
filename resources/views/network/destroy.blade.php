@@ -8,7 +8,7 @@
 		{{ Form::open(array('route' => 'destorynetworknow', 'method' => 'POST')) }}
 
 		<div class="form-group">
-			{{ Form::label("ssid", "SSID", 'class' => 'control-label') }}
+			{{ Form::label("ssid", "SSID", array('class' => 'control-label')) }}
 			<select class="form-control" name="ssid">
 				@foreach ($ssids as $ssid)
 					@foreach ($ssid as $sd)
@@ -19,7 +19,7 @@
 		</div>
 		<br />
 		<div class="form-group">
-			{{ Form::label("networktype", "Network Type", 'class' => 'control-label') }}
+			{{ Form::label("networktype", "Network Type", array('class' => 'control-label')) }}
 			{{ Form::select('networktype', array('none' => 'Unsecured', 'wpa-psk' => 'WPA PSK', 'mschapv2' => 'MSCHAPV2')) }}
 		</div>
 		<br />
